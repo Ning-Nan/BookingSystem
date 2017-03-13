@@ -71,6 +71,6 @@
 
     -->
 <target name="-post-compile">
-    <copy file=“customerinfo.txt" todir="${dist.dir}"/>        
+    <copy file="customerinfo.txt" todir="${dist.dir}"/>        
 </target>
 </project>
