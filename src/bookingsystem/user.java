@@ -67,17 +67,17 @@ public class user {
         }
     }
     
-      public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber)throws FileNotFoundException,
+      public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber)throws IOException,
            Exception{
        
        //check if the user fill all the blanks.
        if(name == null || username == null || password == null ||confirmPassword == null|| address == null || phoneNumber == null){
            throw new Exception("Please fill all the blanks. ");
        }
-       
+      /* 
        if(username.length() <6 || username.length()>12 || password.length()<6 || password.length()>12|| phoneNumber.length()!= 10){
            throw new Exception("the lenth of username and password should be between 6 and 12. The length of phone number should be 10!");
-       }
+       }*/
        
        //read from file to check the repeat username
        BufferedReader reader = 
@@ -102,8 +102,13 @@ public class user {
            throw new Exception("passwords not match!");
        }
            
+      FileWriter fw = new FileWriter(utils.CUSTOMERINFOFILENAME,true);
       
-       
+      BufferedWriter bufw = new BufferedWriter(fw);
+      bufw.newLine();
+      bufw.write(name+"|"+username+"|"+password+"|"+address+"|"+phoneNumber);
+       bufw.flush();
+       bufw.close();
        
        
    }
