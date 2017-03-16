@@ -67,6 +67,46 @@ public class user {
         }
     }
     
+      public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber)throws FileNotFoundException,
+           Exception{
+       
+       //check if the user fill all the blanks.
+       if(name == null || username == null || password == null ||confirmPassword == null|| address == null || phoneNumber == null){
+           throw new Exception("Please fill all the blanks. ");
+       }
+       
+       if(username.length() <6 || username.length()>12 || password.length()<6 || password.length()>12|| phoneNumber.length()!= 10){
+           throw new Exception("the lenth of username and password should be between 6 and 12. The length of phone number should be 10!");
+       }
+       
+       //read from file to check the repeat username
+       BufferedReader reader = 
+               new BufferedReader(new FileReader(utils.CUSTOMERINFOFILENAME));
+       
+       String line;
+       
+       while((line = reader.readLine())!= null){
+        StringTokenizer strtok = new StringTokenizer(line, "|", false);
+        String tok;
+        String usernameTmp;
+        strtok.nextToken();
+        usernameTmp = strtok.nextToken();
+        if(usernameTmp.equals(username)){
+            throw new Exception("ALready exist username! ");
+        }
+       }
+       
+       reader.close();
+       //check are two passwords same.
+       if(!(password.equals(confirmPassword))){
+           throw new Exception("passwords not match!");
+       }
+           
+      
+       
+       
+       
+   }
     public String getUsername() {
         return this.username;
     }
