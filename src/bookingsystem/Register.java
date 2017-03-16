@@ -15,15 +15,16 @@ public class Register {
     private String password;
     private String address;
     private String phoneNumber;
-    
-   public Register(String name, String username, String password, String address, String phoneNumber)throws FileNotFoundException,
+    private String confirmPassword;
+   public Register(String name, String username, String password, String confirmPassword, String address, String phoneNumber)throws FileNotFoundException,
            Exception{
        
        //check if the user fill all the blanks.
-       if(this.name == null || this.username == null || this.password == null || this.address == null || this.phoneNumber == null){
+       if(name == null || username == null || password == null ||confirmPassword == null|| address == null || phoneNumber == null){
            throw new Exception("Please fill all the blanks. ");
        }
        
+       //read from file to check the repeat username
        BufferedReader reader = 
                new BufferedReader(new FileReader(utils.CUSTOMERINFOFILENAME));
        
@@ -38,8 +39,11 @@ public class Register {
         if(usernameTmp.equals(username)){
             throw new Exception("ALready exist username! ");
         }
-        
-           
+       }
+       
+       //check are two passwords same.
+       if(!(password.equals(confirmPassword))){
+           throw new Exception("passwords not match!");
        }
            
       
