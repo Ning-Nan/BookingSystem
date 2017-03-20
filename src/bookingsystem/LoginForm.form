@@ -86,7 +86,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton2" max="32767" attributes="0"/>
+                      <Component id="registerButton" max="32767" attributes="0"/>
                       <Component id="jLabel3" pref="190" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -112,7 +112,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" pref="41" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="registerButton" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -170,10 +170,13 @@
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="NoAccount"/>
           </AccessibilityProperties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="registerButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerButtonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
