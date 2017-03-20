@@ -47,6 +47,11 @@ public class LoginForm extends javax.swing.JFrame {
         jCheckBox1.setText("Remember");
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(51, 153, 255));
         jLabel2.setText("Forget Password?");
@@ -147,6 +152,12 @@ public class LoginForm extends javax.swing.JFrame {
         new RegisterPage().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new BookingPage().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
