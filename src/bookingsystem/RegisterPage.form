@@ -62,7 +62,7 @@
                       <Component id="phoneNumberField" alignment="0" max="32767" attributes="0"/>
                       <Component id="emailField" alignment="0" max="32767" attributes="0"/>
                       <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="confirmPassworldField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="confirmPasswordField" alignment="0" max="32767" attributes="0"/>
                       <Component id="registerButton" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -125,7 +125,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="passwordField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="confirmPassworldField" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmPasswordField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="addressField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -200,7 +200,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="confirmPassworldField">
+        <Component class="javax.swing.JPasswordField" name="confirmPasswordField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Comfirm Password"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -227,6 +227,9 @@
             <Property name="text" type="java.lang.String" value="Register"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerButtonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
         </Component>

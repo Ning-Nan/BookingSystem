@@ -5,6 +5,9 @@
  */
 package bookingsystem;
 
+import java.io.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author msi-pc
@@ -38,7 +41,7 @@ public class RegisterPage extends javax.swing.JFrame {
         phoneNumberField = new javax.swing.JTextField();
         emailField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
-        confirmPassworldField = new javax.swing.JPasswordField();
+        confirmPasswordField = new javax.swing.JPasswordField();
         confirmationCodeField = new javax.swing.JTextField();
         termsCheckBox = new javax.swing.JCheckBox();
         registerButton = new javax.swing.JButton();
@@ -78,8 +81,8 @@ public class RegisterPage extends javax.swing.JFrame {
         passwordField.setText("Password");
         passwordField.setToolTipText("");
 
-        confirmPassworldField.setText("Comfirm Password");
-        confirmPassworldField.setToolTipText("");
+        confirmPasswordField.setText("Comfirm Password");
+        confirmPasswordField.setToolTipText("");
 
         confirmationCodeField.setText("Comfirmation code");
 
@@ -89,6 +92,11 @@ public class RegisterPage extends javax.swing.JFrame {
 
         registerButton.setText("Register");
         registerButton.setToolTipText("");
+        registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerButtonMouseClicked(evt);
+            }
+        });
 
         addressField.setText("Address");
 
@@ -102,7 +110,7 @@ public class RegisterPage extends javax.swing.JFrame {
                     .addComponent(phoneNumberField)
                     .addComponent(emailField)
                     .addComponent(passwordField)
-                    .addComponent(confirmPassworldField)
+                    .addComponent(confirmPasswordField)
                     .addComponent(registerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +161,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confirmPassworldField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,6 +203,35 @@ public class RegisterPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
+        String name = firstNameField.getText();
+        String password = passwordField.getPassword().toString();
+        String confirmPassword = confirmPasswordField.getPassword().toString();
+        String address = addressField.getText();
+        String phoneNumber = phoneNumberField.getText();
+        String username = usernameField.getText();
+        
+        try {
+            new user(name, username, password, confirmPassword, address,
+            phoneNumber);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error reading/writing the customer file " +
+                            utils.CUSTOMERINFOFILENAME, "Read/write error",
+                            JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Registration successful!", "",
+                JOptionPane.PLAIN_MESSAGE);
+        
+        new LoginForm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_registerButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +269,7 @@ public class RegisterPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressField;
-    private javax.swing.JPasswordField confirmPassworldField;
+    private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField confirmationCodeField;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField firstNameField;
