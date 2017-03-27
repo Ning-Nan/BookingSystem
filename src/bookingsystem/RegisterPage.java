@@ -19,6 +19,11 @@ public class RegisterPage extends javax.swing.JFrame {
      */
     public RegisterPage() {
         initComponents();
+        
+        // Enable dynamic textboxes to work
+        jLabel1.requestFocusInWindow();
+        passwordField.setEchoChar((char)0);
+        confirmPasswordField.setEchoChar((char)0);
     }
 
     /**
@@ -54,10 +59,34 @@ public class RegisterPage extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         firstNameField.setText("First Name");
+        firstNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusLost(evt);
+            }
+        });
 
         lastNameField.setText("Last Name");
+        lastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusLost(evt);
+            }
+        });
 
         usernameField.setText("Username");
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusLost(evt);
+            }
+        });
 
         jLabel2.setText("Gender:");
 
@@ -74,15 +103,41 @@ public class RegisterPage extends javax.swing.JFrame {
 
         jLabel3.setText("Date of Birth:");
 
-        phoneNumberField.setText("Mobie Number");
+        phoneNumberField.setText("Phone Number");
+        phoneNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneNumberFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                phoneNumberFieldFocusLost(evt);
+            }
+        });
 
         emailField.setText("Email");
+        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFieldFocusLost(evt);
+            }
+        });
 
         passwordField.setText("Password");
         passwordField.setToolTipText("");
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+        });
 
-        confirmPasswordField.setText("Comfirm Password");
+        confirmPasswordField.setText("Confirm Password");
         confirmPasswordField.setToolTipText("");
+        confirmPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                confirmPasswordFieldFocusGained(evt);
+            }
+        });
 
         confirmationCodeField.setText("Comfirmation code");
 
@@ -99,6 +154,14 @@ public class RegisterPage extends javax.swing.JFrame {
         });
 
         addressField.setText("Address");
+        addressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                addressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                addressFieldFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,6 +294,93 @@ public class RegisterPage extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonMouseClicked
+
+    private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
+
+        if (firstNameField.getText().equals("First Name")) {
+            firstNameField.setText("");
+        }
+    }//GEN-LAST:event_firstNameFieldFocusGained
+
+    private void firstNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusLost
+        if (firstNameField.getText().equals("")) {
+            firstNameField.setText("First Name");
+        }
+    }//GEN-LAST:event_firstNameFieldFocusLost
+
+    private void lastNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusGained
+        if (lastNameField.getText().equals("Last Name")) {
+            lastNameField.setText("");
+        }
+    }//GEN-LAST:event_lastNameFieldFocusGained
+
+    private void lastNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusLost
+        if (lastNameField.getText().equals("")) {
+            lastNameField.setText("Last Name");
+        }
+    }//GEN-LAST:event_lastNameFieldFocusLost
+
+    private void usernameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusGained
+        if (usernameField.getText().equals("Username")) {
+            usernameField.setText("");
+        }
+    }//GEN-LAST:event_usernameFieldFocusGained
+
+    private void usernameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusLost
+        if (usernameField.getText().equals("")) {
+            usernameField.setText("Username");
+        }
+    }//GEN-LAST:event_usernameFieldFocusLost
+
+    private void phoneNumberFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFieldFocusGained
+        if (phoneNumberField.getText().equals("Phone Number")) {
+            phoneNumberField.setText("");
+        }
+    }//GEN-LAST:event_phoneNumberFieldFocusGained
+
+    private void phoneNumberFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFieldFocusLost
+        if (phoneNumberField.getText().equals("")) {
+            phoneNumberField.setText("Phone Number");
+        }
+    }//GEN-LAST:event_phoneNumberFieldFocusLost
+
+    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
+        if (emailField.getText().equals("Email")) {
+            emailField.setText("");
+        }
+    }//GEN-LAST:event_emailFieldFocusGained
+
+    private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
+        if (emailField.getText().equals("")) {
+            emailField.setText("Email");
+        }
+    }//GEN-LAST:event_emailFieldFocusLost
+
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        if (passwordField.getEchoChar() == (char)0) {
+            passwordField.setText("");
+            passwordField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_passwordFieldFocusGained
+
+    private void confirmPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordFieldFocusGained
+        if (confirmPasswordField.getEchoChar() == (char)0) {
+            confirmPasswordField.setText("");
+            confirmPasswordField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_confirmPasswordFieldFocusGained
+
+    private void addressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addressFieldFocusGained
+        if (addressField.getText().equals("Address")) {
+            addressField.setText("");
+        }
+    }//GEN-LAST:event_addressFieldFocusGained
+
+    private void addressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addressFieldFocusLost
+        if (addressField.getText().equals("")) {
+            addressField.setText("Address");
+        }
+    }//GEN-LAST:event_addressFieldFocusLost
 
     /**
      * @param args the command line arguments
