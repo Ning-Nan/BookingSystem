@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package bookingsystem;
+
+import static bookingsystem.user.roleType.customer;
+import static bookingsystem.user.roleType.owner;
 import java.io.*;
 import java.lang.String;
 import javax.swing.JOptionPane;
@@ -27,9 +30,9 @@ public class LoginForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        usernameField = new javax.swing.JTextField();
+        passwordField1 = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -43,24 +46,24 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 131, 30));
-        jTextField1.getAccessibleContext().setAccessibleName("Username");
+        jPanel1.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 131, 30));
+        usernameField.getAccessibleContext().setAccessibleName("Username");
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        passwordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                passwordField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 131, 28));
-        jPasswordField1.getAccessibleContext().setAccessibleName("Password");
+        jPanel1.add(passwordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 131, 28));
+        passwordField1.getAccessibleContext().setAccessibleName("Password");
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 76, 32));
+        jPanel1.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 76, 32));
 
         registerButton.setText("Register");
         registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,7 +116,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
-        pack();
+        setBounds(0, 0, 620, 391);
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
@@ -121,18 +124,18 @@ public class LoginForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_registerButtonMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        String username = jTextField1.getText(); 
-        String password = String.valueOf(jPasswordField1.getPassword());
-           
-        try{
-            new user(username,password);
-        }catch (IOException e) {
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+
+        String username = usernameField.getText();
+        String password = String.valueOf(passwordField1.getPassword());
+        user tempUser;
+        try {
+            tempUser = new user(username, password);
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(this,
-                    "Error reading/writing the customer file " +
-                            utils.CUSTOMERINFOFILENAME, "Read/write error",
-                            JOptionPane.ERROR_MESSAGE);
+                    "Error reading/writing the customer file "
+                    + utils.CUSTOMERINFOFILENAME, "Read/write error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
@@ -140,17 +143,20 @@ public class LoginForm extends javax.swing.JFrame {
             return;
         }
         JOptionPane.showMessageDialog(this, "Login successful!", "",
-                JOptionPane.PLAIN_MESSAGE);            
-            
-            
-            new BookingPage().setVisible(true);
-            this.dispose();
-      
-    }//GEN-LAST:event_jButton1ActionPerformed
+                JOptionPane.PLAIN_MESSAGE);
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        if (tempUser.getRole() == owner) {
+            new EmployeeArrangement(tempUser).setVisible(true);
+            this.dispose();
+        } else if (tempUser.getRole() == customer) {
+            new UserSelectPage(tempUser).setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_passwordField1ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
@@ -192,16 +198,16 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField passwordField1;
     private javax.swing.JButton registerButton;
+    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
