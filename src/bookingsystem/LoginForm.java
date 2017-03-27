@@ -21,11 +21,17 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         try {
             bdb.setup();
+            business.currBusiness = new business(1, "rbusiness", "rbpass");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
+        } catch (Exception e) {
+           JOptionPane.showMessageDialog(this, e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE);
+           System.exit(0);
         }
     }
 
