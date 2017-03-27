@@ -10,6 +10,7 @@ import static bookingsystem.user.roleType.owner;
 import java.io.*;
 import java.lang.String;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 public class LoginForm extends javax.swing.JFrame {
 
@@ -18,6 +19,14 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        try {
+            bdb.setup();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
     }
 
     /**
@@ -135,6 +144,11 @@ public class LoginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,
                     "Error reading/writing the customer file "
                     + utils.CUSTOMERINFOFILENAME, "Read/write error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),
+                    "Database Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         } catch (Exception e) {

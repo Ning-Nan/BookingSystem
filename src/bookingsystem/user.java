@@ -7,9 +7,12 @@ package bookingsystem;
 
 import java.io.*;
 import java.util.StringTokenizer;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class user {
 
+    private int id;
     private String name;
     private String username;
     private String password;
@@ -24,82 +27,37 @@ public class user {
     private roleType role;
 
     // Instance user from existing user
-    public user(String username, String password) throws FileNotFoundException,
+    public user(String username, String password) throws SQLException,
             Exception {
-
-        Boolean authenticated = false;
-        //first check in business file to make business owner to login
-        BufferedReader reader1 = new BufferedReader(new FileReader(utils.BUSINESS));
-
-        String line1;
-
-        while ((line1 = reader1.readLine()) != null) {
-            // Business data seperated by commas
-            StringTokenizer strtok = new StringTokenizer(line1, "|", false);
-            String tok;
-            String nameTmp, usernameTmp;
-            nameTmp = strtok.nextToken();
-            usernameTmp = strtok.nextToken();
-            if (usernameTmp.equals(username)) {
-                tok = strtok.nextToken();
-                if (tok.equals(password)) {
-                    // Found correct owner.
-                    authenticated = true;
-                    this.name = nameTmp;
-                    this.username = usernameTmp;
-                    this.password = tok;
-                    tok = strtok.nextToken();
-                    this.ownerName = tok;
-                    tok = strtok.nextToken();
-                    this.address = tok;
-                    tok = strtok.nextToken();
-                    this.phoneNumber = tok;
-                    this.role = roleType.owner;
-                } else {
-                    throw new Exception("Incorrect password");
-                }
+        
+        ResultSet rs = bdb.selectQuery(
+                "SELECT * from customers WHERE username='" + username +
+                "'");
+        
+        this.role = roleType.customer;
+        
+        if (rs.isClosed()) {
+            rs = bdb.selectQuery(
+            "SELECT * from businesses WHERE username='" + username +
+                    "'");
+            
+            this.role = roleType.owner;
+            
+            if (rs.isClosed()) {
+                throw new Exception("Invalid username");
             }
         }
-
-        reader1.close();
-        //if did not find the username in business, then change to normal user
-        if (authenticated != true) {
-            BufferedReader reader2
-                    = new BufferedReader(new FileReader(utils.CUSTOMERINFOFILENAME));
-            // Each customer is on a new line
-            String line;
-            // Read until the end of the file
-            while ((line = reader2.readLine()) != null) {
-                // Customer data seperated by commas
-                StringTokenizer strtok = new StringTokenizer(line, "|", false);
-                String tok;
-                String nameTmp, usernameTmp;
-                nameTmp = strtok.nextToken();
-                usernameTmp = strtok.nextToken();
-                if (usernameTmp.equals(username)) {
-                    tok = strtok.nextToken();
-                    if (tok.equals(password)) {
-                        // Found correct user.
-                        authenticated = true;
-                        this.name = nameTmp;
-                        this.username = usernameTmp;
-                        this.password = tok;
-                        tok = strtok.nextToken();
-                        this.address = tok;
-                        tok = strtok.nextToken();
-                        this.phoneNumber = tok;
-                        this.role = roleType.customer;
-                    } else {
-                        throw new Exception("Incorrect password");
-                    }
-                }
-            }
-
-            reader2.close();
+        
+        if (!rs.getString("password").equals(password)) {
+            throw new Exception("Invalid password");
         }
-        if (authenticated == false) {
-            throw new Exception("Invalid username");
-        }
+        
+        this.id = rs.getInt("id");
+        this.name = rs.getString("name");
+        this.phoneNumber = rs.getString("phonenumber");
+        this.address = rs.getString("address");
+        this.username = username;
+        this.password = password;
     }
 
     public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber) throws IOException,
