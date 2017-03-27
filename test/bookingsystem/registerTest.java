@@ -26,13 +26,14 @@ public class registerTest {
     public static void setUpClass() {
         
         try {
-            user userRegister = new user("Ning Nan","pater9925","99256789","99256789","Docklands","0405727777");
+            user userRegister = new user("Ning Nan","pater9925","99256789","99256789","Docklands","0405727777","nanning9925@gmail.com");
             user userLogin = new user ("pater9925","99256789");
             assert(userLogin.getUsername().equals("pater9925"));
             assert(userLogin.getName().equals("Ning Nan"));
             assert(userLogin.getAddress()
                     .equals("Docklands"));
             assert(userLogin.getPhoneNumber().equals("0405727777"));
+            assert(userLogin.getEmail().equals("nanning9925@gmail.com"));
             
         } catch (FileNotFoundException e) {
             fail("Customer info file not found");
