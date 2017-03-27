@@ -19,7 +19,7 @@ public class user {
     private String address;
     private String phoneNumber;
     private String ownerName;
-
+    private String email;
     public enum roleType {
         customer, owner
     }
@@ -60,11 +60,11 @@ public class user {
         this.password = password;
     }
 
-    public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber) throws IOException,
+    public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
             Exception {
 
         //check if the user fill all the blanks.
-        if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("")) {
+        if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
             throw new Exception("Please fill all the blanks. ");
         }
        
@@ -96,7 +96,7 @@ public class user {
 
         BufferedWriter bufw = new BufferedWriter(fw);
         bufw.newLine();
-        bufw.write(name + "|" + username + "|" + password + "|" + address + "|" + phoneNumber);
+        bufw.write(name + "|" + username + "|" + password + "|" + address + "|" + phoneNumber +"|" + email);
         bufw.flush();
         bufw.close();
 
@@ -124,6 +124,10 @@ public class user {
 
     public String getOwnerName() {
         return ownerName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
 }
