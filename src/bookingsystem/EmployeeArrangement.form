@@ -29,7 +29,7 @@
                   <Component id="jButton4" min="-2" pref="222" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" pref="222" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="222" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="222" max="-2" attributes="0"/>
+                  <Component id="manageEmployeesButton" min="-2" pref="222" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="97" max="32767" attributes="0"/>
           </Group>
@@ -39,7 +39,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="54" max="-2" attributes="0"/>
+              <Component id="manageEmployeesButton" min="-2" pref="54" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" pref="54" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -52,15 +52,19 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="manageEmployeesButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="Manage Employees"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="AddEmployees"/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageEmployeesButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>

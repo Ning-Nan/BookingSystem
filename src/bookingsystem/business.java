@@ -42,6 +42,7 @@ public class business {
         this.phoneNumber = rs.getString("phonenumber");
         this.username = username;
         this.password = password;
+        this.id = id;
         
     }
     
@@ -71,7 +72,7 @@ public class business {
         ResultSet rs;
         
         try {
-        rs = bdb.selectQuery("SELECT * employees WHERE businessID=" +
+        rs = bdb.selectQuery("SELECT * from employees WHERE businessID=" +
                 this.id);
         
             if (rs.isClosed()) {
