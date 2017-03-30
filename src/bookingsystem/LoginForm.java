@@ -166,10 +166,10 @@ public class LoginForm extends javax.swing.JFrame {
                 JOptionPane.PLAIN_MESSAGE);
 
         if (tempUser.getRole() == owner) {
-            new EmployeeArrangement(tempUser).setVisible(true);
+            new EmployeeArrangement().setVisible(true);
             this.dispose();
         } else if (tempUser.getRole() == customer) {
-            new UserSelectPage(tempUser).setVisible(true);
+            new UserSelectPage().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_loginButtonActionPerformed

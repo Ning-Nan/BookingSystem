@@ -7,11 +7,11 @@ import javax.swing.ListModel;
 
 public class ViewMyBookings extends javax.swing.JFrame {
 
-    public user User;
+  
 
   
-    public ViewMyBookings(user User) throws Exception {
-        this.User = User;
+    public ViewMyBookings() throws Exception {
+ /*
         booking viewMine = new booking(User);
         initComponents();
         jLabel1.setText("Login as: " + User.getName());
@@ -25,7 +25,7 @@ public class ViewMyBookings extends javax.swing.JFrame {
         }
         System.out.println(viewMine.bookingList.size());
         System.out.println(print.length);
-        jList2.setListData(print);
+        jList2.setListData(print);*/
 
     }
 
@@ -129,7 +129,7 @@ public class ViewMyBookings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new UserSelectPage(User).setVisible(true);
+        new UserSelectPage().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed

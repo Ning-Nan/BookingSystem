@@ -12,9 +12,8 @@ package bookingsystem;
 public class EmployeeArrangement extends javax.swing.JFrame {
 
    
-    public user User;
-    public EmployeeArrangement(user User) {
-        this.User = User;
+   
+    public EmployeeArrangement() {
         initComponents();
         
     }

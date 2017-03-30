@@ -11,9 +11,8 @@ package bookingsystem;
  */
 public class ViewAvailiableBookings extends javax.swing.JFrame {
 
-    public user User;
-    public ViewAvailiableBookings(user User) {
-        this.User = User;
+    ;
+    public ViewAvailiableBookings() {
         initComponents();
     }
 

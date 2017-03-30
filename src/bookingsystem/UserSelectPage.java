@@ -14,12 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class UserSelectPage extends javax.swing.JFrame {
 
-    public user User;
+  
 
-    public UserSelectPage(user User) {
-        this.User = User;
+    public UserSelectPage() {
         initComponents();
-        jLabel1.setText("Login as: " + User.getUsername());
+        jLabel1.setText("Login as: " + user.currUser.getUsername());
     }
 
     /**
@@ -132,7 +131,7 @@ public class UserSelectPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            new ViewMyBookings(this.User).setVisible(true);
+            new ViewMyBookings().setVisible(true);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this,
                     "Error reading/writing the file "
@@ -149,7 +148,7 @@ public class UserSelectPage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        new ViewAvailiableBookings(this.User).setVisible(true);
+        new ViewAvailiableBookings().setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
