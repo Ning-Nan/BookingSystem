@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 
 public class user {
 
+    public static user currUser;
     private int id;
     private String name;
     private String username;
@@ -20,6 +21,7 @@ public class user {
     private String phoneNumber;
     private String ownerName;
     private String email;
+
     public enum roleType {
         customer, owner
     }
@@ -29,35 +31,36 @@ public class user {
     // Instance user from existing user
     public user(String username, String password) throws SQLException,
             Exception {
-        
+
         ResultSet rs = bdb.selectQuery(
-                "SELECT * from customers WHERE username='" + username +
-                "'");
-        
+                "SELECT * from customers WHERE username='" + username
+                + "'");
+
         this.role = roleType.customer;
-        
+
         if (rs.isClosed()) {
             rs = bdb.selectQuery(
-            "SELECT * from businesses WHERE username='" + username +
-                    "'");
-            
+                    "SELECT * from businesses WHERE username='" + username
+                    + "'");
+
             this.role = roleType.owner;
-            
+
             if (rs.isClosed()) {
                 throw new Exception("Invalid username");
             }
         }
-        
+
         if (!rs.getString("password").equals(password)) {
             throw new Exception("Invalid password");
         }
-        
+
         this.id = rs.getInt("id");
         this.name = rs.getString("name");
         this.phoneNumber = rs.getString("phonenumber");
         this.address = rs.getString("address");
         this.username = username;
         this.password = password;
+        this.email = rs.getString("email");
     }
 
     public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
@@ -67,38 +70,22 @@ public class user {
         if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
             throw new Exception("Please fill all the blanks. ");
         }
-       
 
-        //read from file to check the repeat username
-        BufferedReader reader
-                = new BufferedReader(new FileReader(utils.CUSTOMERINFOFILENAME));
-
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            StringTokenizer strtok = new StringTokenizer(line, "|", false);
-            String tok;
-            String usernameTmp;
-            strtok.nextToken();
-            usernameTmp = strtok.nextToken();
-            if (usernameTmp.equals(username)) {
-                throw new Exception("ALready exist username! ");
-            }
+        ResultSet rs = bdb.selectQuery("Select * from businesses WHERE username = '" + username + "'");
+       if (!rs.isClosed()) {
+            throw new Exception("ALready exist username! Please try another!");
         }
-
-        reader.close();
-        //check are two passwords same.
-        if (!(password.equals(confirmPassword))) {
-            throw new Exception("passwords not match!");
+        
+         rs = bdb.selectQuery("Select * from  customers WHERE username = '" + username + "'");
+        if (!rs.isClosed()) {
+            throw new Exception("ALready exist username! Please try another!");
         }
+        
+        if(!password.equals(confirmPassword)){
+        throw new Exception("The password doesn't match! Please re-enter them!");}
 
-        FileWriter fw = new FileWriter(utils.CUSTOMERINFOFILENAME, true);
-
-        BufferedWriter bufw = new BufferedWriter(fw);
-        bufw.newLine();
-        bufw.write(name + "|" + username + "|" + password + "|" + address + "|" + phoneNumber +"|" + email);
-        bufw.flush();
-        bufw.close();
+        bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES ("+"'"
+                + username + "', '" + password + "', '" + name + "', '" + address + "', '" + phoneNumber + "', '" + email + "')");
 
     }
 

@@ -190,7 +190,7 @@ public class RegisterPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
-        String name = firstNameField.getText();
+        String name = firstNameField.getText()+" " + lastNameField.getText();
          String password = String.valueOf(passwordField.getPassword());
         String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
         String address = addressField.getText();
