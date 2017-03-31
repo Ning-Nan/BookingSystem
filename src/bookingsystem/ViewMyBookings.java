@@ -1,6 +1,7 @@
 
 package bookingsystem;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.ListModel;
 
@@ -11,22 +12,32 @@ public class ViewMyBookings extends javax.swing.JFrame {
 
   
     public ViewMyBookings() throws Exception {
- /*
-        booking viewMine = new booking(User);
         initComponents();
-        jLabel1.setText("Login as: " + User.getName());
-        String[] print = new String[viewMine.bookingList.size()];
-        for (int i = 0; i < viewMine.bookingList.size(); i++) {
+        jLabel1.setText("Logged in as: " + user.currUser.getName());
+        listBookings();
 
-            booking booking = (booking) viewMine.bookingList.get(i);
-
-            print[i] = booking.getFormateDate() + "     " + booking.getWorker() + "     "
-                    + booking.getPhoneNumber() + "     " + booking.getAddress();
+    }
+    
+    public void listBookings() {
+        
+        ArrayList<booking> bookings =
+                user.currUser.getSortedBookings(business.currBusiness);
+        System.out.println(bookings.size());
+        String[] listData = new String[bookings.size()];
+        
+        for (int i = 0; i < bookings.size(); i++) {
+            booking tmpBooking = bookings.get(i);
+            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            listData[i] = tmpBooking.getTimeStart().format(
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")) +
+                    " - " +
+                    tmpBooking.getTimeFinish().format(
+                            DateTimeFormatter.ofPattern("hh:mm a")) + 
+                    " " + em.getName();
         }
-        System.out.println(viewMine.bookingList.size());
-        System.out.println(print.length);
-        jList2.setListData(print);*/
-
+        
+        jList2.setListData(listData);
+        
     }
 
    

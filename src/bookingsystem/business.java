@@ -66,6 +66,21 @@ public class business {
         return true;
     }
     
+    public employee getEmployee(int employeeID) {
+        try {
+            ResultSet rs = bdb.selectQuery("SELECT * from employees WHERE " +
+                    "businessID=" + this.id);
+            if (rs.isClosed()) {
+                return null;
+            }
+            employee em = new employee(rs.getInt("id"),
+                        rs.getInt("businessID"), rs.getString("name"));
+            return em;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
     public ArrayList<employee> getEmployees() {
         ArrayList<employee> employees = new ArrayList();
         

@@ -8,86 +8,44 @@ package bookingsystem;
 import static bookingsystem.user.roleType.customer;
 import java.io.*;
 import java.util.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-/**
- *
- * @author User
- */
 public class booking {
-    //formateDate means String type date
-    private String formateDate;
-    private Date date;
-    private String worker;
-    private String username;
-    private String bussiness;
-    private String phoneNumber;
+    private int id;
+    private int businessID;
+    private int employeeID;
+    private int customerID;
+    private LocalDateTime timeStart;
+    private LocalDateTime timeFinish;
+    private String name;
     private String address;
-    //use list to store the appointments that the current user has
-    List bookingList = new ArrayList();
+    private String phoneNumber;
+    
+    public booking(int id, int businessID, int employeeID, int customerID, long timeStart,
+            long timeFinish, String name, String address, String phoneNumber) {
 
-    public booking(user User) throws FileNotFoundException,
-            Exception {
-        //by now we focus on single business
-        if (User.getRole() == customer) {
-            BufferedReader reader1 = new BufferedReader(new FileReader(utils.CARSERVICE));
-
-            String line;
-
-            while ((line = reader1.readLine()) != null) {
-
-                StringTokenizer strtok = new StringTokenizer(line, "|", false);
-                String tok;
-                String usernameTmp;
-                usernameTmp = strtok.nextToken();
-
-                if (usernameTmp.equals(User.getUsername())) {
-                    booking tepBooking = new booking();
-                    tepBooking.username = usernameTmp;
-                    tepBooking.worker = strtok.nextToken();
-                    tepBooking.formateDate = strtok.nextToken();
-                    tepBooking.phoneNumber = strtok.nextToken();
-                    tepBooking.bussiness = "Car Service";
-                    tepBooking.address = strtok.nextToken();
-                    bookingList.add(tepBooking);
-                }
-
-            }
-
-            reader1.close();
-        }
-
+        this.id = id;
+        this.businessID = businessID;
+        this.employeeID = employeeID;
+        this.customerID = customerID;
+        this.timeStart = (new Timestamp(timeStart * 1000).toLocalDateTime());
+        this.timeFinish = (new Timestamp(timeFinish * 1000).toLocalDateTime());
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        
     }
-
-    private booking() {
-
+    
+    public LocalDateTime getTimeStart() {
+        return this.timeStart;
     }
-
-    public String getFormateDate() {
-        return formateDate;
+    
+    public LocalDateTime getTimeFinish() {
+        return this.timeFinish;
     }
-
-    public Date getDate() {
-        return date;
+    
+    public int getEmployeeID() {
+        return this.employeeID;
     }
-
-    public String getWorker() {
-        return worker;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getBussiness() {
-        return bussiness;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
 }

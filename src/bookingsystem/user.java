@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class user {
 
@@ -87,6 +88,41 @@ public class user {
         bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES ("+"'"
                 + username + "', '" + password + "', '" + name + "', '" + address + "', '" + phoneNumber + "', '" + email + "')");
 
+    }
+    
+    public ArrayList<booking> getSortedBookings(business b) {
+        ArrayList<booking> bookings = new ArrayList<booking>();
+        
+        try {
+            String query = "SELECT * from bookings WHERE "
+                    + "customerID=" + this.id + " AND businessID=" + b.getID()
+            + " ORDER BY timeStart ASC";
+            System.out.println(query);
+            ResultSet rs = bdb.selectQuery(query);
+            
+            if (rs.isClosed()) {
+                return bookings;
+            }
+            
+            while(rs.next()) {
+                booking tmpBooking = new booking(rs.getInt("id"),
+                        rs.getInt("businessID"),
+                        rs.getInt("employeeID"),
+                        rs.getInt("customerID"),
+                        rs.getLong("timeStart"),
+                        rs.getLong("timeFinish"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phonenumber"));
+                bookings.add(tmpBooking);
+            }
+            
+            
+        } catch (SQLException e) {
+            return bookings;
+        }
+        
+        return bookings;
     }
 
     public String getUsername() {
