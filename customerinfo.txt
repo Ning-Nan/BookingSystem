@@ -1,3 +1,4 @@
 Declan Paine|dwaine|abc123|26 Amiens Road CROSS ROADS NSW 2850|0240551105|abc@gmail.com
 Lincoln Andrews|andrewsl|testpass##|68 Harris Street THORNTON VIC 3712|0353417018|sada@gmail.com
 Sophia Pasco|pasco|TestingLongPassword123@^%|81 Railway Avenue YAMBUNA VIC 3621|0353205505|das@gmail.com
+Kevin|Yuxiong|Kevinng0806|keidbwbwhoe|423572|fsdkflnl@skdfln.com
