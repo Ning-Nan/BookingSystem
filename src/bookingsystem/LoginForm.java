@@ -144,9 +144,8 @@ public class LoginForm extends javax.swing.JFrame {
 
         String username = usernameField.getText();
         String password = String.valueOf(passwordField1.getPassword());
-        user tempUser;
         try {
-            tempUser = new user(username, password);
+            user.currUser = new user(username, password);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this,
                     "Error reading/writing the customer file "
@@ -166,10 +165,10 @@ public class LoginForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Login successful!", "",
                 JOptionPane.PLAIN_MESSAGE);
 
-        if (tempUser.getRole() == owner) {
+        if (user.currUser.getRole() == owner) {
             new EmployeeArrangement().setVisible(true);
             this.dispose();
-        } else if (tempUser.getRole() == customer) {
+        } else if (user.currUser.getRole() == customer) {
             new UserSelectPage().setVisible(true);
             this.dispose();
         }
