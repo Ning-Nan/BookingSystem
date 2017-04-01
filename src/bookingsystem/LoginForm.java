@@ -146,12 +146,6 @@ public class LoginForm extends javax.swing.JFrame {
         String password = String.valueOf(passwordField1.getPassword());
         try {
             user.currUser = new user(username, password);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error reading/writing the customer file "
-                    + utils.CUSTOMERINFOFILENAME, "Read/write error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
