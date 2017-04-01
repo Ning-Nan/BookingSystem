@@ -26,7 +26,7 @@ public class userRegisterTest {
             bdb.setup();
             user user = new user("Ning", "pater", "9925", "9925", "Boxhill",
                     "0405727777", "nanning@gmail.com");
-            System.out.println("1");
+            
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -39,7 +39,7 @@ public class userRegisterTest {
     @AfterClass
     public static void tearDownClass() throws SQLException {
         bdb.iuQuery("DELETE FROM customers WHERE name = 'Ning'");
-          System.out.println("3");
+         
     }
 
     @Before
@@ -59,7 +59,7 @@ public class userRegisterTest {
         assert(rs.getString("password").equals("9925"));
         assert(rs.getString("address").equals("Boxhill"));
         assert(rs.getString("email").equals("nanning@gmail.com"));
-          System.out.println("2");
+
         
     }
 
