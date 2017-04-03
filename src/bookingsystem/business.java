@@ -7,7 +7,11 @@ package bookingsystem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.time.ZoneId;
 
 public class business {
     
@@ -106,6 +110,44 @@ public class business {
         
         return employees;
         
+    }
+    
+    public ArrayList<booking> getABookingsFromDate(Date d) {
+        
+        ArrayList<booking> bookings = new ArrayList<booking>();
+        
+        LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(),
+                ZoneId.systemDefault());
+        Timestamp tldt = Timestamp.valueOf(ldt);
+        Timestamp tldtPlusOneDay = Timestamp.valueOf(ldt.plusDays(1));
+        
+        try {
+            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+                    "businessID=" + this.id + " AND timeStart > " +
+                    tldt.getTime()/1000 + " AND timeStart < " +
+                    tldtPlusOneDay.getTime()/1000 + " AND customerID IS NULL");
+            
+            if (rs.isClosed()) {
+                return bookings;
+            }
+            
+            while(rs.next()) {
+                booking tmpBooking = new booking(rs.getInt("id"),
+                        rs.getInt("businessID"),
+                        rs.getInt("employeeID"),
+                        rs.getInt("customerID"),
+                        rs.getLong("timeStart"),
+                        rs.getLong("timeFinish"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phonenumber"));
+                bookings.add(tmpBooking);
+            }
+            
+            return bookings;
+        } catch (SQLException e) {
+            return bookings;
+        }
     }
     
 }
