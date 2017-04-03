@@ -112,7 +112,8 @@ public class business {
         
     }
     
-    public ArrayList<booking> getABookingsFromDate(Date d) {
+    public ArrayList<booking> getABookingsFromDate(Date d) 
+    {
         
         ArrayList<booking> bookings = new ArrayList<booking>();
         
@@ -149,5 +150,4 @@ public class business {
             return bookings;
         }
     }
-    
 }
