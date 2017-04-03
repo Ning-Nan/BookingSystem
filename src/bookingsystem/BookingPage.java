@@ -5,6 +5,9 @@
  */
 package bookingsystem;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 /**
  *
  * @author msi-pc
@@ -57,6 +60,12 @@ public class BookingPage extends javax.swing.JFrame {
         jTextField1.setText("First Name");
 
         jTextField2.setText("Last Name");
+
+        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Booking Date:");
 
@@ -197,6 +206,28 @@ public class BookingPage extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        ArrayList<booking> bookings =
+                business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
+        
+        jComboBox2.removeAllItems();
+        
+        jComboBox2.addItem("Choose Slot");
+        
+        for (int i = 0; i < bookings.size(); i++) {
+            String str = new String();
+            booking tmpBooking = bookings.get(i);
+            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            str = tmpBooking.getTimeStart().format(
+                    DateTimeFormatter.ofPattern("hh:mm a")) +
+                    " - " +
+                    tmpBooking.getTimeFinish().format(
+                            DateTimeFormatter.ofPattern("hh:mm a")) + 
+                    " " + em.getName();
+            jComboBox2.addItem(str);
+        }
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     /**
      * @param args the command line arguments
