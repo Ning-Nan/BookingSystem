@@ -41,6 +41,11 @@ public class EmployeeArrangement extends javax.swing.JFrame {
                 manageEmployeesButtonMouseClicked(evt);
             }
         });
+        manageEmployeesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageEmployeesButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("Add Time Slot");
@@ -88,7 +93,12 @@ public class EmployeeArrangement extends javax.swing.JFrame {
 
     private void manageEmployeesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageEmployeesButtonMouseClicked
         new AddEmployees().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_manageEmployeesButtonMouseClicked
+
+    private void manageEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageEmployeesButtonActionPerformed
 
     /**
      * @param args the command line arguments

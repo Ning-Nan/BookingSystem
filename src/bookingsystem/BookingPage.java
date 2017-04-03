@@ -227,6 +227,7 @@ public class BookingPage extends javax.swing.JFrame {
                     " " + em.getName();
             jComboBox2.addItem(str);
         }
+        
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     /**
