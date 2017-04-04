@@ -5,8 +5,6 @@
  */
 package bookingsystem;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
