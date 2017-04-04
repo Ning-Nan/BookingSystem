@@ -45,6 +45,11 @@ public class AddTimeSlot extends javax.swing.JFrame {
         jLabel1.setText("Date: ");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "9:00 a.m. - 10:00 a.m.", "10:00 a.m. - 11:00 a.m.", "11:00 a.m. - 12:00 a.m.", "12:00 p.m. - 1:00 p.m.", "1:00 p.m. - 2:00 p.m.", "2:00 p.m. - 3:00 p.m.", "3:00 p.m. - 4:00 p.m.", "4:00 p.m. - 5:00 p.m.", "5:00 p.m. - 6:00 p.m.", "6:00 p.m. - 7:00 p.m.", "7:00 p.m. - 8:00 p.m.", "8:00 p.m. - 9:00 p.m." }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Time Slot: ");
         jLabel2.setToolTipText("");
@@ -105,7 +110,6 @@ public class AddTimeSlot extends javax.swing.JFrame {
         jTextField1.getAccessibleContext().setAccessibleName("EmployeeID");
         jLabel1.getAccessibleContext().setAccessibleName("Date");
         jButton1.getAccessibleContext().setAccessibleName("<Back");
-        jButton2.getAccessibleContext().setAccessibleName("Add");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,6 +136,10 @@ public class AddTimeSlot extends javax.swing.JFrame {
         new EmployeeArrangement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

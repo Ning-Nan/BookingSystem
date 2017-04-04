@@ -19,6 +19,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
      */
     public AllBookingSlot() {
         initComponents();
+        
     }
 
     /**
