@@ -5,8 +5,11 @@
  */
 package bookingsystem;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,7 +22,48 @@ public class AllBookingSlot extends javax.swing.JFrame {
      */
     public AllBookingSlot() {
         initComponents();
+        DefaultListModel model = new DefaultListModel();
+        ArrayList<booking> booking = business.currBusiness.getAllBooking();
+        model.addElement("EmployeeID  " + "Employee Name    " +  "Date and Time");
+        for (int i = 0; i < booking.size(); i++) {
+            String str = new String();
+            booking tmpBooking = booking.get(i);
+            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  " + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " 
+                  + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"));
+            model.addElement(str);
+        }
+        jList2.setModel(model);
+        /*DefaultListModel model = new DefaultListModel();
+        ArrayList<booking> booking = new ArrayList<booking>();
         
+        try {
+            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+                    "businessID =" );
+            
+            if (rs.isClosed()) {
+                jList2.setModel(model);
+            }
+            
+            while(rs.next()) {
+                booking tmpBooking = new booking(rs.getInt("id"),
+                        rs.getInt("businessID"),
+                        rs.getInt("employeeID"),
+                        rs.getInt("customerID"),
+                        rs.getLong("timeStart"),
+                        rs.getLong("timeFinish"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phonenumber"));
+                booking.add(tmpBooking);
+            }
+            
+            jList2.setModel(model);
+        } catch (SQLException e) {
+            jList2.setModel(model);
+        }
+        
+        jList2.setModel(model);*/
     }
 
     /**

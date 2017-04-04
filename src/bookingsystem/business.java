@@ -150,4 +150,35 @@ public class business {
             return bookings;
         }
     }
+    
+    public ArrayList<booking> getAllBooking()
+    {
+        ArrayList<booking> bookings = new ArrayList<booking>();
+        
+        try {
+            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+                    "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish");
+            
+            if (rs.isClosed()) {
+                return bookings;
+            }
+            
+            while(rs.next()) {
+                booking tmpBooking = new booking(rs.getInt("id"),
+                        rs.getInt("businessID"),
+                        rs.getInt("employeeID"),
+                        rs.getInt("customerID"),
+                        rs.getLong("timeStart"),
+                        rs.getLong("timeFinish"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phonenumber"));
+                bookings.add(tmpBooking);
+            }
+            
+            return bookings;
+        } catch (SQLException e) {
+            return bookings;
+        }
+    }
 }

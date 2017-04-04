@@ -34,8 +34,20 @@ public class AddEmployees extends javax.swing.JFrame {
         addEmployeeButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        addEmployeeButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        employeeNameField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeNameFieldMouseClicked(evt);
+            }
+        });
+        employeeNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeNameFieldActionPerformed(evt);
+            }
+        });
 
         addEmployeeButton.setText("Add Employee");
         addEmployeeButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -46,6 +58,18 @@ public class AddEmployees extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jList1);
 
+        addEmployeeButton1.setText("<-- Back");
+        addEmployeeButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addEmployeeButton1MouseClicked(evt);
+            }
+        });
+        addEmployeeButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmployeeButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -55,20 +79,27 @@ public class AddEmployees extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(employeeNameField)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                    .addComponent(addEmployeeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addEmployeeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addEmployeeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(employeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addEmployeeButton)
                 .addGap(29, 29, 29)
+                .addComponent(employeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addEmployeeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addEmployeeButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
+
+        employeeNameField.getAccessibleContext().setAccessibleName("");
+        employeeNameField.getAccessibleContext().setAccessibleDescription("");
+        addEmployeeButton1.getAccessibleContext().setAccessibleName("Back");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -77,6 +108,25 @@ public class AddEmployees extends javax.swing.JFrame {
         business.currBusiness.addEmployee(employeeNameField.getText());
         refreshEmployeeList();
     }//GEN-LAST:event_addEmployeeButtonMouseClicked
+
+    private void addEmployeeButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addEmployeeButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addEmployeeButton1MouseClicked
+
+    private void addEmployeeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeButton1ActionPerformed
+        // TODO add your handling code here:
+        this .dispose();
+        new EmployeeArrangement().setVisible(true);
+    }//GEN-LAST:event_addEmployeeButton1ActionPerformed
+
+    private void employeeNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_employeeNameFieldActionPerformed
+
+    private void employeeNameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeNameFieldMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_employeeNameFieldMouseClicked
 
     /**
      * @param args the command line arguments
@@ -128,6 +178,7 @@ public class AddEmployees extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployeeButton;
+    private javax.swing.JButton addEmployeeButton1;
     private javax.swing.JTextField employeeNameField;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
