@@ -147,7 +147,7 @@ public class UserSelectPage extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String ObjButtons[] = {"Yes","No"};
-        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", "Employee Arrangement", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[1]);
+        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[1]);
     
         if(PromptResult==0)
         {

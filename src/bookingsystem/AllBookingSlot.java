@@ -78,6 +78,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
         jList2 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("All Booking Slot");
 
         jButton1.setText("<-- Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

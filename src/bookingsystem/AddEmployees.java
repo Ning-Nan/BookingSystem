@@ -37,6 +37,7 @@ public class AddEmployees extends javax.swing.JFrame {
         addEmployeeButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add Employee");
 
         employeeNameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

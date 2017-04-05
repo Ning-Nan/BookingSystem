@@ -36,6 +36,7 @@ public class EmployeeArrangement extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Arrangement");
 
         manageEmployeesButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         manageEmployeesButton.setText("Manage Employees");
@@ -147,7 +148,7 @@ public class EmployeeArrangement extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         String ObjButtons[] = {"Yes","No"};
-        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", "Employee Arrangement", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[1]);
+        int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[1]);
     
         if(PromptResult==0)
         {
