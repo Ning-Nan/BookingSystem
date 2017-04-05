@@ -5,6 +5,8 @@
  */
 package bookingsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author msi-pc
@@ -129,7 +131,7 @@ public class EmployeeArrangement extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
+       JOptionPane.showMessageDialog(this, evt, string, WIDTH, icon);
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
