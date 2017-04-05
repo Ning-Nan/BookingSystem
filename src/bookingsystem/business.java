@@ -73,7 +73,7 @@ public class business {
     public employee getEmployee(int employeeID) {
         try {
             ResultSet rs = bdb.selectQuery("SELECT * from employees WHERE " +
-                    "businessID=" + this.id);
+                    "businessID=" + this.id + " AND id=" + employeeID);
             if (rs.isClosed()) {
                 return null;
             }
