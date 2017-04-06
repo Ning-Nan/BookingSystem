@@ -7,7 +7,11 @@ package bookingsystem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class employee {
     private int id;
@@ -32,7 +36,13 @@ public class employee {
         return businessID;
     }
     public ArrayList<booking> getEmployeeAvailability() throws SQLException{
-    
+        
+        Date now = new Date();
+        LocalDateTime ldt = LocalDateTime.ofInstant(now.toInstant(),
+                ZoneId.systemDefault());
+        Timestamp tldt = Timestamp.valueOf(ldt);
+        Timestamp tldtPlusSevenDay = Timestamp.valueOf(ldt.plusDays(7));
+        
         ArrayList<booking> bookings = new ArrayList<booking>();
         
         ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE employeeID = "
@@ -45,6 +55,11 @@ public class employee {
         }
         
         while(rs.next()){
+            
+            if(rs.getLong("timeStart") < tldt.getTime()/1000 || rs.getLong("timeStart") > 
+                    tldtPlusSevenDay.getTime()/1000){
+                continue;
+            }
         booking tmpBooking = new booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
