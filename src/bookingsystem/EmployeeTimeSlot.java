@@ -5,6 +5,12 @@
  */
 package bookingsystem;
 
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author msi-pc
@@ -16,13 +22,12 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
      */
     public EmployeeTimeSlot() {
         initComponents();
-        
-        for(int i = 0; i<business.currBusiness.getEmployees().size();i++)
-        {
+
+        for (int i = 0; i < business.currBusiness.getEmployees().size(); i++) {
             jComboBox1.addItem(business.currBusiness.getEmployees().get(i).getId()
                     + " " + business.currBusiness.getEmployees().get(i).getName());
         }
-        
+
     }
 
     /**
@@ -102,11 +107,43 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jList1.removeAll();
-        String tmp = (String)jComboBox1.getSelectedItem();
+        ArrayList<booking> bookings = new ArrayList<booking>();
+
+        String tmp = (String) jComboBox1.getSelectedItem();
         int id = Character.getNumericValue(tmp.charAt(0));
-        System.out.println(jComboBox1.getSelectedIndex());
-        System.out.println(id);
+
+        if (jComboBox1.getSelectedIndex()!=0){
+            try {
+                bookings = business.currBusiness.getEmployee(id).getEmployeeAvailability();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeTimeSlot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String[] listData = new String[bookings.size()];
+
+            for (int i = 0; i < bookings.size(); i++) {
+                booking tmpBooking = bookings.get(i);
+                listData[i] = tmpBooking.getTimeStart().format(
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"))
+                        + " - "
+                        + tmpBooking.getTimeFinish().format(
+                                DateTimeFormatter.ofPattern("hh:mm a"));
+
+                if (tmpBooking.getName() == null) {
+                    listData[i] = listData[i] + " AVAILABLE*";
+                } else {
+                    listData[i] = listData[i] + " " + tmpBooking.getName();
+                }
+            }
+
+            jList1.setListData(listData);
+
+        }
         
+
+        //System.out.println(jComboBox1.getSelectedIndex());
+        //System.out.println(id);
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
