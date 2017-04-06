@@ -48,4 +48,30 @@ public class booking {
     public int getEmployeeID() {
         return this.employeeID;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getBusinessID() {
+        return businessID;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    
 }
