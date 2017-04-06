@@ -16,6 +16,14 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
      */
     public EmployeeTimeSlot() {
         initComponents();
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Choose Employee");
+        for(int i = 0; i<business.currBusiness.getEmployees().size();i++)
+        {
+            jComboBox1.addItem(business.currBusiness.getEmployees().get(i).getId()
+                    + " " + business.currBusiness.getEmployees().get(i).getName());
+        }
+        
     }
 
     /**
@@ -36,6 +44,11 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
         setTitle("Employee Time Slot");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Employee" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(jList1);
 
@@ -87,6 +100,12 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
         this.dispose();
         new EmployeeArrangement().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        jList1.removeAll();
+        
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
