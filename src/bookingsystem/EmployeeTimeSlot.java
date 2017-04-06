@@ -16,8 +16,7 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
      */
     public EmployeeTimeSlot() {
         initComponents();
-        jComboBox1.removeAllItems();
-        jComboBox1.addItem("Choose Employee");
+        
         for(int i = 0; i<business.currBusiness.getEmployees().size();i++)
         {
             jComboBox1.addItem(business.currBusiness.getEmployees().get(i).getId()
@@ -103,7 +102,10 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jList1.removeAll();
-        
+        String tmp = (String)jComboBox1.getSelectedItem();
+        int id = Character.getNumericValue(tmp.charAt(0));
+        System.out.println(jComboBox1.getSelectedIndex());
+        System.out.println(id);
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
