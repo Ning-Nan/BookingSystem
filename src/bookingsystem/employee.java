@@ -19,4 +19,13 @@ public class employee {
     public String getName() {
         return this.name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getBusinessID() {
+        return businessID;
+    }
+    
 }
