@@ -92,7 +92,7 @@ public class business {
         
         try {
         rs = bdb.selectQuery("SELECT * from employees WHERE businessID=" +
-                this.id);
+                this.id + " ORDER BY id");
         
             if (rs.isClosed()) {
                 return employees;
@@ -181,4 +181,6 @@ public class business {
             return bookings;
         }
     }
+    
+    
 }
