@@ -5,6 +5,8 @@
  */
 package bookingsystem;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author msi-pc
@@ -16,6 +18,18 @@ public class AddTimeSlot extends javax.swing.JFrame {
      */
     public AddTimeSlot() {
         initComponents();
+        loadEmployees();
+    }
+    
+    private ArrayList<employee> employees;
+    
+    public void loadEmployees() {
+        employees = business.currBusiness.getEmployees();
+        
+        for (int i = 0; i < employees.size(); i++) {
+            employeeNameCB.addItem(employees.get(i).getName());
+        }
+        
     }
 
     /**
@@ -28,29 +42,22 @@ public class AddTimeSlot extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        employeeNameCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Time Slot");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setText("Employee ID");
-
         jLabel1.setText("Date: ");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "9:00 a.m. - 10:00 a.m.", "10:00 a.m. - 11:00 a.m.", "11:00 a.m. - 12:00 a.m.", "12:00 p.m. - 1:00 p.m.", "1:00 p.m. - 2:00 p.m.", "2:00 p.m. - 3:00 p.m.", "3:00 p.m. - 4:00 p.m.", "4:00 p.m. - 5:00 p.m.", "5:00 p.m. - 6:00 p.m.", "6:00 p.m. - 7:00 p.m.", "7:00 p.m. - 8:00 p.m.", "8:00 p.m. - 9:00 p.m." }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Time Slot: ");
         jLabel2.setToolTipText("");
@@ -64,6 +71,8 @@ public class AddTimeSlot extends javax.swing.JFrame {
 
         jButton2.setText("Add");
 
+        employeeNameCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose employee" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -71,11 +80,11 @@ public class AddTimeSlot extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(employeeNameCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -92,8 +101,8 @@ public class AddTimeSlot extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(employeeNameCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -108,7 +117,6 @@ public class AddTimeSlot extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextField1.getAccessibleContext().setAccessibleName("EmployeeID");
         jLabel1.getAccessibleContext().setAccessibleName("Date");
         jButton1.getAccessibleContext().setAccessibleName("<Back");
 
@@ -137,10 +145,6 @@ public class AddTimeSlot extends javax.swing.JFrame {
         new EmployeeArrangement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,13 +182,13 @@ public class AddTimeSlot extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> employeeNameCB;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }
