@@ -167,11 +167,6 @@ public class business {
                 return false;
             }
             
-            String query = "SELECT * from bookings WHERE " +
-                    "employeeID=" + em.getId() + " AND timeStart < "
-                    + (finishTimestamp.getTime()/1000)
-                    + " AND timeFinish > " + (finishTimestamp.getTime()/1000);
-            System.out.println(query);
             rs = bdb.selectQuery("SELECT * from bookings WHERE " +
                     "employeeID=" + em.getId() + " AND timeStart < "
                     + (finishTimestamp.getTime()/1000)
