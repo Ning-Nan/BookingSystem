@@ -44,7 +44,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        timeSlotCB = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -57,7 +57,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
 
         jLabel1.setText("Date: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "9:00 a.m. - 10:00 a.m.", "10:00 a.m. - 11:00 a.m.", "11:00 a.m. - 12:00 a.m.", "12:00 p.m. - 1:00 p.m.", "1:00 p.m. - 2:00 p.m.", "2:00 p.m. - 3:00 p.m.", "3:00 p.m. - 4:00 p.m.", "4:00 p.m. - 5:00 p.m.", "5:00 p.m. - 6:00 p.m.", "6:00 p.m. - 7:00 p.m.", "7:00 p.m. - 8:00 p.m.", "8:00 p.m. - 9:00 p.m." }));
+        timeSlotCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "9:00 a.m. - 10:00 a.m.", "10:00 a.m. - 11:00 a.m.", "11:00 a.m. - 12:00 a.m.", "12:00 p.m. - 1:00 p.m.", "1:00 p.m. - 2:00 p.m.", "2:00 p.m. - 3:00 p.m.", "3:00 p.m. - 4:00 p.m.", "4:00 p.m. - 5:00 p.m.", "5:00 p.m. - 6:00 p.m.", "6:00 p.m. - 7:00 p.m.", "7:00 p.m. - 8:00 p.m.", "8:00 p.m. - 9:00 p.m." }));
 
         jLabel2.setText("Time Slot: ");
         jLabel2.setToolTipText("");
@@ -93,7 +93,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, 169, Short.MAX_VALUE)
+                            .addComponent(timeSlotCB, 0, 169, Short.MAX_VALUE)
                             .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -108,7 +108,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeSlotCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -185,10 +185,10 @@ public class AddTimeSlot extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> employeeNameCB;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JComboBox<String> timeSlotCB;
     // End of variables declaration//GEN-END:variables
 }
