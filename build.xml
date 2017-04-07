@@ -71,7 +71,7 @@
 
     -->
 <target name="-post-compile">
-    <copy file="customerinfo.txt" todir="${dist.dir}"/>        
+    <copy file="bdb.db" todir="${dist.dir}"/>        
 </target>
 
 <target name="nonbjar">
