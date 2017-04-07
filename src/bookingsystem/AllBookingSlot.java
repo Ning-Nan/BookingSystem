@@ -22,13 +22,23 @@ public class AllBookingSlot extends javax.swing.JFrame {
         initComponents();
         DefaultListModel model = new DefaultListModel();
         ArrayList<booking> booking = business.currBusiness.getAllBooking();
-        model.addElement("EmployeeID  " + "Employee Name    " +  "Date and Time");
+
         for (int i = 0; i < booking.size(); i++) {
             String str = new String();
             booking tmpBooking = booking.get(i);
             employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
-            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  " + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " 
-                  + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"));
+            String bookingState = new String();
+            if(tmpBooking.getCustomerID() > 0)
+            {
+                bookingState = "Booked";
+            }
+            else
+            {
+                bookingState = "Not Booked";
+            }
+            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  "
+                  + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"))
+                  + "          " + bookingState;
             model.addElement(str);
         }
         jList2.setModel(model);
