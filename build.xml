@@ -73,4 +73,14 @@
 <target name="-post-compile">
     <copy file="customerinfo.txt" todir="${dist.dir}"/>        
 </target>
+
+<target name="nonbjar">
+  <move file="manifest.mf" tofile="manifest.mf.orig"/>
+  <move file="nonbmanifest.mf" tofile="manifest.mf"/>
+  <antcall target="jar"/>
+  <copydir src="libs" dest="dist/lib" includes="*.jar" />
+  <move file="manifest.mf" tofile="nonbmanifest.mf"/>
+  <move file="manifest.mf.orig" tofile="manifest.mf"/>
+</target>
+
 </project>
