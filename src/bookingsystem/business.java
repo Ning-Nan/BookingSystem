@@ -151,6 +151,50 @@ public class business {
         }
     }
     
+    public boolean createOpenBooking(employee em, LocalDateTime timeStart,
+            LocalDateTime timeFinish) {
+        
+        Timestamp startTimestamp = Timestamp.valueOf(timeStart);
+        Timestamp finishTimestamp = Timestamp.valueOf(timeFinish);
+        
+        try {
+            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+                "employeeID=" + em.getId() + " AND timeStart <= "
+                    + (startTimestamp.getTime()/1000) 
+                    + " AND timeFinish >= " + (finishTimestamp.getTime()/1000));
+            
+            if (!rs.isClosed()) {
+                return false;
+            }
+            
+            String query = "SELECT * from bookings WHERE " +
+                    "employeeID=" + em.getId() + " AND timeStart < "
+                    + (finishTimestamp.getTime()/1000)
+                    + " AND timeFinish > " + (finishTimestamp.getTime()/1000);
+            System.out.println(query);
+            rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+                    "employeeID=" + em.getId() + " AND timeStart < "
+                    + (finishTimestamp.getTime()/1000)
+                    + " AND timeFinish > " + (finishTimestamp.getTime()/1000));
+                    
+            if (!rs.isClosed()) {
+                return false;
+            }
+            
+            boolean success = bdb.iuQuery("INSERT INTO bookings (employeeID," +
+                    " businessID, timeStart, timeFinish) VALUES (" +
+                    em.getId() + ", " + this.id + ", "
+                    + startTimestamp.getTime()/1000 + ", " +
+                    finishTimestamp.getTime()/1000 + ")");
+            
+            return success;    
+            
+        } catch (SQLException e) {
+            return false;
+        }
+  
+    }
+    
     public ArrayList<booking> getAllBooking()
     {
         ArrayList<booking> bookings = new ArrayList<booking>();

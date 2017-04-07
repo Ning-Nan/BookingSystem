@@ -6,6 +6,10 @@
 package bookingsystem;
 
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +23,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
     public AddTimeSlot() {
         initComponents();
         loadEmployees();
+        jXDatePicker1.setDate(new Date());
     }
     
     private ArrayList<employee> employees;
@@ -47,7 +52,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
         timeSlotCB = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         employeeNameCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +74,12 @@ public class AddTimeSlot extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Add");
+        addButton.setText("Add");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addButtonMouseClicked(evt);
+            }
+        });
 
         employeeNameCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose employee" }));
 
@@ -84,7 +94,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -113,7 +123,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -145,6 +155,43 @@ public class AddTimeSlot extends javax.swing.JFrame {
         new EmployeeArrangement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
+        employee em;
+        if (employeeNameCB.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Pick an employee!",
+                    "Employee not selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            em = employees.get(employeeNameCB.getSelectedIndex() - 1);
+        }
+        if (timeSlotCB.getSelectedIndex() != 0) {
+            LocalDateTime timeStart = LocalDateTime.ofInstant(
+                    jXDatePicker1.getDate().toInstant(),
+                    ZoneId.systemDefault());
+            
+            timeStart = timeStart.plusHours(8 + timeSlotCB.getSelectedIndex());
+        
+            LocalDateTime timeFinish = timeStart.plusHours(1);
+            
+            boolean success = 
+                    business.currBusiness.createOpenBooking(em, timeStart,
+                            timeFinish);
+            
+            if (!success) {
+                JOptionPane.showMessageDialog(this,
+                        "The selected employee already has a booking " +
+                                "at the selected time.", "Booking Conflict",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Pick a timeslot!",
+                    "Timeslot not selected", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_addButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -182,9 +229,9 @@ public class AddTimeSlot extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JComboBox<String> employeeNameCB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
