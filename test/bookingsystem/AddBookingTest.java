@@ -75,13 +75,14 @@ public class AddBookingTest {
         long end = 1501372800;
         
         ResultSet rs = bdb.selectQuery(
-                "SELECT * from bookings WHERE id = '5' businessId = '5'"+
-                        " employeeID = 2 ");
+                "SELECT * from bookings WHERE id = '5'");
         
         assertTrue(!rs.isClosed());
         
         assert(start == rs.getLong("timeStart"));
         assert(end == rs.getLong("timeFinish"));
+        assert(rs.getInt("businessID")==1);
+        assert(rs.getInt("employeeID")==2);
         
     
     }
