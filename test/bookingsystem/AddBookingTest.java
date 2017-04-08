@@ -5,6 +5,7 @@
  */
 package bookingsystem;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -57,7 +58,7 @@ public class AddBookingTest {
 
 
     @Test
-    public void testMethod() throws ParseException {
+    public void testMethod() throws ParseException, SQLException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date testDate =(Date) dateFormat.parse("2017-07-30");
         LocalDateTime timeStart = LocalDateTime.ofInstant(
@@ -69,6 +70,18 @@ public class AddBookingTest {
                 timeFinish);
         
         assertTrue(success);
+        
+        long start = 1501369200;
+        long end = 1501372800;
+        
+        ResultSet rs = bdb.selectQuery(
+                "SELECT * from bookings WHERE id = '5' businessId = '5'"+
+                        " employeeID = 2 ");
+        
+        assertTrue(!rs.isClosed());
+        
+        assert(start == rs.getLong("timeStart"));
+        assert(end == rs.getLong("timeFinish"));
         
     
     }
