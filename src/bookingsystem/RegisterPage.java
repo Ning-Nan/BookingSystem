@@ -199,6 +199,12 @@ public class RegisterPage extends javax.swing.JFrame {
         String username = usernameField.getText();
         String email = emailField.getText();
         
+        if(firstNameField.getText().equals("First Name")||lastNameField.getText().equals("Last Name")||
+                username.equals("Username")||phoneNumber.equals("Phone Number")|| email.equals("Email")
+                || address.equals("Address")){
+            JOptionPane.showMessageDialog(this, "Please fill all the blanks!","",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             new user(name, username, password, confirmPassword, address,
             phoneNumber, email);
