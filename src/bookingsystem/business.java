@@ -196,7 +196,7 @@ public class business {
         
         try {
             ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
-                    "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish");
+                    "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish" + " ORDER BY timeStart ASC");
             
             if (rs.isClosed()) {
                 return bookings;
