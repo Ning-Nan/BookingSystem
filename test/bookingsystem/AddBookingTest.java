@@ -6,6 +6,12 @@
 package bookingsystem;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,16 +21,17 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author User
+ * @author mac
  */
-public class AddEmployeeTest {
+public class AddBookingTest {
     
-    public AddEmployeeTest() {
+    public AddBookingTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-          try {
+        
+        try {
             bdb.setup();
             business.currBusiness = new business(1, "rbusiness", "rbpass");
 
@@ -50,15 +57,19 @@ public class AddEmployeeTest {
 
 
     @Test
-    public void testMethod() {
+    public void testMethod() throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date testDate =(Date) dateFormat.parse("2017-07-30");
+        LocalDateTime timeStart = LocalDateTime.ofInstant(
+                    testDate.toInstant(),
+                    ZoneId.systemDefault());
+        timeStart = timeStart.plusHours(9);
+        LocalDateTime timeFinish = timeStart.plusHours(1);
+        boolean success = business.currBusiness.createOpenBooking(business.currBusiness.getEmployee(2), timeStart,
+                timeFinish);
+        
+        assertTrue(success);
+        
     
-        business.currBusiness.addEmployee("Java");
-        
-        employee test = business.currBusiness.getEmployee(4);
-        
-        assert(test.getBusinessID() == 1);
-        assert(test.getId() == 5);
-        assert(test.getName().equals("Java"));
-        
     }
 }
