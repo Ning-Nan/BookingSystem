@@ -54,11 +54,13 @@ public class AddEmployeeTest {
     
         business.currBusiness.addEmployee("Java");
         
-        employee test = business.currBusiness.getEmployee(4);
+        employee test = business.currBusiness.getEmployee(5);
+        
         
         assert(test.getBusinessID() == 1);
         assert(test.getId() == 5);
         assert(test.getName().equals("Java"));
+       
         
     }
 }
