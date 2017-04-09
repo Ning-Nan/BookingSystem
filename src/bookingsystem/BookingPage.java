@@ -70,7 +70,7 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "Dan 3.00p.m. - 5.00p.m." }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot" }));
 
         jLabel6.setText("Available Slot:");
 
