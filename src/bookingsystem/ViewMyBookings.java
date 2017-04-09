@@ -13,21 +13,21 @@ public class ViewMyBookings extends javax.swing.JFrame {
   
     public ViewMyBookings() throws Exception {
         initComponents();
-        jLabel1.setText("Logged in as: " + user.currUser.getName());
+        jLabel1.setText("Logged in as: " + User.currUser.getName());
         listBookings();
 
     }
     
     public void listBookings() {
         
-        ArrayList<booking> bookings =
-                user.currUser.getSortedBookings(business.currBusiness);
+        ArrayList<Booking> bookings =
+                User.currUser.getSortedBookings(Business.currBusiness);
         System.out.println(bookings.size());
         String[] listData = new String[bookings.size()];
         
         for (int i = 0; i < bookings.size(); i++) {
-            booking tmpBooking = bookings.get(i);
-            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            Booking tmpBooking = bookings.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             listData[i] = tmpBooking.getTimeStart().format(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")) +
                     " - " +

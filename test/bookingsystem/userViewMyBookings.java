@@ -29,9 +29,9 @@ public class userViewMyBookings {
     @BeforeClass
     public static void setUpClass() {
         try {
-            bdb.setup();
-            user.currUser = new user("dwaine", "abc123");
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            User.currUser = new User("dwaine", "abc123");
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -55,14 +55,14 @@ public class userViewMyBookings {
 
     @Test
     public void testSomeMethod() {
-        ArrayList<booking> bookings
-                = user.currUser.getSortedBookings(business.currBusiness);
+        ArrayList<Booking> bookings
+                = User.currUser.getSortedBookings(Business.currBusiness);
         System.out.println(bookings.size());
         String[] listData = new String[bookings.size()];
 
         for (int i = 0; i < bookings.size(); i++) {
-            booking tmpBooking = bookings.get(i);
-            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            Booking tmpBooking = bookings.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             listData[i] = tmpBooking.getTimeStart().format(
                     DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"))
                     + " - "

@@ -33,8 +33,8 @@ public class AddBookingTest {
     public static void setUpClass() {
         
         try {
-            bdb.setup();
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -66,7 +66,7 @@ public class AddBookingTest {
                     ZoneId.systemDefault());
         timeStart = timeStart.plusHours(9);
         LocalDateTime timeFinish = timeStart.plusHours(1);
-        boolean success = business.currBusiness.createOpenBooking(business.currBusiness.getEmployee(2), timeStart,
+        boolean success = Business.currBusiness.createOpenBooking(Business.currBusiness.getEmployee(2), timeStart,
                 timeFinish);
         
         assertTrue(success);
@@ -74,7 +74,7 @@ public class AddBookingTest {
         long start = 1501369200;
         long end = 1501372800;
         
-        ResultSet rs = bdb.selectQuery(
+        ResultSet rs = Bdb.selectQuery(
                 "SELECT * from bookings WHERE id = '5'");
         
         assertTrue(!rs.isClosed());

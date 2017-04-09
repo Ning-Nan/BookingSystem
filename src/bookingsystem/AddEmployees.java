@@ -118,7 +118,7 @@ public class AddEmployees extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        business.currBusiness.addEmployee(employeeNameField.getText());
+        Business.currBusiness.addEmployee(employeeNameField.getText());
         refreshEmployeeList();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -159,7 +159,7 @@ public class AddEmployees extends javax.swing.JFrame {
     
     private boolean refreshEmployeeList() {
         DefaultListModel model = new DefaultListModel();
-        ArrayList<employee> employees = business.currBusiness.getEmployees();
+        ArrayList<Employee> employees = Business.currBusiness.getEmployees();
         
         for (int i = 0; i < employees.size(); i++) {
             model.addElement(employees.get(i).getName());

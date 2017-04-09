@@ -33,9 +33,9 @@ public class ViewAvailableBookingTest {
     @BeforeClass
     public static void setUpClass() {
          try {
-            bdb.setup();
-            user.currUser = new user("dwaine", "abc123");
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            User.currUser = new User("dwaine", "abc123");
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -65,7 +65,7 @@ public class ViewAvailableBookingTest {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date testDate =(Date) dateFormat.parse("2017-08-30");
         System.out.println(testDate);
-        ArrayList<booking> bookings =business.currBusiness.getABookingsFromDate(testDate);
+        ArrayList<Booking> bookings =Business.currBusiness.getABookingsFromDate(testDate);
         
         assert(bookings.size() == 1);
         assert(bookings.get(0).getId() == 1);

@@ -23,8 +23,8 @@ public class userRegisterTest {
     @BeforeClass
     public static void setUpClass() {
         try {
-            bdb.setup();
-            user user = new user("Ning", "pater", "9925", "9925", "Boxhill",
+            Bdb.setup();
+            User user = new User("Ning", "pater", "9925", "9925", "Boxhill",
                     "0405727777", "nanning@gmail.com");
             
 
@@ -38,7 +38,7 @@ public class userRegisterTest {
 
     @AfterClass
     public static void tearDownClass() throws SQLException {
-        bdb.iuQuery("DELETE FROM customers WHERE name = 'Ning'");
+        Bdb.iuQuery("DELETE FROM customers WHERE name = 'Ning'");
          
     }
 
@@ -52,7 +52,7 @@ public class userRegisterTest {
 
     @Test
     public void testSomeMethod() throws SQLException {
-        ResultSet rs = bdb.selectQuery(
+        ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='pater'");
         assert(rs.getString("name").equals("Ning"));
         assert(rs.getString("phonenumber").equals("0405727777"));

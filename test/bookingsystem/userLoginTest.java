@@ -5,7 +5,7 @@
  */
 package bookingsystem;
 
-import static bookingsystem.user.roleType.customer;
+import static bookingsystem.User.roleType.customer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.junit.After;
@@ -27,8 +27,8 @@ public class userLoginTest {
     @BeforeClass
     public static void setUpClass() {
         try {
-            bdb.setup();
-            user.currUser = new user("dwaine", "abc123");
+            Bdb.setup();
+            User.currUser = new User("dwaine", "abc123");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -52,12 +52,12 @@ public class userLoginTest {
 
     @Test
     public void testSomeMethod() {
-        assert (user.currUser.getName().equals("Declan Paine"));
-        assert (user.currUser.getPhoneNumber().equals("0240551105"));
-        assert (user.currUser.getAddress().equals("26 Amiens Road CROSS ROADS NSW 2850"));
+        assert (User.currUser.getName().equals("Declan Paine"));
+        assert (User.currUser.getPhoneNumber().equals("0240551105"));
+        assert (User.currUser.getAddress().equals("26 Amiens Road CROSS ROADS NSW 2850"));
 
-        assert (user.currUser.getEmail().equals("dwaine@gmail.com"));
-        assert (user.currUser.getUsername().equals("dwaine"));
-        assert (user.currUser.getRole().equals(customer));
+        assert (User.currUser.getEmail().equals("dwaine@gmail.com"));
+        assert (User.currUser.getUsername().equals("dwaine"));
+        assert (User.currUser.getRole().equals(customer));
     }
 }

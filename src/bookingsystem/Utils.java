@@ -3,7 +3,7 @@ package bookingsystem;
 
 import java.util.*;
 
-public class utils {
+public class Utils {
     //store the file name.
     public static final String CUSTOMERINFOFILENAME = "customerinfo.txt";
     public static final String BUSINESS = "business.txt";

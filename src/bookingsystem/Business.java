@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.time.ZoneId;
 
-public class business {
+public class Business {
     
-    public static business currBusiness;
+    public static Business currBusiness;
     
     private int id;
     private String name;
@@ -24,9 +24,9 @@ public class business {
     private String password;
     private String phoneNumber;
     
-    public business(int id, String username, String password)
+    public Business(int id, String username, String password)
             throws SQLException, Exception {
-        ResultSet rs = bdb.selectQuery("SELECT * from businesses WHERE id=" +
+        ResultSet rs = Bdb.selectQuery("SELECT * from businesses WHERE id=" +
                 id);
         
         if (rs.isClosed()) {
@@ -60,7 +60,7 @@ public class business {
     
     public boolean addEmployee(String name) {
         try {
-            bdb.iuQuery("INSERT INTO employees (businessID, name) " +
+            Bdb.iuQuery("INSERT INTO employees (businessID, name) " +
                     "VALUES (" +
                     this.id + ", " +
                     "'" + name + "')");
@@ -70,14 +70,14 @@ public class business {
         return true;
     }
     
-    public employee getEmployee(int employeeID) {
+    public Employee getEmployee(int employeeID) {
         try {
-            ResultSet rs = bdb.selectQuery("SELECT * from employees WHERE " +
+            ResultSet rs = Bdb.selectQuery("SELECT * from employees WHERE " +
                     "businessID=" + this.id + " AND id=" + employeeID);
             if (rs.isClosed()) {
                 return null;
             }
-            employee em = new employee(rs.getInt("id"),
+            Employee em = new Employee(rs.getInt("id"),
                         rs.getInt("businessID"), rs.getString("name"));
             return em;
         } catch (SQLException e) {
@@ -85,13 +85,13 @@ public class business {
         }
     }
     
-    public ArrayList<employee> getEmployees() {
-        ArrayList<employee> employees = new ArrayList();
+    public ArrayList<Employee> getEmployees() {
+        ArrayList<Employee> employees = new ArrayList();
         
         ResultSet rs;
         
         try {
-        rs = bdb.selectQuery("SELECT * from employees WHERE businessID=" +
+        rs = Bdb.selectQuery("SELECT * from employees WHERE businessID=" +
                 this.id + " ORDER BY id");
         
             if (rs.isClosed()) {
@@ -99,7 +99,7 @@ public class business {
             }
             
             while (rs.next()) {
-                employee em = new employee(rs.getInt("id"),
+                Employee em = new Employee(rs.getInt("id"),
                         rs.getInt("businessID"), rs.getString("name"));
                 employees.add(em);
             }
@@ -112,10 +112,10 @@ public class business {
         
     }
     
-    public ArrayList<booking> getABookingsFromDate(Date d) 
+    public ArrayList<Booking> getABookingsFromDate(Date d) 
     {
         
-        ArrayList<booking> bookings = new ArrayList<booking>();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
         
         LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(),
                 ZoneId.systemDefault());
@@ -123,7 +123,7 @@ public class business {
         Timestamp tldtPlusOneDay = Timestamp.valueOf(ldt.plusDays(1));
         
         try {
-            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+            ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                     "businessID=" + this.id + " AND timeStart > " +
                     tldt.getTime()/1000 + " AND timeStart < " +
                     tldtPlusOneDay.getTime()/1000 + " AND customerID IS NULL");
@@ -133,7 +133,7 @@ public class business {
             }
             
             while(rs.next()) {
-                booking tmpBooking = new booking(rs.getInt("id"),
+                Booking tmpBooking = new Booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
                         rs.getInt("customerID"),
@@ -151,14 +151,14 @@ public class business {
         }
     }
     
-    public boolean createOpenBooking(employee em, LocalDateTime timeStart,
+    public boolean createOpenBooking(Employee em, LocalDateTime timeStart,
             LocalDateTime timeFinish) {
         
         Timestamp startTimestamp = Timestamp.valueOf(timeStart);
         Timestamp finishTimestamp = Timestamp.valueOf(timeFinish);
         
         try {
-            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+            ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                 "employeeID=" + em.getId() + " AND timeStart <= "
                     + (startTimestamp.getTime()/1000) 
                     + " AND timeFinish >= " + (finishTimestamp.getTime()/1000));
@@ -167,7 +167,7 @@ public class business {
                 return false;
             }
             
-            rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+            rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                     "employeeID=" + em.getId() + " AND timeStart < "
                     + (finishTimestamp.getTime()/1000)
                     + " AND timeFinish > " + (finishTimestamp.getTime()/1000));
@@ -176,7 +176,7 @@ public class business {
                 return false;
             }
             
-            boolean success = bdb.iuQuery("INSERT INTO bookings (employeeID," +
+            boolean success = Bdb.iuQuery("INSERT INTO bookings (employeeID," +
                     " businessID, timeStart, timeFinish) VALUES (" +
                     em.getId() + ", " + this.id + ", "
                     + startTimestamp.getTime()/1000 + ", " +
@@ -190,12 +190,12 @@ public class business {
   
     }
     
-    public ArrayList<booking> getAllBooking()
+    public ArrayList<Booking> getAllBooking()
     {
-        ArrayList<booking> bookings = new ArrayList<booking>();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
         
         try {
-            ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE " +
+            ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                     "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish" + " ORDER BY timeStart ASC");
             
             if (rs.isClosed()) {
@@ -203,7 +203,7 @@ public class business {
             }
             
             while(rs.next()) {
-                booking tmpBooking = new booking(rs.getInt("id"),
+                Booking tmpBooking = new Booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
                         rs.getInt("customerID"),

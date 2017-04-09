@@ -25,8 +25,8 @@ public class AddEmployeeTest {
     @BeforeClass
     public static void setUpClass() {
           try {
-            bdb.setup();
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -52,9 +52,9 @@ public class AddEmployeeTest {
     @Test
     public void testMethod() {
     
-        business.currBusiness.addEmployee("Java");
+        Business.currBusiness.addEmployee("Java");
         
-        employee test = business.currBusiness.getEmployee(5);
+        Employee test = Business.currBusiness.getEmployee(5);
         
         
         assert(test.getBusinessID() == 1);

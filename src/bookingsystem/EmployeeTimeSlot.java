@@ -23,9 +23,9 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
     public EmployeeTimeSlot() {
         initComponents();
 
-        for (int i = 0; i < business.currBusiness.getEmployees().size(); i++) {
-            jComboBox1.addItem(business.currBusiness.getEmployees().get(i).getId()
-                    + " " + business.currBusiness.getEmployees().get(i).getName());
+        for (int i = 0; i < Business.currBusiness.getEmployees().size(); i++) {
+            jComboBox1.addItem(Business.currBusiness.getEmployees().get(i).getId()
+                    + " " + Business.currBusiness.getEmployees().get(i).getName());
         }
 
     }
@@ -107,14 +107,14 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jList1.removeAll();
-        ArrayList<booking> bookings = new ArrayList<booking>();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
 
         String tmp = (String) jComboBox1.getSelectedItem();
         int id = Character.getNumericValue(tmp.charAt(0));
 
         if (jComboBox1.getSelectedIndex()!=0){
             try {
-                bookings = business.currBusiness.getEmployee(id).getEmployeeAvailability();
+                bookings = Business.currBusiness.getEmployee(id).getEmployeeAvailability();
             } catch (SQLException ex) {
                 Logger.getLogger(EmployeeTimeSlot.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -122,7 +122,7 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
             String[] listData = new String[bookings.size()];
 
             for (int i = 0; i < bookings.size(); i++) {
-                booking tmpBooking = bookings.get(i);
+                Booking tmpBooking = bookings.get(i);
                 listData[i] = tmpBooking.getTimeStart().format(
                         DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"))
                         + " - "

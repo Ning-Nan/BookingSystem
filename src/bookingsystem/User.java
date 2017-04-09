@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class user {
+public class User {
 
-    public static user currUser;
+    public static User currUser;
     private int id;
     private String name;
     private String username;
@@ -30,17 +30,17 @@ public class user {
     private roleType role;
 
     // Instance user from existing user
-    public user(String username, String password) throws SQLException,
+    public User(String username, String password) throws SQLException,
             Exception {
 
-        ResultSet rs = bdb.selectQuery(
+        ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='" + username
                 + "'");
 
         this.role = roleType.customer;
 
         if (rs.isClosed()) {
-            rs = bdb.selectQuery(
+            rs = Bdb.selectQuery(
                     "SELECT * from businesses WHERE username='" + username
                     + "'");
 
@@ -64,7 +64,7 @@ public class user {
         this.email = rs.getString("email");
     }
 
-    public user(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
+    public User(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
             Exception {
 
         //check if the user fill all the blanks.
@@ -72,12 +72,12 @@ public class user {
             throw new Exception("Please fill all the blanks. ");
         }
 
-        ResultSet rs = bdb.selectQuery("Select * from businesses WHERE username = '" + username + "'");
+        ResultSet rs = Bdb.selectQuery("Select * from businesses WHERE username = '" + username + "'");
        if (!rs.isClosed()) {
             throw new Exception("ALready exist username! Please try another!");
         }
         
-         rs = bdb.selectQuery("Select * from  customers WHERE username = '" + username + "'");
+         rs = Bdb.selectQuery("Select * from  customers WHERE username = '" + username + "'");
         if (!rs.isClosed()) {
             throw new Exception("ALready exist username! Please try another!");
         }
@@ -85,27 +85,27 @@ public class user {
         if(!password.equals(confirmPassword)){
         throw new Exception("The password doesn't match! Please re-enter them!");}
 
-        bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES ("+"'"
+        Bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES ("+"'"
                 + username + "', '" + password + "', '" + name + "', '" + address + "', '" + phoneNumber + "', '" + email + "')");
 
     }
     
-    public ArrayList<booking> getSortedBookings(business b) {
-        ArrayList<booking> bookings = new ArrayList<booking>();
+    public ArrayList<Booking> getSortedBookings(Business b) {
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
         
         try {
             String query = "SELECT * from bookings WHERE "
                     + "customerID=" + this.id + " AND businessID=" + b.getID()
             + " ORDER BY timeStart ASC";
             System.out.println(query);
-            ResultSet rs = bdb.selectQuery(query);
+            ResultSet rs = Bdb.selectQuery(query);
             
             if (rs.isClosed()) {
                 return bookings;
             }
             
             while(rs.next()) {
-                booking tmpBooking = new booking(rs.getInt("id"),
+                Booking tmpBooking = new Booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
                         rs.getInt("customerID"),

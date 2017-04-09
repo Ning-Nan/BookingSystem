@@ -21,12 +21,12 @@ public class AllBookingSlot extends javax.swing.JFrame {
     public AllBookingSlot() {
         initComponents();
         DefaultListModel model = new DefaultListModel();
-        ArrayList<booking> booking = business.currBusiness.getAllBooking();
+        ArrayList<Booking> booking = Business.currBusiness.getAllBooking();
 
         for (int i = 0; i < booking.size(); i++) {
             String str = new String();
-            booking tmpBooking = booking.get(i);
-            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            Booking tmpBooking = booking.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             String bookingState = new String();
             if(tmpBooking.getCustomerID() > 0)
             {

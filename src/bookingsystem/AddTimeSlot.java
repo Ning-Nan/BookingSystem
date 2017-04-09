@@ -26,10 +26,10 @@ public class AddTimeSlot extends javax.swing.JFrame {
         jXDatePicker1.setDate(new Date());
     }
     
-    private ArrayList<employee> employees;
+    private ArrayList<Employee> employees;
     
     public void loadEmployees() {
-        employees = business.currBusiness.getEmployees();
+        employees = Business.currBusiness.getEmployees();
         
         for (int i = 0; i < employees.size(); i++) {
             employeeNameCB.addItem(employees.get(i).getName());
@@ -157,7 +157,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
-        employee em;
+        Employee em;
         if (employeeNameCB.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Pick an employee!",
                     "Employee not selected", JOptionPane.ERROR_MESSAGE);
@@ -175,7 +175,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
             LocalDateTime timeFinish = timeStart.plusHours(1);
             
             boolean success = 
-                    business.currBusiness.createOpenBooking(em, timeStart,
+                    Business.currBusiness.createOpenBooking(em, timeStart,
                             timeFinish);
             
             if (!success) {

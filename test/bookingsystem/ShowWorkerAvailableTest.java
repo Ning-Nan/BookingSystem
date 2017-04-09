@@ -26,8 +26,8 @@ public class ShowWorkerAvailableTest {
     @BeforeClass
     public static void setUpClass() throws SQLException {
         try {
-            bdb.setup();
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {
             fail(e.getMessage());
@@ -53,10 +53,10 @@ public class ShowWorkerAvailableTest {
 
     @Test
     public void testMethod() throws SQLException {
-        ArrayList<booking> bookings = new ArrayList<booking>();
-        ArrayList<booking> bookings1 = new ArrayList<booking>();
-        bookings = business.currBusiness.getEmployee(1).getEmployeeAvailability();
-        bookings1 = business.currBusiness.getEmployee(2).getEmployeeAvailability();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+        ArrayList<Booking> bookings1 = new ArrayList<Booking>();
+        bookings = Business.currBusiness.getEmployee(1).getEmployeeAvailability();
+        bookings1 = Business.currBusiness.getEmployee(2).getEmployeeAvailability();
         assert(bookings.size()==0);
         assert(bookings1.size()==1);
         assert(bookings1.get(0).getEmployeeID() == 2);

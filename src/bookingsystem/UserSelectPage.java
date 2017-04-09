@@ -18,7 +18,7 @@ public class UserSelectPage extends javax.swing.JFrame {
 
     public UserSelectPage() {
         initComponents();
-        jLabel1.setText("Login as: " + user.currUser.getUsername());
+        jLabel1.setText("Login as: " + User.currUser.getUsername());
     }
 
     /**
@@ -134,7 +134,7 @@ public class UserSelectPage extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this,
                     "Error reading/writing the file "
-                    + utils.CUSTOMERINFOFILENAME, "Read/write error",
+                    + Utils.CUSTOMERINFOFILENAME, "Read/write error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         } catch (Exception e) {

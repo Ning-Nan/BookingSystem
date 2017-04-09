@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class bdb {
+public class Bdb {
     
     public static Connection conn = null;
     public static String dbPath = "jdbc:sqlite:bdb.db";

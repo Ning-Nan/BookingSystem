@@ -5,8 +5,8 @@
  */
 package bookingsystem;
 
-import static bookingsystem.user.roleType.customer;
-import static bookingsystem.user.roleType.owner;
+import static bookingsystem.User.roleType.customer;
+import static bookingsystem.User.roleType.owner;
 import java.io.*;
 import java.lang.String;
 import javax.swing.JOptionPane;
@@ -20,8 +20,8 @@ public class LoginForm extends javax.swing.JFrame {
     public LoginForm() {
         initComponents();
         try {
-            bdb.setup();
-            business.currBusiness = new business(1, "rbusiness", "rbpass");
+            Bdb.setup();
+            Business.currBusiness = new Business(1, "rbusiness", "rbpass");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
@@ -140,7 +140,7 @@ public class LoginForm extends javax.swing.JFrame {
         String username = usernameField.getText();
         String password = String.valueOf(passwordField1.getPassword());
         try {
-            user.currUser = new user(username, password);
+            User.currUser = new User(username, password);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
@@ -154,10 +154,10 @@ public class LoginForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Login successful!", "Login",
                 JOptionPane.PLAIN_MESSAGE);
 
-        if (user.currUser.getRole() == owner) {
+        if (User.currUser.getRole() == owner) {
             new EmployeeArrangement().setVisible(true);
             this.dispose();
-        } else if (user.currUser.getRole() == customer) {
+        } else if (User.currUser.getRole() == customer) {
             new UserSelectPage().setVisible(true);
             this.dispose();
         }

@@ -5,13 +5,13 @@
  */
 package bookingsystem;
 
-import static bookingsystem.user.roleType.customer;
+import static bookingsystem.User.roleType.customer;
 import java.io.*;
 import java.util.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-public class booking {
+public class Booking {
     private int id;
     private int businessID;
     private int employeeID;
@@ -22,7 +22,7 @@ public class booking {
     private String address;
     private String phoneNumber;
     
-    public booking(int id, int businessID, int employeeID, int customerID, long timeStart,
+    public Booking(int id, int businessID, int employeeID, int customerID, long timeStart,
             long timeFinish, String name, String address, String phoneNumber) {
 
         this.id = id;

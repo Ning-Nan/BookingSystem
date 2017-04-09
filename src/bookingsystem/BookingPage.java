@@ -19,10 +19,10 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public BookingPage() {
         initComponents();
-        jTextField1.setText(user.currUser.getName());
-        jTextField5.setText(user.currUser.getEmail());
-        jTextField3.setText(user.currUser.getPhoneNumber());
-        jTextField4.setText(user.currUser.getAddress());
+        jTextField1.setText(User.currUser.getName());
+        jTextField5.setText(User.currUser.getEmail());
+        jTextField3.setText(User.currUser.getPhoneNumber());
+        jTextField4.setText(User.currUser.getAddress());
     }
 
     /**
@@ -196,8 +196,8 @@ public class BookingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        ArrayList<booking> bookings =
-                business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
+        ArrayList<Booking> bookings =
+                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
         
         jComboBox2.removeAllItems();
         
@@ -205,8 +205,8 @@ public class BookingPage extends javax.swing.JFrame {
         
         for (int i = 0; i < bookings.size(); i++) {
             String str = new String();
-            booking tmpBooking = bookings.get(i);
-            employee em = business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            Booking tmpBooking = bookings.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             str = tmpBooking.getTimeStart().format(
                     DateTimeFormatter.ofPattern("hh:mm a")) +
                     " - " +

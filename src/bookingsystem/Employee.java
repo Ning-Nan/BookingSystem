@@ -13,12 +13,12 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class employee {
+public class Employee {
     private int id;
     private int businessID;
     private String name;
     
-    public employee(int id, int businessID, String name) {
+    public Employee(int id, int businessID, String name) {
         this.id = id;
         this.businessID = businessID;
         this.name = name;
@@ -35,7 +35,7 @@ public class employee {
     public int getBusinessID() {
         return businessID;
     }
-    public ArrayList<booking> getEmployeeAvailability() throws SQLException{
+    public ArrayList<Booking> getEmployeeAvailability() throws SQLException{
         
         Date now = new Date();
         LocalDateTime ldt = LocalDateTime.ofInstant(now.toInstant(),
@@ -43,9 +43,9 @@ public class employee {
         Timestamp tldt = Timestamp.valueOf(ldt);
         Timestamp tldtPlusSevenDay = Timestamp.valueOf(ldt.plusDays(7));
         
-        ArrayList<booking> bookings = new ArrayList<booking>();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
         
-        ResultSet rs = bdb.selectQuery("SELECT * from bookings WHERE employeeID = "
+        ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE employeeID = "
         +"'"+ this.id +"'" +" AND businessID = " + "'" + this.businessID +"'" +
                 " ORDER BY timeStart ASC ");
         
@@ -60,7 +60,7 @@ public class employee {
                     tldtPlusSevenDay.getTime()/1000){
                 continue;
             }
-        booking tmpBooking = new booking(rs.getInt("id"),
+        Booking tmpBooking = new Booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
                         rs.getInt("customerID"),
