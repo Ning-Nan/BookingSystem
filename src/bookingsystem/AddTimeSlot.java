@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookingsystem;
 
 import java.util.ArrayList;
@@ -11,10 +6,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author msi-pc
- */
 public class AddTimeSlot extends javax.swing.JFrame {
 
     /**
