@@ -186,6 +186,9 @@ public class AddTimeSlot extends javax.swing.JFrame {
                         "The selected employee already has a booking " +
                                 "at the selected time.", "Booking Conflict",
                     JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Booking created!",
+                        "Success", JOptionPane.PLAIN_MESSAGE);
             }
             
         } else {
