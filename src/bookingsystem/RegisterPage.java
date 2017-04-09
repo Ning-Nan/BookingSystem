@@ -199,12 +199,6 @@ public class RegisterPage extends javax.swing.JFrame {
         try {
             new User(name, username, password, confirmPassword, address,
             phoneNumber, email);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error reading/writing the customer file " +
-                            Utils.CUSTOMERINFOFILENAME, "Read/write error",
-                            JOptionPane.ERROR_MESSAGE);
-            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);

@@ -122,12 +122,6 @@ public class UserSelectPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             new ViewMyBookings().setVisible(true);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error reading/writing the file "
-                    + Utils.CUSTOMERINFOFILENAME, "Read/write error",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);

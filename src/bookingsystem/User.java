@@ -85,8 +85,7 @@ public class User {
      * @throws IOException
      * @throws Exception 
      */
-    public User(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
-            Exception {
+    public User(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws Exception {
 
         //check if the user fill all the blanks.
         if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
