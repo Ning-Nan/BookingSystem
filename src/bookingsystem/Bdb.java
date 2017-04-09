@@ -21,8 +21,11 @@ public class Bdb {
      * @throws SQLException 
      */
     public static boolean setup() throws SQLException {
-        conn = DriverManager.getConnection(dbPath);
-        return true;
+        if (conn == null) {
+            conn = DriverManager.getConnection(dbPath);
+            return true;
+        }
+        return false;
     }
     
     /**
