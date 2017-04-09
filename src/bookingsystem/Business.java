@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.time.ZoneId;
 
+/**
+ * Java representation of a Business database item and the current logged in
+ * business.
+ * Caution should be used to make sure a Business object always
+ * represents an actual database item.
+ */
 public class Business {
     
     public static Business currBusiness;
@@ -19,6 +25,14 @@ public class Business {
     private String password;
     private String phoneNumber;
     
+    /**
+     * Construct a Business object by querying the database for it's existence.
+     * @param id id from the business table
+     * @param username owner username
+     * @param password owner password
+     * @throws SQLException
+     * @throws Exception 
+     */
     public Business(int id, String username, String password)
             throws SQLException, Exception {
         ResultSet rs = Bdb.selectQuery("SELECT * from businesses WHERE id=" +
@@ -53,6 +67,11 @@ public class Business {
         return name;
     }
     
+    /**
+     * Add an employee for the a business
+     * @param name Employee name
+     * @return Success of adding employee
+     */
     public boolean addEmployee(String name) {
         try {
             Bdb.iuQuery("INSERT INTO employees (businessID, name) " +
@@ -65,6 +84,11 @@ public class Business {
         return true;
     }
     
+    /**
+     * Given an employeeID, return an Employee object using the database.
+     * @param employeeID employeeID from the database table
+     * @return Employee object that has the employeeID
+     */
     public Employee getEmployee(int employeeID) {
         try {
             ResultSet rs = Bdb.selectQuery("SELECT * from employees WHERE " +
@@ -80,6 +104,10 @@ public class Business {
         }
     }
     
+    /**
+     * Get all the employees for a business
+     * @return An ArrayList containing Employee objects of all the employees.
+     */
     public ArrayList<Employee> getEmployees() {
         ArrayList<Employee> employees = new ArrayList();
         
@@ -107,15 +135,30 @@ public class Business {
         
     }
     
+    /**
+     * Get available bookings for a certain date
+     * @param d Date
+     * @return ArrayList of Bookings
+     */
     public ArrayList<Booking> getABookingsFromDate(Date d) 
     {
         
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         
+        // Convert date object to a LocalDateTime object
         LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(),
                 ZoneId.systemDefault());
+        
+        // Get the Timestamps of thate day at midnight and the next day at
+        // midnight.
+        
         Timestamp tldt = Timestamp.valueOf(ldt);
         Timestamp tldtPlusOneDay = Timestamp.valueOf(ldt.plusDays(1));
+        
+        /*
+            Timestamps are stored as unix timestamps (seconds),
+            Java uses milliseconds. (Divide/Multiply by 1000).
+        */
         
         try {
             ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
@@ -124,6 +167,7 @@ public class Business {
                     tldtPlusOneDay.getTime()/1000 + " AND customerID IS NULL");
             
             if (rs.isClosed()) {
+                // No results, no bookings for the date.
                 return bookings;
             }
             
@@ -146,31 +190,52 @@ public class Business {
         }
     }
     
+    /**
+     * Create a new booking for a business, assigned to an employee
+     * @param em Employee for the booking
+     * @param timeStart Time booking starts
+     * @param timeFinish Time booking ends
+     * @return Success of booking creation
+     */
     public boolean createOpenBooking(Employee em, LocalDateTime timeStart,
             LocalDateTime timeFinish) {
         
         Timestamp startTimestamp = Timestamp.valueOf(timeStart);
         Timestamp finishTimestamp = Timestamp.valueOf(timeFinish);
         
+        /*
+            Timestamps are stored as unix timestamps (seconds),
+            Java uses milliseconds. (Divide/Multiply by 1000).
+        */
+        
         try {
+            /* Make sure an employee doesn't already have a booking
+             * that overlaps the booking being created.
+             */
             ResultSet rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                 "employeeID=" + em.getId() + " AND timeStart <= "
                     + (startTimestamp.getTime()/1000) 
                     + " AND timeFinish >= " + (finishTimestamp.getTime()/1000));
             
             if (!rs.isClosed()) {
+                // If a result is returned then a booking overlaps.
                 return false;
             }
             
+            /* Make sure an employee doesn't have a booking that will
+             * overlap by being mid-way through the booking being created.
+             */
             rs = Bdb.selectQuery("SELECT * from bookings WHERE " +
                     "employeeID=" + em.getId() + " AND timeStart < "
                     + (finishTimestamp.getTime()/1000)
                     + " AND timeFinish > " + (finishTimestamp.getTime()/1000));
                     
             if (!rs.isClosed()) {
+                // If a result is returned then a booking overlaps.
                 return false;
             }
             
+            // No bookings overlap, add it to the database.
             boolean success = Bdb.iuQuery("INSERT INTO bookings (employeeID," +
                     " businessID, timeStart, timeFinish) VALUES (" +
                     em.getId() + ", " + this.id + ", "
@@ -185,6 +250,10 @@ public class Business {
   
     }
     
+    /**
+     * Get all bookings available or booked for a business
+     * @return List of bookings
+     */
     public ArrayList<Booking> getAllBooking()
     {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
@@ -194,6 +263,7 @@ public class Business {
                     "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish" + " ORDER BY timeStart ASC");
             
             if (rs.isClosed()) {
+                // No bookings
                 return bookings;
             }
             

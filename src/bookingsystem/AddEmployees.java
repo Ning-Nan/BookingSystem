@@ -148,6 +148,10 @@ public class AddEmployees extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Refresh the list of employees for the current business
+     * @return Success of the refresh
+     */
     private boolean refreshEmployeeList() {
         DefaultListModel model = new DefaultListModel();
         ArrayList<Employee> employees = Business.currBusiness.getEmployees();

@@ -153,10 +153,6 @@ public class UserSelectPage extends javax.swing.JFrame {
         new BookingPage().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

@@ -186,6 +186,10 @@ public class BookingPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * Refresh available bookings when a date is picked
+     * @param evt 
+     */
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         ArrayList<Booking> bookings =
                 Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());

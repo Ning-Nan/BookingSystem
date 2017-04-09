@@ -155,10 +155,6 @@ public class EmployeeArrangement extends javax.swing.JFrame {
         new EmployeeTimeSlot().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

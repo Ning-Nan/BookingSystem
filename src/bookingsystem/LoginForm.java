@@ -15,7 +15,11 @@ public class LoginForm extends javax.swing.JFrame {
     public LoginForm() {
         initComponents();
         try {
+            
+            // Setup the database
             Bdb.setup();
+            
+            // Hardcoded for single business login in Part A
             Business.currBusiness = new Business(1, "rbusiness", "rbpass");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
@@ -148,7 +152,10 @@ public class LoginForm extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Login successful!", "Login",
                 JOptionPane.PLAIN_MESSAGE);
-
+        
+        // Show a different screen based on whether the owner or a customer
+        // logged in.
+        
         if (User.currUser.getRole() == owner) {
             new EmployeeArrangement().setVisible(true);
             this.dispose();

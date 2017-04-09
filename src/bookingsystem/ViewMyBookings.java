@@ -18,6 +18,9 @@ public class ViewMyBookings extends javax.swing.JFrame {
 
     }
     
+    /**
+     * Refresh the list of the customer's bookings.
+     */
     public void listBookings() {
         
         ArrayList<Booking> bookings =
@@ -145,10 +148,6 @@ public class ViewMyBookings extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -12,6 +12,8 @@ public class AllBookingSlot extends javax.swing.JFrame {
     public AllBookingSlot() {
         initComponents();
         DefaultListModel model = new DefaultListModel();
+        
+        // Get all bookings and display them
         ArrayList<Booking> booking = Business.currBusiness.getAllBooking();
 
         for (int i = 0; i < booking.size(); i++) {
@@ -19,6 +21,9 @@ public class AllBookingSlot extends javax.swing.JFrame {
             Booking tmpBooking = booking.get(i);
             Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             String bookingState = new String();
+            
+            // customerID of a booking will be a customer ID if it is booked,
+            // customerIDs are always above 0.
             if(tmpBooking.getCustomerID() > 0)
             {
                 bookingState = "Booked";

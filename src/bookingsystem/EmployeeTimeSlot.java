@@ -13,7 +13,8 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
      */
     public EmployeeTimeSlot() {
         initComponents();
-
+        
+        // Add employees to the ComboBox
         for (int i = 0; i < Business.currBusiness.getEmployees().size(); i++) {
             jComboBox1.addItem(Business.currBusiness.getEmployees().get(i).getId()
                     + " " + Business.currBusiness.getEmployees().get(i).getName());
@@ -96,13 +97,18 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
         new EmployeeArrangement().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * When an employee is selected get their time slots.
+     * @param evt 
+     */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jList1.removeAll();
         ArrayList<Booking> bookings = new ArrayList<Booking>();
 
         String tmp = (String) jComboBox1.getSelectedItem();
         int id = Character.getNumericValue(tmp.charAt(0));
-
+        
+        // Make sure an employee is selected.
         if (jComboBox1.getSelectedIndex()!=0){
             try {
                 bookings = Business.currBusiness.getEmployee(id).getEmployeeAvailability();
@@ -111,7 +117,8 @@ public class EmployeeTimeSlot extends javax.swing.JFrame {
             }
 
             String[] listData = new String[bookings.size()];
-
+            
+            // List time slots
             for (int i = 0; i < bookings.size(); i++) {
                 Booking tmpBooking = bookings.get(i);
                 listData[i] = tmpBooking.getTimeStart().format(

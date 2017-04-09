@@ -8,11 +8,22 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Java representation of an Employee database item.
+ * Caution should be used to make sure an Employee object always
+ * represents an actual database item.
+ */
 public class Employee {
     private int id;
     private int businessID;
     private String name;
     
+    /**
+     * Create an employee object with the given parameters.
+     * @param id Employee's id from the database
+     * @param businessID businessID from the database
+     * @param name employee's name from the database
+     */
     public Employee(int id, int businessID, String name) {
         this.id = id;
         this.businessID = businessID;
@@ -30,6 +41,12 @@ public class Employee {
     public int getBusinessID() {
         return businessID;
     }
+    
+    /**
+     * Get an employee's availability for the next 7 days.
+     * @return An ArrayList of booking objects
+     * @throws SQLException 
+     */
     public ArrayList<Booking> getEmployeeAvailability() throws SQLException{
         
         Date now = new Date();

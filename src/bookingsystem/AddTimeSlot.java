@@ -19,6 +19,10 @@ public class AddTimeSlot extends javax.swing.JFrame {
     
     private ArrayList<Employee> employees;
     
+    /**
+     * Load employee names into the ComboBox and keep an internal list
+     * for their IDs.
+     */
     public void loadEmployees() {
         employees = Business.currBusiness.getEmployees();
         
@@ -149,18 +153,26 @@ public class AddTimeSlot extends javax.swing.JFrame {
 
     private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
         Employee em;
+        
+        // Make sure an employee has been picked
         if (employeeNameCB.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Pick an employee!",
                     "Employee not selected", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
+            // Set the selected employee from the internal list
             em = employees.get(employeeNameCB.getSelectedIndex() - 1);
         }
+        
+        // Make sure a timeslot has been picked
         if (timeSlotCB.getSelectedIndex() != 0) {
+            
+            // Set timeStart to midnight of the selected date
             LocalDateTime timeStart = LocalDateTime.ofInstant(
                     jXDatePicker1.getDate().toInstant(),
                     ZoneId.systemDefault());
             
+            // Timeslots start from 9am which will be index 1
             timeStart = timeStart.plusHours(8 + timeSlotCB.getSelectedIndex());
         
             LocalDateTime timeFinish = timeStart.plusHours(1);

@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Java representation of a customer database item.
+ * Caution should be used to make sure a User object always
+ * represents an actual database item.
+ */
 public class User {
 
     public static User currUser;
@@ -24,10 +29,17 @@ public class User {
 
     private roleType role;
 
-    // Instance user from existing user
+    /**
+     * Instance a user from an existing user in the database.
+     * @param username User's username
+     * @param password User's password
+     * @throws SQLException
+     * @throws Exception 
+     */
     public User(String username, String password) throws SQLException,
             Exception {
-
+        
+        // Check the customers table to find the user.
         ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='" + username
                 + "'");
@@ -35,6 +47,7 @@ public class User {
         this.role = roleType.customer;
 
         if (rs.isClosed()) {
+            // User wasn't a customer, check if they are a business owner.
             rs = Bdb.selectQuery(
                     "SELECT * from businesses WHERE username='" + username
                     + "'");
@@ -42,6 +55,7 @@ public class User {
             this.role = roleType.owner;
 
             if (rs.isClosed()) {
+                // User isn't a customer or business owner.
                 throw new Exception("Invalid username");
             }
         }
@@ -58,7 +72,19 @@ public class User {
         this.password = password;
         this.email = rs.getString("email");
     }
-
+    
+    /**
+     * Create a new user
+     * @param name Customer name
+     * @param username Customer username
+     * @param password Customer password
+     * @param confirmPassword Customer confirmPassword
+     * @param address Customer address
+     * @param phoneNumber Customer phone number
+     * @param email Customer email address
+     * @throws IOException
+     * @throws Exception 
+     */
     public User(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws IOException,
             Exception {
 
@@ -85,6 +111,11 @@ public class User {
 
     }
     
+    /**
+     * Get all a customer's bookings for a business sorted by time.
+     * @param b The business that has the customer's bookings
+     * @return ArrayList of Bookings
+     */
     public ArrayList<Booking> getSortedBookings(Business b) {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         
