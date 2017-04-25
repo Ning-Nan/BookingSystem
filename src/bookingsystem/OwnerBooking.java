@@ -184,41 +184,12 @@ public class OwnerBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        refreshBookingListWithDate();
+        
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jComboBox2.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Select a booking time", "Error",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
-
-        boolean success = false;
-
-        try {
-            success = Business.currBusiness.book(b, User.currUser,
-                jTextField1.getText(), jTextField4.getText(),
-                jTextField3.getText());
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Database error!", "Error",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!success) {
-            JOptionPane.showMessageDialog(this, "Unable to book slot", "Error",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        JOptionPane.showMessageDialog(this,
-            "Booking has been successfully booked!", "Success",
-            JOptionPane.PLAIN_MESSAGE);
-
-        refreshBookingListWithDate();
+        this.dispose();
+        new EmployeeArrangement().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
