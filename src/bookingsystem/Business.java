@@ -286,5 +286,28 @@ public class Business {
         }
     }
     
+    /**
+     * Book a booking
+     * @param b Booking to be booked
+     * @param u User account for the booking
+     * @param name Name of the person the booking is made for
+     * @param address Address of the person the booking is made for
+     * @param phoneNumber Phone Number of the person the booking is made for
+     * @return Whether the booking was successfully booked
+     * @throws SQLException 
+     */
+    public boolean book(Booking b, User u, String name,
+            String address, String phoneNumber) throws SQLException {
+        
+        boolean success = Bdb.iuQuery("UPDATE bookings SET customerID=" +
+                u.getID() +
+                ", name='" + name + "'" +
+                ", address='" + address + "'" +
+                ", phonenumber='" + phoneNumber + "'" +
+                " WHERE id=" + b.getId());
+        
+        return success;
+    }
+    
     
 }

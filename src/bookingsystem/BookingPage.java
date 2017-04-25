@@ -2,9 +2,13 @@ package bookingsystem;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class BookingPage extends javax.swing.JFrame {
-
+    
+    ArrayList<Booking> bookings;
+    
     /**
      * Creates new form BookingPage
      */
@@ -14,6 +18,31 @@ public class BookingPage extends javax.swing.JFrame {
         jTextField5.setText(User.currUser.getEmail());
         jTextField3.setText(User.currUser.getPhoneNumber());
         jTextField4.setText(User.currUser.getAddress());
+    }
+    
+    /**
+     * Refresh available bookings with date picker date.
+     */
+    public void refreshBookingListWithDate() {
+        bookings =
+                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
+        
+        jComboBox2.removeAllItems();
+        
+        jComboBox2.addItem("Choose Slot");
+        
+        for (int i = 0; i < bookings.size(); i++) {
+            String str = new String();
+            Booking tmpBooking = bookings.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            str = tmpBooking.getTimeStart().format(
+                    DateTimeFormatter.ofPattern("hh:mm a")) +
+                    " - " +
+                    tmpBooking.getTimeFinish().format(
+                            DateTimeFormatter.ofPattern("hh:mm a")) + 
+                    " " + em.getName();
+            jComboBox2.addItem(str);
+        }
     }
 
     /**
@@ -176,10 +205,6 @@ public class BookingPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here
         new UserSelectPage().setVisible(true);
@@ -191,27 +216,42 @@ public class BookingPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        ArrayList<Booking> bookings =
-                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
-        
-        jComboBox2.removeAllItems();
-        
-        jComboBox2.addItem("Choose Slot");
-        
-        for (int i = 0; i < bookings.size(); i++) {
-            String str = new String();
-            Booking tmpBooking = bookings.get(i);
-            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
-            str = tmpBooking.getTimeStart().format(
-                    DateTimeFormatter.ofPattern("hh:mm a")) +
-                    " - " +
-                    tmpBooking.getTimeFinish().format(
-                            DateTimeFormatter.ofPattern("hh:mm a")) + 
-                    " " + em.getName();
-            jComboBox2.addItem(str);
+        refreshBookingListWithDate();
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jComboBox2.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Select a booking time", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
-    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+        Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
+        
+        boolean success = false;
+        
+        try {
+            success = Business.currBusiness.book(b, User.currUser,
+                    jTextField1.getText(), jTextField4.getText(),
+                    jTextField3.getText());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Database error!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!success) {
+            JOptionPane.showMessageDialog(this, "Unable to book slot", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this,
+                "Booking has been successfully booked!", "Success",
+                JOptionPane.PLAIN_MESSAGE);
+        
+        refreshBookingListWithDate();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
