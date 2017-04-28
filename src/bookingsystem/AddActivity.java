@@ -49,6 +49,11 @@ public class AddActivity extends javax.swing.JFrame {
         jLabel1.setText("Duration:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Duration ", "1", "2", "3", "4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Hour/s");
 
@@ -156,6 +161,10 @@ public class AddActivity extends javax.swing.JFrame {
         this.dispose();
         new EmployeeArrangement().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
