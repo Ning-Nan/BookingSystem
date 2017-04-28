@@ -58,6 +58,11 @@ public class AddTimeSlot extends javax.swing.JFrame {
         jLabel1.setText("Date: ");
 
         timeSlotCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot", "9:00 a.m. - 10:00 a.m.", "10:00 a.m. - 11:00 a.m.", "11:00 a.m. - 12:00 a.m.", "12:00 p.m. - 1:00 p.m.", "1:00 p.m. - 2:00 p.m.", "2:00 p.m. - 3:00 p.m.", "3:00 p.m. - 4:00 p.m.", "4:00 p.m. - 5:00 p.m.", "5:00 p.m. - 6:00 p.m.", "6:00 p.m. - 7:00 p.m.", "7:00 p.m. - 8:00 p.m.", "8:00 p.m. - 9:00 p.m." }));
+        timeSlotCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeSlotCBActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Time Slot: ");
         jLabel2.setToolTipText("");
@@ -198,6 +203,10 @@ public class AddTimeSlot extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_addButtonMouseClicked
+
+    private void timeSlotCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeSlotCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeSlotCBActionPerformed
 
     /**
      * @param args the command line arguments
