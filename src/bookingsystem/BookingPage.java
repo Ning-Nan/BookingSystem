@@ -258,15 +258,15 @@ public class BookingPage extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+        int id = Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getId();
         Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
         
         boolean success = false;
-        
+        System.out.println(id);
         try {
             success = Business.currBusiness.book(b, User.currUser,
                     jTextField1.getText(), jTextField4.getText(),
-                    jTextField3.getText());
+                    jTextField3.getText(),id );
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Database error!", "Error",
                     JOptionPane.ERROR_MESSAGE);

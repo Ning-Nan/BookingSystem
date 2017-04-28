@@ -330,13 +330,14 @@ public class Business {
      * @throws SQLException
      */
     public boolean book(Booking b, User u, String name,
-            String address, String phoneNumber) throws SQLException {
+            String address, String phoneNumber, int activityId) throws SQLException {
 
         boolean success = Bdb.iuQuery("UPDATE bookings SET customerID="
                 + u.getID()
                 + ", name='" + name + "'"
                 + ", address='" + address + "'"
                 + ", phonenumber='" + phoneNumber + "'"
+                + ", activity='" + activityId + "'"
                 + " WHERE id=" + b.getId());
 
         return success;
