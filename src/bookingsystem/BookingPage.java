@@ -18,7 +18,6 @@ public class BookingPage extends javax.swing.JFrame {
         jTextField5.setText(User.currUser.getEmail());
         jTextField3.setText(User.currUser.getPhoneNumber());
         jTextField4.setText(User.currUser.getAddress());
-        loadActivity();
     }
     
     /**
@@ -43,18 +42,6 @@ public class BookingPage extends javax.swing.JFrame {
                             DateTimeFormatter.ofPattern("hh:mm a")) + 
                     " " + em.getName();
             jComboBox2.addItem(str);
-        }
-    }
-    
-    public void loadActivity(){
-     
-        ArrayList<Activity> Activity = Business.currBusiness.getActivity();
-        for (int i = 0; i < Business.currBusiness.getActivity().size(); i++) {
-            String str = new String();
-            Activity tmpActivity = Activity.get(i);
-            str = tmpActivity.getName() + " " + tmpActivity.getDuration() + "mins";
-            
-            jComboBox3.addItem(str);
         }
     }
 
@@ -127,11 +114,6 @@ public class BookingPage extends javax.swing.JFrame {
         jLabel7.setText("Activities:");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -285,10 +267,6 @@ public class BookingPage extends javax.swing.JFrame {
         
         refreshBookingListWithDate();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
