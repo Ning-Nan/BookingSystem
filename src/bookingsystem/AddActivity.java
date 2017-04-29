@@ -22,19 +22,7 @@ public class AddActivity extends javax.swing.JFrame {
      */
     public AddActivity() {
         initComponents();
-        DefaultListModel model = new DefaultListModel();
-        
-        // Get all bookings and display them
-        ArrayList<Activity> activity = Business.currBusiness.getActivity();
-
-        for (int i = 0; i < activity.size(); i++) {
-            String str = new String();
-            Activity tmpActivity = activity.get(i);
-            
-            str = tmpActivity.getName()+ "                      " + tmpActivity.getDuration() + " min/s";
-            model.addElement(str);
-        }
-        jList1.setModel(model);
+        refreshActicityList();
     }
 
     /**
@@ -204,7 +192,20 @@ public class AddActivity extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Activity added!",
                         "Success", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private boolean refreshActicityList() {
+        DefaultListModel model = new DefaultListModel();
+        ArrayList<Activity> activity = Business.currBusiness.getActivity();
 
+        for (int i = 0; i < activity.size(); i++) {
+            String str = new String();
+            
+            str = activity.get(i).getName()+ "          " + activity.get(i).getDuration() + " min/s";
+            model.addElement(str);
+        }
+        jList1.setModel(model);
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
