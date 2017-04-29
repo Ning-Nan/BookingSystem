@@ -1,49 +1,47 @@
-
 package bookingsystem;
 
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.ListModel;
 
-
 public class ViewMyBookings extends javax.swing.JFrame {
 
-  
-
-  
+    /**
+     * View Bookings
+     * @throws Exception 
+     */
     public ViewMyBookings() throws Exception {
         initComponents();
         jLabel1.setText("Logged in as: " + User.currUser.getName());
         listBookings();
 
     }
-    
+
     /**
      * Refresh the list of the customer's bookings.
      */
     public void listBookings() {
-        
-        ArrayList<Booking> bookings =
-                User.currUser.getSortedBookings(Business.currBusiness);
+
+        ArrayList<Booking> bookings
+                = User.currUser.getSortedBookings(Business.currBusiness);
         System.out.println(bookings.size());
         String[] listData = new String[bookings.size()];
-        
+
         for (int i = 0; i < bookings.size(); i++) {
             Booking tmpBooking = bookings.get(i);
             Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             listData[i] = tmpBooking.getTimeStart().format(
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")) +
-                    " - " +
-                    tmpBooking.getTimeFinish().format(
-                            DateTimeFormatter.ofPattern("hh:mm a")) + 
-                    " " + em.getName();
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"))
+                    + " - "
+                    + tmpBooking.getTimeFinish().format(
+                            DateTimeFormatter.ofPattern("hh:mm a"))
+                    + " " + em.getName();
         }
-        
+
         jList2.setListData(listData);
-        
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class AllBookingSlot extends javax.swing.JFrame {
 
     ArrayList<Booking> booking;
-    
+
     /**
      * Creates new form AllBookingSlot
      */
@@ -47,10 +47,14 @@ public class AllBookingSlot extends javax.swing.JFrame {
         
         jList2.setModel(model);*/
     }
-    
+
+    /**
+     * Refresh the list of bookings for the current business.
+     *
+     */
     public void refreshBookingList() {
         DefaultListModel model = new DefaultListModel();
-        
+
         // Get all bookings and display them
         booking = Business.currBusiness.getAllBooking();
 
@@ -59,24 +63,22 @@ public class AllBookingSlot extends javax.swing.JFrame {
             Booking tmpBooking = booking.get(i);
             Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
             String bookingState = new String();
-            
+
             // customerID of a booking will be a customer ID if it is booked,
             // customerIDs are always above 0.
-            if(tmpBooking.getCustomerID() > 0)
-            {
+            if (tmpBooking.getCustomerID() > 0) {
                 bookingState = "Booked";
-            }
-            else
-            {
+            } else {
                 bookingState = "Not Booked";
             }
-            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  "
-                  + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"))
-                  + "          " + bookingState;
+            str = "        " + tmpBooking.getEmployeeID() + "                      " + em.getName() + "                  "
+                    + tmpBooking.getTimeStart().format(DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " + tmpBooking.getTimeFinish().format(DateTimeFormatter.ofPattern("hh:mm a"))
+                    + "          " + bookingState;
             model.addElement(str);
         }
         jList2.setModel(model);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,6 +170,10 @@ public class AllBookingSlot extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jList2AncestorAdded
 
+    /**
+     * Delete a selected booking.
+     *
+     */
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
         Booking b = booking.get(jList2.getSelectedIndex());
         try {

@@ -155,35 +155,46 @@ public class AddActivity extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    /**
+     * Add activity to database and refresh the activity list
+     *
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jComboBox1.getSelectedIndex() == 0) {
             return;
         }
         try {
             Business.currBusiness.addActivity(jTextField1.getText(),
-                (Integer.valueOf(jComboBox1.getSelectedItem().toString())) * 60);
+                    (Integer.valueOf(jComboBox1.getSelectedItem().toString())) * 60);
         } catch (SQLException e) {
             return;
         }
         JOptionPane.showMessageDialog(this, "Activity added!",
-                        "Success", JOptionPane.PLAIN_MESSAGE);
-        
+                "Success", JOptionPane.PLAIN_MESSAGE);
+
         refreshActicityList();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    /**
+     * Refresh the list of activities for the current business
+     *
+     * @return Success of the refresh
+     */
     private boolean refreshActicityList() {
         DefaultListModel model = new DefaultListModel();
         ArrayList<Activity> activity = Business.currBusiness.getActivity();
 
         for (int i = 0; i < activity.size(); i++) {
             String str = new String();
-            
-            str = activity.get(i).getName()+ "          " + activity.get(i).getDuration() + " mins";
+
+            str = activity.get(i).getName() + "          " + activity.get(i).getDuration() + " mins";
             model.addElement(str);
         }
         jList1.setModel(model);
         return true;
     }
+
     /**
      * @param args the command line arguments
      */

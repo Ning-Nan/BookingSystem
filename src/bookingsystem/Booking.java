@@ -1,8 +1,5 @@
 package bookingsystem;
 
-import static bookingsystem.User.roleType.customer;
-import java.io.*;
-import java.util.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
