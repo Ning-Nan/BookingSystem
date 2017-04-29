@@ -428,5 +428,10 @@ public class Business {
                 name + "', " + duration + ", " + this.id + ")");
         return true;
     }
+    
+    public boolean deleteBooking(Booking b) throws SQLException {
+        boolean success = Bdb.iuQuery("DELETE from bookings WHERE id= " + b.getId());
+        return success;
+    }
 
 }

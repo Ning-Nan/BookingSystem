@@ -1,43 +1,21 @@
 package bookingsystem;
 
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class AllBookingSlot extends javax.swing.JFrame {
 
+    ArrayList<Booking> booking;
+    
     /**
      * Creates new form AllBookingSlot
      */
     public AllBookingSlot() {
         initComponents();
-        DefaultListModel model = new DefaultListModel();
-        
-        // Get all bookings and display them
-        ArrayList<Booking> booking = Business.currBusiness.getAllBooking();
-
-        for (int i = 0; i < booking.size(); i++) {
-            String str = new String();
-            Booking tmpBooking = booking.get(i);
-            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
-            String bookingState = new String();
-            
-            // customerID of a booking will be a customer ID if it is booked,
-            // customerIDs are always above 0.
-            if(tmpBooking.getCustomerID() > 0)
-            {
-                bookingState = "Booked";
-            }
-            else
-            {
-                bookingState = "Not Booked";
-            }
-            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  "
-                  + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"))
-                  + "          " + bookingState;
-            model.addElement(str);
-        }
-        jList2.setModel(model);
+        refreshBookingList();
         /*DefaultListModel model = new DefaultListModel();
         ArrayList<booking> booking = new ArrayList<booking>();
         
@@ -69,7 +47,36 @@ public class AllBookingSlot extends javax.swing.JFrame {
         
         jList2.setModel(model);*/
     }
+    
+    public void refreshBookingList() {
+        DefaultListModel model = new DefaultListModel();
+        
+        // Get all bookings and display them
+        booking = Business.currBusiness.getAllBooking();
 
+        for (int i = 0; i < booking.size(); i++) {
+            String str = new String();
+            Booking tmpBooking = booking.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            String bookingState = new String();
+            
+            // customerID of a booking will be a customer ID if it is booked,
+            // customerIDs are always above 0.
+            if(tmpBooking.getCustomerID() > 0)
+            {
+                bookingState = "Booked";
+            }
+            else
+            {
+                bookingState = "Not Booked";
+            }
+            str = "        " + tmpBooking.getEmployeeID()+ "                      " + em.getName() + "                  "
+                  + tmpBooking.getTimeStart().format( DateTimeFormatter.ofPattern("dd/MM/yyyy   hh:mm a")) + " - " + tmpBooking.getTimeFinish().format( DateTimeFormatter.ofPattern("hh:mm a"))
+                  + "          " + bookingState;
+            model.addElement(str);
+        }
+        jList2.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +89,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("All Booking Slot");
@@ -107,6 +115,13 @@ public class AllBookingSlot extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList2);
 
+        deleteButton.setText("Delete");
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,7 +129,9 @@ public class AllBookingSlot extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteButton)
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
@@ -125,9 +142,15 @@ public class AllBookingSlot extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                .addGap(7, 7, 7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                        .addGap(7, 7, 7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(deleteButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("Back");
@@ -144,6 +167,18 @@ public class AllBookingSlot extends javax.swing.JFrame {
     private void jList2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList2AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jList2AncestorAdded
+
+    private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
+        Booking b = booking.get(jList2.getSelectedIndex());
+        try {
+            Business.currBusiness.deleteBooking(b);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error deleting booking", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        refreshBookingList();
+    }//GEN-LAST:event_deleteButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,6 +216,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane2;
