@@ -28,15 +28,18 @@ public class BookingPage extends javax.swing.JFrame {
     
     /**
      * Refresh available bookings with date picker date.
+     * @param duration duration of the activity
      */
     public void refreshBookingListWithDate(int duration) {
         /*bookings =
                 Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());*/
         
+        //get available booking of current business at choosen date.
         bookings =
                 Business.currBusiness.getABookingsFromDate(
                         jXDatePicker1.getDate(), duration);
         
+        //refresh the list in the time slot combobox
         jComboBox2.removeAllItems();
         
         jComboBox2.addItem("Choose Slot");
@@ -58,9 +61,17 @@ public class BookingPage extends javax.swing.JFrame {
         jComboBox1.addItem("Choose Start Time");
     }
     
+    /**
+     * Load this business's activity and add into comboBox.
+     * 
+     */
+    
     public void loadActivity(){
      
+        //get activity for this business
         ArrayList<Activity> Activity = Business.currBusiness.getActivity();
+        
+        //loop to add activity name and time into activity comboBox
         for (int i = 0; i < Business.currBusiness.getActivity().size(); i++) {
             String str = new String();
             Activity tmpActivity = Activity.get(i);
@@ -276,38 +287,49 @@ public class BookingPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        
         if (jComboBox3.getSelectedIndex() != 0) {
            refreshBookingListWithDate(
                    Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration()); 
         }
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
+    /**
+     * Load information from GUI and book a booking
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        //time slot is needed to be choosen
         if (jComboBox2.getSelectedIndex() == 0 || jComboBox1.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Select a booking time", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
         
+        //Get activity from comboBox
         Activity a = Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1);
         int id = a.getId();
+        
+        //Get slected booking
         Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
         
         boolean success = false;
         System.out.println(id);
         
-        
+        //Convert date object to a LocalDateTime object
         LocalDateTime timeStart = LocalDateTime.ofInstant(jXDatePicker1.getDate().toInstant(),
                 ZoneId.systemDefault());
         
+        //default time have no hours, puls hours for that date depends on user's choice
         timeStart = timeStart.plusHours(Long.parseLong(String.valueOf(jComboBox1.getSelectedItem())));
         
-        
+        //the finish time depends on the activity which is selected
         LocalDateTime timeFinish = timeStart.plusHours(a.getDuration() / 60);
         
         System.out.println(timeFinish.getHour());
         
-        
+        //try to book the booking
         try {
             success = Business.currBusiness.book(b, timeStart, timeFinish, User.currUser.getID(),
                     jTextField1.getText(), jTextField4.getText(),
@@ -329,9 +351,14 @@ public class BookingPage extends javax.swing.JFrame {
                 "Booking has been successfully booked!", "Success",
                 JOptionPane.PLAIN_MESSAGE);
         
+        //after booked, the available bookings are updated.
         refreshBookingListWithDate(Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Refresh when the item of comboBox is selected
+     * @param evt 
+     */
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         if (jComboBox3.getSelectedIndex() == 0) {
             return;
@@ -341,12 +368,18 @@ public class BookingPage extends javax.swing.JFrame {
                    Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration()); 
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
+    /**
+     * Refresh start time comboBox depends on the time slot that the user choose.
+     * @param evt 
+     */
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (jComboBox2.getSelectedIndex() <= 0) {
             return;
         }
         
+        //get the booking selected
         Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
+        
         int startHour = b.getTimeStart().getHour();
         int endHour = b.getTimeFinish().getHour();
         
@@ -354,6 +387,7 @@ public class BookingPage extends javax.swing.JFrame {
                 Business.currBusiness.getActivity().
                         get(jComboBox3.getSelectedIndex()-1).getDuration();
         
+        //duration is stored as minutes in database, convert to hours here
         duration = duration / 60;
         if (duration == 0) {
             duration = 1;

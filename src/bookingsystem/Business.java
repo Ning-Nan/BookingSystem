@@ -191,8 +191,16 @@ public class Business {
             return bookings;
         }
     }
-    
-        public ArrayList<Booking> getABookingsFromDate(Date d, int duration) {
+
+    /**
+     * Get available bookings for a certain date which has enough time for the
+     * activity
+     *
+     * @param d Date
+     * @param duration Activity duration
+     * @return ArrayList of Bookings
+     */
+    public ArrayList<Booking> getABookingsFromDate(Date d, int duration) {
 
         ArrayList<Booking> bookings = new ArrayList<Booking>();
 
@@ -214,8 +222,8 @@ public class Business {
                     "SELECT *, (timeFinish - timeStart) AS duration from bookings WHERE "
                     + "businessID=" + this.id + " AND timeStart > "
                     + tldt.getTime() / 1000 + " AND timeStart < "
-                    + tldtPlusOneDay.getTime() / 1000 + " AND customerID IS NULL" +
-                            " AND duration >= " + (duration * 60));
+                    + tldtPlusOneDay.getTime() / 1000 + " AND customerID IS NULL"
+                    + " AND duration >= " + (duration * 60));
 
             if (rs.isClosed()) {
                 // No results, no bookings for the date.
@@ -338,6 +346,11 @@ public class Business {
         }
     }
 
+    /**
+     * Get all activities that this business have from database
+     *
+     * @return List of activities
+     */
     public ArrayList<Activity> getActivity() {
 
         ArrayList<Activity> intList = new ArrayList<Activity>();
@@ -351,14 +364,14 @@ public class Business {
             }
 
             while (rs.next()) {
-                
+
                 Activity tempActivity = new Activity(rs.getInt("id"),
-                                                     rs.getInt("businessID"),
-                                                     rs.getString("name"),
-                                                     rs.getInt("duration")
-                                                      );
+                        rs.getInt("businessID"),
+                        rs.getString("name"),
+                        rs.getInt("duration")
+                );
                 intList.add(tempActivity);
-                
+
             }
 
             return intList;
@@ -372,28 +385,37 @@ public class Business {
      * Book a booking
      *
      * @param b Booking to be booked
-     * @param u User account for the booking
+     * @param timeStart Start Time of the booking
+     * @param timeFinish Finish time of the booking
+     * @param userID User id for the booking
      * @param name Name of the person the booking is made for
      * @param address Address of the person the booking is made for
      * @param phoneNumber Phone Number of the person the booking is made for
+     * @param activityId Activity id for the activity that user chooses
      * @return Whether the booking was successfully booked
      * @throws SQLException
      */
     public boolean book(Booking b, LocalDateTime timeStart, LocalDateTime timeFinish,
             int userID, String name,
             String address, String phoneNumber, int activityId) throws SQLException {
-        
+
         System.out.println("START");
+
+        /* If the user's booking duration is not fully used the booking duration,
+         * will add one new available booking which use the left duration,
+         * and the available booking before is deleted or updated.
+         * The booked booking will add a new one into the database.
+         */
         if (!b.getTimeStart().equals(timeStart)) {
             Bdb.iuQuery("UPDATE bookings SET"
-                + " timeFinish=" + (Timestamp.valueOf(timeStart).getTime() / 1000)
-                + " WHERE id=" + b.getId());
+                    + " timeFinish=" + (Timestamp.valueOf(timeStart).getTime() / 1000)
+                    + " WHERE id=" + b.getId());
         } else {
             Bdb.iuQuery("DELETE FROM bookings WHERE id=" + b.getId());
         }
-        
-        Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart," +
-                " timeFinish, customerID, name, address, phoneNumber, activity) "
+
+        Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart,"
+                + " timeFinish, customerID, name, address, phoneNumber, activity) "
                 + "VALUES(" + b.getEmployeeID()
                 + ", " + b.getBusinessID()
                 + ", " + (Timestamp.valueOf(timeStart).getTime() / 1000)
@@ -403,15 +425,15 @@ public class Business {
                 + ", '" + address + "'"
                 + ", '" + phoneNumber + "'"
                 + ", " + activityId + ")");
-        
+
         if (!b.getTimeFinish().equals(timeFinish)) {
-            Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart," +
-                    " timeFinish) VALUES(" +
-                    b.getEmployeeID() + ", " + b.getBusinessID() + ", " +
-                    (Timestamp.valueOf(timeFinish).getTime() / 1000) + ", " +
-                    (Timestamp.valueOf(b.getTimeFinish()).getTime() / 1000) + ")");
+            Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart,"
+                    + " timeFinish) VALUES("
+                    + b.getEmployeeID() + ", " + b.getBusinessID() + ", "
+                    + (Timestamp.valueOf(timeFinish).getTime() / 1000) + ", "
+                    + (Timestamp.valueOf(b.getTimeFinish()).getTime() / 1000) + ")");
         }
-                
+
         /*boolean success = Bdb.iuQuery("UPDATE bookings SET customerID="
                 + u.getID()
                 + ", name='" + name + "'"
@@ -419,16 +441,30 @@ public class Business {
                 + ", phonenumber='" + phoneNumber + "'"
                 + ", activity='" + activityId + "'"
                 + " WHERE id=" + b.getId());*/
+        return true;
+    }
 
-        return true;
-    }
-    
+    /**
+     * Business owner add an activity
+     *
+     * @param name Activity name
+     * @param duration Activity duration
+     * @return Whether the add action was successfully booked
+     * @throws SQLException
+     */
     public boolean addActivity(String name, int duration) throws SQLException {
-        Bdb.iuQuery("INSERT INTO activity (name, duration, businessID) VALUES('" +
-                name + "', " + duration + ", " + this.id + ")");
+        Bdb.iuQuery("INSERT INTO activity (name, duration, businessID) VALUES('"
+                + name + "', " + duration + ", " + this.id + ")");
         return true;
     }
-    
+
+    /**
+     * Business owner delete a booking
+     *
+     * @param b the booking is needed to be deleted
+     * @return Whether the delete action was successfully booked
+     * @throws SQLException
+     */
     public boolean deleteBooking(Booking b) throws SQLException {
         boolean success = Bdb.iuQuery("DELETE from bookings WHERE id= " + b.getId());
         return success;
