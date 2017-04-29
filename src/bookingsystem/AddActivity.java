@@ -6,6 +6,9 @@
 package bookingsystem;
 
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,19 @@ public class AddActivity extends javax.swing.JFrame {
      */
     public AddActivity() {
         initComponents();
+        DefaultListModel model = new DefaultListModel();
+        
+        // Get all bookings and display them
+        ArrayList<Activity> activity = Business.currBusiness.getActivity();
+
+        for (int i = 0; i < activity.size(); i++) {
+            String str = new String();
+            Activity tmpActivity = activity.get(i);
+            
+            str = tmpActivity.getName()+ "                      " + tmpActivity.getDuration() + " min/s";
+            model.addElement(str);
+        }
+        jList1.setModel(model);
     }
 
     /**
@@ -153,10 +169,10 @@ public class AddActivity extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(32, 32, 32))
         );
 
         jButton2.getAccessibleContext().setAccessibleName("Back");
