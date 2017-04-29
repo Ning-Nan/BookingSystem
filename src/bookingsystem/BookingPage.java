@@ -3,7 +3,11 @@ package bookingsystem;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 public class BookingPage extends javax.swing.JFrame {
     
@@ -19,14 +23,19 @@ public class BookingPage extends javax.swing.JFrame {
         jTextField3.setText(User.currUser.getPhoneNumber());
         jTextField4.setText(User.currUser.getAddress());
         loadActivity();
+        jXDatePicker1.setDate(new Date());
     }
     
     /**
      * Refresh available bookings with date picker date.
      */
-    public void refreshBookingListWithDate() {
+    public void refreshBookingListWithDate(int duration) {
+        /*bookings =
+                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());*/
+        
         bookings =
-                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());
+                Business.currBusiness.getABookingsFromDate(
+                        jXDatePicker1.getDate(), duration);
         
         jComboBox2.removeAllItems();
         
@@ -44,6 +53,9 @@ public class BookingPage extends javax.swing.JFrame {
                     " " + em.getName();
             jComboBox2.addItem(str);
         }
+        
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Choose Start Time");
     }
     
     public void loadActivity(){
@@ -82,6 +94,8 @@ public class BookingPage extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,6 +129,11 @@ public class BookingPage extends javax.swing.JFrame {
         });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Slot" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Available Slot:");
 
@@ -133,6 +152,10 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Start At:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -148,20 +171,20 @@ public class BookingPage extends javax.swing.JFrame {
                     .addComponent(jTextField4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, 160, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,13 +209,17 @@ public class BookingPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         jTextField1.getAccessibleContext().setAccessibleName("FirstName");
@@ -215,13 +242,14 @@ public class BookingPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(105, 105, 105))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(105, 105, 105))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,8 +257,8 @@ public class BookingPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton2.getAccessibleContext().setAccessibleName("BackButton");
@@ -249,27 +277,46 @@ public class BookingPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        refreshBookingListWithDate();
+        if (jComboBox3.getSelectedIndex() != 0) {
+           refreshBookingListWithDate(
+                   Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration()); 
+        }
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jComboBox2.getSelectedIndex() == 0) {
+        if (jComboBox2.getSelectedIndex() == 0 || jComboBox1.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Select a booking time", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int id = Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getId();
+        
+        Activity a = Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1);
+        int id = a.getId();
         Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
         
         boolean success = false;
         System.out.println(id);
+        
+        
+        LocalDateTime timeStart = LocalDateTime.ofInstant(jXDatePicker1.getDate().toInstant(),
+                ZoneId.systemDefault());
+        
+        timeStart = timeStart.plusHours(Long.parseLong(String.valueOf(jComboBox1.getSelectedItem())));
+        
+        
+        LocalDateTime timeFinish = timeStart.plusHours(a.getDuration() / 60);
+        
+        System.out.println(timeFinish.getHour());
+        
+        
         try {
-            success = Business.currBusiness.book(b, User.currUser,
+            success = Business.currBusiness.book(b, timeStart, timeFinish, User.currUser,
                     jTextField1.getText(), jTextField4.getText(),
                     jTextField3.getText(),id );
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Database error!", "Error",
                     JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
             return;
         }
         
@@ -283,12 +330,45 @@ public class BookingPage extends javax.swing.JFrame {
                 "Booking has been successfully booked!", "Success",
                 JOptionPane.PLAIN_MESSAGE);
         
-        refreshBookingListWithDate();
+        refreshBookingListWithDate(Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
+        if (jComboBox3.getSelectedIndex() == 0) {
+            return;
+        }        
+        
+        refreshBookingListWithDate(
+                   Business.currBusiness.getActivity().get(jComboBox3.getSelectedIndex()-1).getDuration()); 
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        if (jComboBox2.getSelectedIndex() <= 0) {
+            return;
+        }
+        
+        Booking b = bookings.get(jComboBox2.getSelectedIndex() - 1);
+        int startHour = b.getTimeStart().getHour();
+        int endHour = b.getTimeFinish().getHour();
+        
+        int duration =
+                Business.currBusiness.getActivity().
+                        get(jComboBox3.getSelectedIndex()-1).getDuration();
+        
+        duration = duration / 60;
+        if (duration == 0) {
+            duration = 1;
+        }
+        
+        System.out.println(duration);
+        
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Choose Start Time");
+        for (int i = startHour; i + duration <= endHour; i = i + duration) {
+            System.out.println(i);
+            jComboBox1.addItem(Integer.toString(i));
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,9 +408,11 @@ public class BookingPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

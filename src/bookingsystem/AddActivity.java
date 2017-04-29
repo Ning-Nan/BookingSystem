@@ -5,6 +5,9 @@
  */
 package bookingsystem;
 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author msi-pc
@@ -58,10 +61,16 @@ public class AddActivity extends javax.swing.JFrame {
         jLabel2.setText("Hour/s");
 
         jButton1.setText("Add Activity");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("or");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Minute", "00", "10", "20", "30", "40", "50", "60" }));
+        jComboBox2.setEnabled(false);
 
         jLabel4.setText("Minute/s");
 
@@ -165,6 +174,20 @@ public class AddActivity extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jComboBox1.getSelectedIndex() == 0) {
+            return;
+        }
+        try {
+            Business.currBusiness.addActivity(jTextField1.getText(),
+                (Integer.valueOf(jComboBox1.getSelectedItem().toString())) * 60);
+        } catch (SQLException e) {
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Activity added!",
+                        "Success", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

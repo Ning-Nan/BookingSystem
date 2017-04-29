@@ -191,6 +191,55 @@ public class Business {
             return bookings;
         }
     }
+    
+        public ArrayList<Booking> getABookingsFromDate(Date d, int duration) {
+
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+
+        // Convert date object to a LocalDateTime object
+        LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(),
+                ZoneId.systemDefault());
+
+        // Get the Timestamps of thate day at midnight and the next day at
+        // midnight.
+        Timestamp tldt = Timestamp.valueOf(ldt);
+        Timestamp tldtPlusOneDay = Timestamp.valueOf(ldt.plusDays(1));
+
+        /*
+            Timestamps are stored as unix timestamps (seconds),
+            Java uses milliseconds. (Divide/Multiply by 1000).
+         */
+        try {
+            ResultSet rs = Bdb.selectQuery(
+                    "SELECT *, (timeFinish - timeStart) AS duration from bookings WHERE "
+                    + "businessID=" + this.id + " AND timeStart > "
+                    + tldt.getTime() / 1000 + " AND timeStart < "
+                    + tldtPlusOneDay.getTime() / 1000 + " AND customerID IS NULL" +
+                            " AND duration >= " + (duration * 60));
+
+            if (rs.isClosed()) {
+                // No results, no bookings for the date.
+                return bookings;
+            }
+
+            while (rs.next()) {
+                Booking tmpBooking = new Booking(rs.getInt("id"),
+                        rs.getInt("businessID"),
+                        rs.getInt("employeeID"),
+                        rs.getInt("customerID"),
+                        rs.getLong("timeStart"),
+                        rs.getLong("timeFinish"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phonenumber"));
+                bookings.add(tmpBooking);
+            }
+
+            return bookings;
+        } catch (SQLException e) {
+            return bookings;
+        }
+    }
 
     /**
      * Create a new booking for a business, assigned to an employee
@@ -247,6 +296,7 @@ public class Business {
             return success;
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -329,18 +379,54 @@ public class Business {
      * @return Whether the booking was successfully booked
      * @throws SQLException
      */
-    public boolean book(Booking b, User u, String name,
+    public boolean book(Booking b, LocalDateTime timeStart, LocalDateTime timeFinish,
+            User u, String name,
             String address, String phoneNumber, int activityId) throws SQLException {
-
-        boolean success = Bdb.iuQuery("UPDATE bookings SET customerID="
+        
+        System.out.println("START");
+        if (!b.getTimeStart().equals(timeStart)) {
+            Bdb.iuQuery("UPDATE bookings SET"
+                + " timeFinish=" + (Timestamp.valueOf(timeStart).getTime() / 1000)
+                + " WHERE id=" + b.getId());
+        } else {
+            Bdb.iuQuery("DELETE FROM bookings WHERE id=" + b.getId());
+        }
+        
+        Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart," +
+                " timeFinish, customerID, name, address, phoneNumber, activity) "
+                + "VALUES(" + b.getEmployeeID()
+                + ", " + b.getBusinessID()
+                + ", " + (Timestamp.valueOf(timeStart).getTime() / 1000)
+                + ", " + (Timestamp.valueOf(timeFinish).getTime() / 1000)
+                + ", " + u.getID()
+                + ", '" + name + "'"
+                + ", '" + address + "'"
+                + ", '" + phoneNumber + "'"
+                + ", " + activityId + ")");
+        
+        if (!b.getTimeFinish().equals(timeFinish)) {
+            Bdb.iuQuery("INSERT INTO bookings (employeeID, businessID, timeStart," +
+                    " timeFinish) VALUES(" +
+                    b.getEmployeeID() + ", " + b.getBusinessID() + ", " +
+                    (Timestamp.valueOf(timeFinish).getTime() / 1000) + ", " +
+                    (Timestamp.valueOf(b.getTimeFinish()).getTime() / 1000) + ")");
+        }
+                
+        /*boolean success = Bdb.iuQuery("UPDATE bookings SET customerID="
                 + u.getID()
                 + ", name='" + name + "'"
                 + ", address='" + address + "'"
                 + ", phonenumber='" + phoneNumber + "'"
                 + ", activity='" + activityId + "'"
-                + " WHERE id=" + b.getId());
+                + " WHERE id=" + b.getId());*/
 
-        return success;
+        return true;
+    }
+    
+    public boolean addActivity(String name, int duration) throws SQLException {
+        Bdb.iuQuery("INSERT INTO activity (name, duration, businessID) VALUES('" +
+                name + "', " + duration + ", " + this.id + ")");
+        return true;
     }
 
 }
