@@ -380,7 +380,7 @@ public class Business {
      * @throws SQLException
      */
     public boolean book(Booking b, LocalDateTime timeStart, LocalDateTime timeFinish,
-            User u, String name,
+            int userID, String name,
             String address, String phoneNumber, int activityId) throws SQLException {
         
         System.out.println("START");
@@ -398,7 +398,7 @@ public class Business {
                 + ", " + b.getBusinessID()
                 + ", " + (Timestamp.valueOf(timeStart).getTime() / 1000)
                 + ", " + (Timestamp.valueOf(timeFinish).getTime() / 1000)
-                + ", " + u.getID()
+                + ", " + userID
                 + ", '" + name + "'"
                 + ", '" + address + "'"
                 + ", '" + phoneNumber + "'"

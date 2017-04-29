@@ -309,7 +309,7 @@ public class BookingPage extends javax.swing.JFrame {
         
         
         try {
-            success = Business.currBusiness.book(b, timeStart, timeFinish, User.currUser,
+            success = Business.currBusiness.book(b, timeStart, timeFinish, User.currUser.getID(),
                     jTextField1.getText(), jTextField4.getText(),
                     jTextField3.getText(),id );
         } catch (SQLException e) {

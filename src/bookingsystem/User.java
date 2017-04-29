@@ -110,6 +110,29 @@ public class User {
 
     }
     
+    public User(String username) throws SQLException,
+            Exception {
+        
+        // Check the customers table to find the user.
+        ResultSet rs = Bdb.selectQuery(
+                "SELECT * from customers WHERE username='" + username
+                + "'");
+
+        this.role = roleType.customer;
+
+        if (rs.isClosed()) {
+            throw new Exception("Invalid username");
+        }
+
+        this.id = rs.getInt("id");
+        this.name = rs.getString("name");
+        this.phoneNumber = rs.getString("phonenumber");
+        this.address = rs.getString("address");
+        this.username = username;
+        this.password = password;
+        this.email = rs.getString("email");
+    }
+    
     /**
      * Get all a customer's bookings for a business sorted by time.
      * @param b The business that has the customer's bookings
@@ -180,6 +203,19 @@ public class User {
     
     public int getID() {
         return id;
+    }
+    
+    public static int getIDfromUsername(String username) {
+        try {
+            ResultSet rs = Bdb.selectQuery("SELECT * from customers WHERE " +
+                    "username = '" + username + "'");
+            if (rs.isClosed()) {
+                return 0;
+            }
+            return rs.getInt("id");
+        } catch (SQLException e) {
+            return 0;
+        }
     }
 
 }
