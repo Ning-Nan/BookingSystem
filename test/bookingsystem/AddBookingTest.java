@@ -75,7 +75,7 @@ public class AddBookingTest {
         long end = 1501372800;
         
         ResultSet rs = Bdb.selectQuery(
-                "SELECT * from bookings WHERE id = '5'");
+                "SELECT * from bookings WHERE id = '9'");
         
         assertTrue(!rs.isClosed());
         
