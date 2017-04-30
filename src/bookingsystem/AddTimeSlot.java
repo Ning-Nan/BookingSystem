@@ -187,7 +187,6 @@ public class AddTimeSlot extends javax.swing.JFrame {
         }
         
         if (endCB.getSelectedIndex() <= timeSlotCB.getSelectedIndex()) {
-            System.out.println("WHAT");
             if (endCB.getSelectedIndex() != 0) {
                 return;
             }
@@ -200,7 +199,6 @@ public class AddTimeSlot extends javax.swing.JFrame {
             
             LocalDateTime timeFinish = timeStart;
             
-            // Timeslots start from 9am which will be index 1
             timeStart = timeStart.plusHours(timeSlotCB.getSelectedIndex());
             
             if (endCB.getSelectedIndex() == 0) {

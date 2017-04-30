@@ -30,8 +30,6 @@ public class OwnerBooking extends javax.swing.JFrame {
      * Refresh available bookings with date picker date.
      */
     public void refreshBookingListWithDate(int duration) {
-        /*bookings =
-                Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());*/
         
         bookings =
                 Business.currBusiness.getABookingsFromDate(
@@ -333,8 +331,6 @@ public class OwnerBooking extends javax.swing.JFrame {
         
         LocalDateTime timeFinish = timeStart.plusHours(a.getDuration() / 60);
         
-        System.out.println(timeFinish.getHour());
-        
         
         try {
             success = Business.currBusiness.book(b, timeStart, timeFinish, userID,
@@ -387,12 +383,9 @@ public class OwnerBooking extends javax.swing.JFrame {
             duration = 1;
         }
         
-        System.out.println(duration);
-        
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Choose Start Time");
         for (int i = startHour; i + duration <= endHour; i = i + duration) {
-            System.out.println(i);
             jComboBox1.addItem(Integer.toString(i));
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed

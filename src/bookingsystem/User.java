@@ -205,6 +205,11 @@ public class User {
         return id;
     }
     
+    /**
+     * Get a user ID from their username from the database.
+     * @param username
+     * @return User ID
+     */
     public static int getIDfromUsername(String username) {
         try {
             ResultSet rs = Bdb.selectQuery("SELECT * from customers WHERE " +

@@ -326,8 +326,6 @@ public class BookingPage extends javax.swing.JFrame {
         //the finish time depends on the activity which is selected
         LocalDateTime timeFinish = timeStart.plusHours(a.getDuration() / 60);
         
-        System.out.println(timeFinish.getHour());
-        
         //try to book the booking
         try {
             success = Business.currBusiness.book(b, timeStart, timeFinish, User.currUser.getID(),
@@ -392,12 +390,10 @@ public class BookingPage extends javax.swing.JFrame {
             duration = 1;
         }
         
-        System.out.println(duration);
         
         jComboBox1.removeAllItems();
         jComboBox1.addItem("Choose Start Time");
         for (int i = startHour; i + duration <= endHour; i = i + duration) {
-            System.out.println(i);
             jComboBox1.addItem(Integer.toString(i));
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
