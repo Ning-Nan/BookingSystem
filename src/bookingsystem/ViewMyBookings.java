@@ -1,35 +1,47 @@
-
 package bookingsystem;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.ListModel;
 
-
 public class ViewMyBookings extends javax.swing.JFrame {
 
-    public user User;
-
-  
-    public ViewMyBookings(user User) throws Exception {
-        this.User = User;
-        booking viewMine = new booking(User);
+    /**
+     * View Bookings
+     * @throws Exception 
+     */
+    public ViewMyBookings() throws Exception {
         initComponents();
-        jLabel1.setText("Login as: " + User.getName());
-        String[] print = new String[viewMine.bookingList.size()];
-        for (int i = 0; i < viewMine.bookingList.size(); i++) {
-
-            booking booking = (booking) viewMine.bookingList.get(i);
-
-            print[i] = booking.getFormateDate() + "     " + booking.getWorker() + "     "
-                    + booking.getPhoneNumber() + "     " + booking.getAddress();
-        }
-        System.out.println(viewMine.bookingList.size());
-        System.out.println(print.length);
-        jList2.setListData(print);
+        jLabel1.setText("Logged in as: " + User.currUser.getName());
+        listBookings();
 
     }
 
-   
+    /**
+     * Refresh the list of the customer's bookings.
+     */
+    public void listBookings() {
+
+        ArrayList<Booking> bookings
+                = User.currUser.getSortedBookings(Business.currBusiness);
+        System.out.println(bookings.size());
+        String[] listData = new String[bookings.size()];
+
+        for (int i = 0; i < bookings.size(); i++) {
+            Booking tmpBooking = bookings.get(i);
+            Employee em = Business.currBusiness.getEmployee(tmpBooking.getEmployeeID());
+            listData[i] = tmpBooking.getTimeStart().format(
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"))
+                    + " - "
+                    + tmpBooking.getTimeFinish().format(
+                            DateTimeFormatter.ofPattern("hh:mm a"))
+                    + " " + em.getName();
+        }
+
+        jList2.setListData(listData);
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,6 +55,7 @@ public class ViewMyBookings extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("View Booking");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -129,14 +142,10 @@ public class ViewMyBookings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new UserSelectPage(User).setVisible(true);
+        new UserSelectPage().setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

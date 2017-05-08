@@ -17,3 +17,6 @@
 
 # Mac OS X #
 .DS_Store
+
+# Don't update database without force #
+bdb.db
