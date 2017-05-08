@@ -14,6 +14,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        InputCheck.check = new InputCheck();
         try {
             
             // Setup the database

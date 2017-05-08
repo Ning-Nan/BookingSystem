@@ -203,7 +203,7 @@ public class RegisterPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } 
         JOptionPane.showMessageDialog(this, "Registration successful!", "",
                 JOptionPane.PLAIN_MESSAGE);
         
