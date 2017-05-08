@@ -1,6 +1,10 @@
 package bookingsystem;
+
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class AddEmployees extends javax.swing.JFrame {
 
@@ -98,17 +102,24 @@ public class AddEmployees extends javax.swing.JFrame {
 
     private void employeeNameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeNameFieldMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_employeeNameFieldMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this .dispose();
+        this.dispose();
         new EmployeeArrangement().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            InputCheck.check.checkShortName(employeeNameField.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Business.currBusiness.addEmployee(employeeNameField.getText());
         refreshEmployeeList();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -147,21 +158,22 @@ public class AddEmployees extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Refresh the list of employees for the current business
+     *
      * @return Success of the refresh
      */
     private boolean refreshEmployeeList() {
         DefaultListModel model = new DefaultListModel();
         ArrayList<Employee> employees = Business.currBusiness.getEmployees();
-        
+
         for (int i = 0; i < employees.size(); i++) {
             model.addElement(employees.get(i).getName());
         }
-        
+
         jList1.setModel(model);
-        
+
         return true;
     }
 

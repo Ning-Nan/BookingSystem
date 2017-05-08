@@ -92,11 +92,11 @@ public class User {
             throw new Exception("Please fill all the blanks. ");
         }
         
-       // InputCheck.check.checkEmail(email);
-       // InputCheck.check.checkPassword(password);
-        //InputCheck.check.checkShortName(name);
-     // InputCheck.check.checkLong(address);
-        InputCheck.check.checkPhone(phoneNumber);
+       InputCheck.check.checkEmail(email);
+       InputCheck.check.checkPassword(password);
+       InputCheck.check.checkShortName(name);
+       InputCheck.check.checkLong(address);
+       InputCheck.check.checkPhone(phoneNumber);
 
         ResultSet rs = Bdb.selectQuery("Select * from businesses WHERE username = '" + username + "'");
        if (!rs.isClosed()) {
