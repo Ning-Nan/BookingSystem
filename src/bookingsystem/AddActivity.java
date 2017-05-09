@@ -8,6 +8,8 @@ package bookingsystem;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -165,9 +167,14 @@ public class AddActivity extends javax.swing.JFrame {
             return;
         }
         try {
+            InputCheck.check.checkShortName(jTextField1.getText());
             Business.currBusiness.addActivity(jTextField1.getText(),
                     (Integer.valueOf(jComboBox1.getSelectedItem().toString())) * 60);
         } catch (SQLException e) {
+            return;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         JOptionPane.showMessageDialog(this, "Activity added!",

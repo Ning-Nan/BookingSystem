@@ -57,7 +57,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 firstNameFieldFocusLost(evt);
             }
         });
-        jPanel1.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 90, -1));
+        jPanel1.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 90, -1));
 
         lastNameField.setText("Last Name");
         lastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -73,7 +73,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 lastNameFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 100, -1));
+        jPanel1.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 100, -1));
 
         usernameField.setText("Username");
         usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -84,7 +84,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 usernameFieldFocusLost(evt);
             }
         });
-        jPanel1.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 115, 206, -1));
+        jPanel1.add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 206, -1));
 
         phoneNumberField.setText("Phone Number");
         phoneNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -95,7 +95,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 phoneNumberFieldFocusLost(evt);
             }
         });
-        jPanel1.add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 206, -1));
+        jPanel1.add(phoneNumberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 206, -1));
 
         emailField.setText("Email");
         emailField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -106,7 +106,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 emailFieldFocusLost(evt);
             }
         });
-        jPanel1.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 185, 206, -1));
+        jPanel1.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 206, -1));
 
         passwordField.setText("Password");
         passwordField.setToolTipText("");
@@ -115,7 +115,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 passwordFieldFocusGained(evt);
             }
         });
-        jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 206, -1));
+        jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 206, -1));
 
         confirmPasswordField.setText("Confirm Password");
         confirmPasswordField.setToolTipText("");
@@ -124,7 +124,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 confirmPasswordFieldFocusGained(evt);
             }
         });
-        jPanel1.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 255, 206, -1));
+        jPanel1.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 206, -1));
 
         registerButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         registerButton.setText("Register");
@@ -134,7 +134,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 registerButtonMouseClicked(evt);
             }
         });
-        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 90, 20));
+        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, 20));
 
         addressField.setText("Address");
         addressField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -145,12 +145,12 @@ public class RegisterPage extends javax.swing.JFrame {
                 addressFieldFocusLost(evt);
             }
         });
-        jPanel1.add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 206, -1));
+        jPanel1.add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 206, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Register");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 380, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 260, 10));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("Back");
@@ -159,23 +159,23 @@ public class RegisterPage extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 90, 20));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 90, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();

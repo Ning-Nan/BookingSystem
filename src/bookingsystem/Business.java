@@ -443,6 +443,35 @@ public class Business {
                 + " WHERE id=" + b.getId());*/
         return true;
     }
+    
+        public ArrayList<Business> getBusiness() throws Exception {
+
+        ArrayList<Business> tepBusiness = new ArrayList<Business>();
+
+        try {
+            ResultSet rs = Bdb.selectQuery("SELECT * FROM businesses ORDER BY id");
+
+            if (rs.isClosed()) {
+                // no activity
+                return tepBusiness;
+            }
+
+            while (rs.next()) {
+
+                
+                Business business = new Business(rs.getInt("id"), rs.getString("username"),
+                rs.getString("password"));
+                
+                tepBusiness.add(business);
+
+            }
+
+            return tepBusiness;
+        } catch (SQLException e) {
+            return tepBusiness;
+        }
+
+    }
 
     /**
      * Business owner add an activity
