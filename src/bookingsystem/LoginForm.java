@@ -6,6 +6,9 @@ import java.io.*;
 import java.lang.String;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginForm extends javax.swing.JFrame {
 
@@ -16,22 +19,30 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         InputCheck.check = new InputCheck();
         try {
-            
+
             // Setup the database
             Bdb.setup();
-            
-            // Hardcoded for single business login in Part A
+
+            // tmp business for get the whole business list
             Business.currBusiness = new Business(1, "rbusiness", "rbpass");
+
+            ArrayList<Business> business = Business.currBusiness.getBusiness();
+
+            for (int i = 0; i < business.size(); i++) {
+
+                Business tmp = business.get(i);
+                jComboBox1.addItem(tmp.getName());
+            }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(this, e.getMessage(),
+            JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
-           System.exit(0);
+            System.exit(0);
         }
     }
 
@@ -129,6 +140,11 @@ public class LoginForm extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleName("BusinessRegister");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose business" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 140, 220, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,7 +170,19 @@ public class LoginForm extends javax.swing.JFrame {
 
         String username = usernameField.getText();
         String password = String.valueOf(passwordField1.getPassword());
+
         try {
+            if (jComboBox1.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Please select a business",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+        Business.currBusiness = Business.currBusiness.getBusiness().get(jComboBox1.getSelectedIndex()-1);
+            
+            
+
             User.currUser = new User(username, password);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
@@ -168,10 +196,9 @@ public class LoginForm extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Login successful!", "Login",
                 JOptionPane.PLAIN_MESSAGE);
-        
+
         // Show a different screen based on whether the owner or a customer
         // logged in.
-        
         if (User.currUser.getRole() == owner) {
             new EmployeeArrangement().setVisible(true);
             this.dispose();
@@ -188,6 +215,11 @@ public class LoginForm extends javax.swing.JFrame {
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
