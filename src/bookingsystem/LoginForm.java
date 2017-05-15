@@ -136,6 +136,11 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 30));
 
         businessRegisterButton.setText("Business register");
+        businessRegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                businessRegisterButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(businessRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 130, 30));
         businessRegisterButton.getAccessibleContext().setAccessibleName("BusinessRegister");
 
@@ -220,6 +225,11 @@ public class LoginForm extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void businessRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_businessRegisterButtonActionPerformed
+        new BusinessRegister().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_businessRegisterButtonActionPerformed
 
     /**
      * @param args the command line arguments
