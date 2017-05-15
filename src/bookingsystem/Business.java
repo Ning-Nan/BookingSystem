@@ -498,5 +498,42 @@ public class Business {
         boolean success = Bdb.iuQuery("DELETE from bookings WHERE id= " + b.getId());
         return success;
     }
+    
+    /**
+     * Register a new business
+     * @param name Business Name
+     * @param username Business Owner's Login Username
+     * @param password Business Owner's Login Password
+     * @param address Business Address
+     * @param phoneNumber Business Phone Number
+     * @param email Business Email Address
+     * @return Registration success/failure
+     * @throws SQLException
+     * @throws Exception 
+     */
+    public static boolean register(String name, String username,
+            String password, String address,
+            String phoneNumber, String email) throws SQLException, Exception {
+        
+        boolean success = false;
+        
+        ResultSet rs = Bdb.selectQuery("SELECT * from businesses WHERE " +
+                "username='" + username + "'");
+        
+        if (!rs.isClosed()) {
+            throw new Exception("Username already taken");
+        }
+        
+        success = Bdb.iuQuery("INSERT INTO businesses (name, username," +
+                " password, address, phonenumber, email) VALUES (" +
+                "'" + name + "', " +
+                "'" + username + "', " +
+                "'" + password + "', " +
+                "'" + address + "', " +
+                "'" + phoneNumber + ", " +
+                "'" + email + ")");
+        
+        return success;
+    }
 
 }
