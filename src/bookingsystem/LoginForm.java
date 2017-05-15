@@ -67,7 +67,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        businessRegisterButton = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,9 +135,9 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel5.setText("business register?");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 30));
 
-        jButton1.setText("Business register");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 130, 30));
-        jButton1.getAccessibleContext().setAccessibleName("BusinessRegister");
+        businessRegisterButton.setText("Business register");
+        jPanel1.add(businessRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 130, 30));
+        businessRegisterButton.getAccessibleContext().setAccessibleName("BusinessRegister");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose business" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton businessRegisterButton;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
