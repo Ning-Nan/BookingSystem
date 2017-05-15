@@ -524,6 +524,13 @@ public class Business {
             throw new Exception("Username already taken");
         }
         
+        rs = Bdb.selectQuery("SELECT * from customers WHERE " +
+                "username='" + username + "'");
+        
+        if (!rs.isClosed()) {
+            throw new Exception("Username already taken");
+        }
+        
         success = Bdb.iuQuery("INSERT INTO businesses (name, username," +
                 " password, address, phonenumber, email) VALUES (" +
                 "'" + name + "', " +
