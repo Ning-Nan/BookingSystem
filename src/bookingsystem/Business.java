@@ -530,8 +530,8 @@ public class Business {
                 "'" + username + "', " +
                 "'" + password + "', " +
                 "'" + address + "', " +
-                "'" + phoneNumber + ", " +
-                "'" + email + ")");
+                "'" + phoneNumber + "', " +
+                "'" + email + "')");
         
         return success;
     }
