@@ -5,6 +5,9 @@
  */
 package bookingsystem;
 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author msi-pc
@@ -66,6 +69,11 @@ public class BusinessRegister extends javax.swing.JFrame {
         confirmPasswordField.setText("Confirm Password");
 
         registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +174,29 @@ public class BusinessRegister extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        try {
+            Business.register(businessNameField.getText(), usernameField.getText(),
+                    String.valueOf(passwordField.getPassword()), addressField.getText(),
+                    phoneNumberField.getText(), emailField.getText());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this, "Registration successful!", "",
+                JOptionPane.PLAIN_MESSAGE);
+        
+        new LoginForm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
