@@ -89,9 +89,9 @@ public class BusinessRegister extends javax.swing.JFrame {
 
         jLabel2.setText("Business Hour:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m." }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Close Time" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Close Time", "4.00 p.m.", "5.00 p.m.", "6.00 p.m.", "7.00 p.m.", "8.00 p.m.", "9.00 p.m.", "10.00 p.m.", "11.00 p.m.", "12.00 a.m. " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
