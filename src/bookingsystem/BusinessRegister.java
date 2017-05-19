@@ -64,6 +64,11 @@ public class BusinessRegister extends javax.swing.JFrame {
         jLabel1.setText("Business Register");
 
         businessNameField.setText("Company Name");
+        businessNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                businessNameFieldFocusGained(evt);
+            }
+        });
 
         firstNameField.setText("First Name");
 
@@ -258,7 +263,7 @@ public class BusinessRegister extends javax.swing.JFrame {
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         try {
             Business.register(businessNameField.getText(), usernameField.getText(),
-                    String.valueOf(passwordField.getPassword()), addressField.getText(),
+                    String.valueOf(passwordField.getPassword()), String.valueOf(confirmPasswordField.getPassword()), addressField.getText(),
                     phoneNumberField.getText(), emailField.getText());
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
@@ -277,6 +282,11 @@ public class BusinessRegister extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void businessNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_businessNameFieldFocusGained
+        // TODO add your handling code here:
+   
+    }//GEN-LAST:event_businessNameFieldFocusGained
 
     /**
      * @param args the command line arguments

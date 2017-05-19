@@ -7,9 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * Java representation of a customer database item.
- * Caution should be used to make sure a User object always
- * represents an actual database item.
+ * Java representation of a customer database item. Caution should be used to
+ * make sure a User object always represents an actual database item.
  */
 public class User {
 
@@ -31,14 +30,15 @@ public class User {
 
     /**
      * Instance a user from an existing user in the database.
+     *
      * @param username User's username
      * @param password User's password
      * @throws SQLException
-     * @throws Exception 
+     * @throws Exception
      */
     public User(String username, String password) throws SQLException,
             Exception {
-        
+
         // Check the customers table to find the user.
         ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='" + username
@@ -72,9 +72,10 @@ public class User {
         this.password = password;
         this.email = rs.getString("email");
     }
-    
+
     /**
      * Create a new user
+     *
      * @param name Customer name
      * @param username Customer username
      * @param password Customer password
@@ -83,7 +84,7 @@ public class User {
      * @param phoneNumber Customer phone number
      * @param email Customer email address
      * @throws IOException
-     * @throws Exception 
+     * @throws Exception
      */
     public User(String name, String username, String password, String confirmPassword, String address, String phoneNumber, String email) throws Exception {
 
@@ -91,34 +92,36 @@ public class User {
         if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
             throw new Exception("Please fill all the blanks. ");
         }
-        
-       InputCheck.check.checkEmail(email);
-       InputCheck.check.checkPassword(password);
-       InputCheck.check.checkShortName(name);
-       InputCheck.check.checkLong(address);
-       InputCheck.check.checkPhone(phoneNumber);
+
+        InputCheck.check.checkEmail(email);
+        InputCheck.check.checkPassword(password);
+        InputCheck.check.checkPassword(confirmPassword);
+        InputCheck.check.checkShortName(name);
+        InputCheck.check.checkLong(address);
+        InputCheck.check.checkPhone(phoneNumber);
 
         ResultSet rs = Bdb.selectQuery("Select * from businesses WHERE username = '" + username + "'");
-       if (!rs.isClosed()) {
-            throw new Exception("ALready exist username! Please try another!");
-        }
-        
-         rs = Bdb.selectQuery("Select * from  customers WHERE username = '" + username + "'");
         if (!rs.isClosed()) {
             throw new Exception("ALready exist username! Please try another!");
         }
-        
-        if(!password.equals(confirmPassword)){
-        throw new Exception("The password doesn't match! Please re-enter them!");}
 
-        Bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES ("+"'"
+        rs = Bdb.selectQuery("Select * from  customers WHERE username = '" + username + "'");
+        if (!rs.isClosed()) {
+            throw new Exception("ALready exist username! Please try another!");
+        }
+
+        if (!password.equals(confirmPassword)) {
+            throw new Exception("The password doesn't match! Please re-enter them!");
+        }
+
+        Bdb.iuQuery("INSERT INTO customers (username, password, name, address, phonenumber, email) VALUES (" + "'"
                 + username + "', '" + password + "', '" + name + "', '" + address + "', '" + phoneNumber + "', '" + email + "')");
 
     }
-    
+
     public User(String username) throws SQLException,
             Exception {
-        
+
         // Check the customers table to find the user.
         ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='" + username
@@ -138,27 +141,28 @@ public class User {
         this.password = password;
         this.email = rs.getString("email");
     }
-    
+
     /**
      * Get all a customer's bookings for a business sorted by time.
+     *
      * @param b The business that has the customer's bookings
      * @return ArrayList of Bookings
      */
     public ArrayList<Booking> getSortedBookings(Business b) {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
-        
+
         try {
             String query = "SELECT * from bookings WHERE "
                     + "customerID=" + this.id + " AND businessID=" + b.getID()
-            + " ORDER BY timeStart ASC";
+                    + " ORDER BY timeStart ASC";
             System.out.println(query);
             ResultSet rs = Bdb.selectQuery(query);
-            
+
             if (rs.isClosed()) {
                 return bookings;
             }
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 Booking tmpBooking = new Booking(rs.getInt("id"),
                         rs.getInt("businessID"),
                         rs.getInt("employeeID"),
@@ -170,12 +174,11 @@ public class User {
                         rs.getString("phonenumber"));
                 bookings.add(tmpBooking);
             }
-            
-            
+
         } catch (SQLException e) {
             return bookings;
         }
-        
+
         return bookings;
     }
 
@@ -206,20 +209,21 @@ public class User {
     public String getEmail() {
         return email;
     }
-    
+
     public int getID() {
         return id;
     }
-    
+
     /**
      * Get a user ID from their username from the database.
+     *
      * @param username
      * @return User ID
      */
     public static int getIDfromUsername(String username) {
         try {
-            ResultSet rs = Bdb.selectQuery("SELECT * from customers WHERE " +
-                    "username = '" + username + "'");
+            ResultSet rs = Bdb.selectQuery("SELECT * from customers WHERE "
+                    + "username = '" + username + "'");
             if (rs.isClosed()) {
                 return 0;
             }

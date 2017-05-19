@@ -443,8 +443,8 @@ public class Business {
                 + " WHERE id=" + b.getId());*/
         return true;
     }
-    
-        public ArrayList<Business> getBusiness() throws Exception {
+
+    public ArrayList<Business> getBusiness() throws Exception {
 
         ArrayList<Business> tepBusiness = new ArrayList<Business>();
 
@@ -458,10 +458,9 @@ public class Business {
 
             while (rs.next()) {
 
-                
                 Business business = new Business(rs.getInt("id"), rs.getString("username"),
-                rs.getString("password"));
-                
+                        rs.getString("password"));
+
                 tepBusiness.add(business);
 
             }
@@ -498,9 +497,10 @@ public class Business {
         boolean success = Bdb.iuQuery("DELETE from bookings WHERE id= " + b.getId());
         return success;
     }
-    
+
     /**
      * Register a new business
+     *
      * @param name Business Name
      * @param username Business Owner's Login Username
      * @param password Business Owner's Login Password
@@ -509,37 +509,51 @@ public class Business {
      * @param email Business Email Address
      * @return Registration success/failure
      * @throws SQLException
-     * @throws Exception 
+     * @throws Exception
      */
     public static boolean register(String name, String username,
-            String password, String address,
+            String password, String confirmPassword, String address,
             String phoneNumber, String email) throws SQLException, Exception {
-        
+
+        //check if the user fill all the blanks.
+        if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
+            throw new Exception("Please fill all the blanks. ");
+        }
+        InputCheck.check.checkEmail(email);
+        InputCheck.check.checkPassword(password);
+        InputCheck.check.checkPassword(confirmPassword);
+        InputCheck.check.checkShortName(name);
+        InputCheck.check.checkLong(address);
+        InputCheck.check.checkPhone(phoneNumber);
+
         boolean success = false;
-        
-        ResultSet rs = Bdb.selectQuery("SELECT * from businesses WHERE " +
-                "username='" + username + "'");
-        
+
+        ResultSet rs = Bdb.selectQuery("SELECT * from businesses WHERE "
+                + "username='" + username + "'");
+
         if (!rs.isClosed()) {
             throw new Exception("Username already taken");
         }
-        
-        rs = Bdb.selectQuery("SELECT * from customers WHERE " +
-                "username='" + username + "'");
-        
+
+        rs = Bdb.selectQuery("SELECT * from customers WHERE "
+                + "username='" + username + "'");
+
         if (!rs.isClosed()) {
             throw new Exception("Username already taken");
         }
-        
-        success = Bdb.iuQuery("INSERT INTO businesses (name, username," +
-                " password, address, phonenumber, email) VALUES (" +
-                "'" + name + "', " +
-                "'" + username + "', " +
-                "'" + password + "', " +
-                "'" + address + "', " +
-                "'" + phoneNumber + "', " +
-                "'" + email + "')");
-        
+        if (!password.equals(confirmPassword)) {
+            throw new Exception("The password doesn't match! Please re-enter them!");
+        }
+
+        success = Bdb.iuQuery("INSERT INTO businesses (name, username,"
+                + " password, address, phonenumber, email) VALUES ("
+                + "'" + name + "', "
+                + "'" + username + "', "
+                + "'" + password + "', "
+                + "'" + address + "', "
+                + "'" + phoneNumber + "', "
+                + "'" + email + "')");
+
         return success;
     }
 
