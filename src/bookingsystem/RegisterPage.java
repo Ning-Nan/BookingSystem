@@ -106,6 +106,11 @@ public class RegisterPage extends javax.swing.JFrame {
                 emailFieldFocusLost(evt);
             }
         });
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
         jPanel1.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 206, -1));
 
         passwordField.setText("Password");
@@ -113,6 +118,11 @@ public class RegisterPage extends javax.swing.JFrame {
         passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordFieldFocusGained(evt);
+            }
+        });
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
             }
         });
         jPanel1.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 206, -1));
@@ -306,6 +316,14 @@ public class RegisterPage extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments

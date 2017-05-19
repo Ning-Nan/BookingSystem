@@ -19,6 +19,9 @@ public class BusinessRegister extends javax.swing.JFrame {
      */
     public BusinessRegister() {
         initComponents();
+        jLabel1.requestFocusInWindow();
+        passwordField.setEchoChar((char)0);
+        confirmPasswordField.setEchoChar((char)0);
     }
 
     /**
@@ -68,21 +71,84 @@ public class BusinessRegister extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 businessNameFieldFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                businessNameFieldFocusLost(evt);
+            }
         });
 
         firstNameField.setText("First Name");
+        firstNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusLost(evt);
+            }
+        });
 
         lastNameField.setText("Last Name");
+        lastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusLost(evt);
+            }
+        });
 
-        usernameField.setText("Onwer Username");
+        usernameField.setText("Owner Username");
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusLost(evt);
+            }
+        });
 
         emailField.setText("Owner E-mail");
+        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFieldFocusLost(evt);
+            }
+        });
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         addressField.setText("Address");
+        addressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                addressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                addressFieldFocusLost(evt);
+            }
+        });
 
         passwordField.setText("Password");
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+        });
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
 
         confirmPasswordField.setText("Confirm Password");
+        confirmPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                confirmPasswordFieldFocusGained(evt);
+            }
+        });
 
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +165,14 @@ public class BusinessRegister extends javax.swing.JFrame {
         });
 
         phoneNumberField.setText("Phone Number");
+        phoneNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneNumberFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                phoneNumberFieldFocusLost(evt);
+            }
+        });
 
         jLabel2.setText("Business Hour:");
 
@@ -240,9 +314,9 @@ public class BusinessRegister extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(65, 65, 65)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,18 +349,122 @@ public class BusinessRegister extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         JOptionPane.showMessageDialog(this, "Registration successful!", "",
                 JOptionPane.PLAIN_MESSAGE);
-        
+
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void businessNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_businessNameFieldFocusGained
         // TODO add your handling code here:
-   
+
+        if (businessNameField.getText().equals("Company Name")) {
+            businessNameField.setText("");
+        }
     }//GEN-LAST:event_businessNameFieldFocusGained
+
+    private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
+        // TODO add your handling code here:
+        if (firstNameField.getText().equals("First Name")) {
+            firstNameField.setText("");
+        }
+    }//GEN-LAST:event_firstNameFieldFocusGained
+
+    private void lastNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusGained
+        if (lastNameField.getText().equals("Last Name")) {
+            lastNameField.setText("");
+        }
+    }//GEN-LAST:event_lastNameFieldFocusGained
+
+    private void usernameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusGained
+        if (usernameField.getText().equals("Owner Username")) {
+            usernameField.setText("");
+        }
+    }//GEN-LAST:event_usernameFieldFocusGained
+
+    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
+        if (emailField.getText().equals("Owner E-mail")) {
+            emailField.setText("");
+        }
+    }//GEN-LAST:event_emailFieldFocusGained
+
+    private void addressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addressFieldFocusGained
+        if (addressField.getText().equals("Address")) {
+            addressField.setText("");
+        }
+    }//GEN-LAST:event_addressFieldFocusGained
+
+    private void phoneNumberFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFieldFocusGained
+        if (phoneNumberField.getText().equals("Phone Number")) {
+            phoneNumberField.setText("");
+        }
+    }//GEN-LAST:event_phoneNumberFieldFocusGained
+
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        if (passwordField.getEchoChar() == (char) 0) {
+            passwordField.setText("");
+            passwordField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_passwordFieldFocusGained
+
+    private void confirmPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordFieldFocusGained
+        if (confirmPasswordField.getEchoChar() == (char) 0) {
+            confirmPasswordField.setText("");
+            confirmPasswordField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_confirmPasswordFieldFocusGained
+
+    private void businessNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_businessNameFieldFocusLost
+        if (businessNameField.getText().equals("")) {
+            businessNameField.setText("Company Name");
+        }
+    }//GEN-LAST:event_businessNameFieldFocusLost
+
+    private void firstNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusLost
+        if (firstNameField.getText().equals("")) {
+            firstNameField.setText("First Name");
+        }
+    }//GEN-LAST:event_firstNameFieldFocusLost
+
+    private void lastNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusLost
+       if (lastNameField.getText().equals("")) {
+            lastNameField.setText("Last Name");
+        }
+    }//GEN-LAST:event_lastNameFieldFocusLost
+
+    private void usernameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusLost
+        if (usernameField.getText().equals("")) {
+            usernameField.setText("Owner Username");
+        }
+    }//GEN-LAST:event_usernameFieldFocusLost
+
+    private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
+       if (emailField.getText().equals("")) {
+            emailField.setText("Owner E-mail");
+        }
+    }//GEN-LAST:event_emailFieldFocusLost
+
+    private void addressFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addressFieldFocusLost
+        if (addressField.getText().equals("")) {
+            addressField.setText("Address");
+        }
+    }//GEN-LAST:event_addressFieldFocusLost
+
+    private void phoneNumberFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFieldFocusLost
+        if (phoneNumberField.getText().equals("")) {
+            phoneNumberField.setText("Phone Number");
+        }
+    }//GEN-LAST:event_phoneNumberFieldFocusLost
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
