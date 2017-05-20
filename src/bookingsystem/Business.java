@@ -24,6 +24,9 @@ public class Business {
     private String username;
     private String password;
     private String phoneNumber;
+    private int start;
+    private int close;
+    private boolean[] days;
 
     /**
      * Construct a Business object by querying the database for it's existence.
@@ -57,6 +60,11 @@ public class Business {
         this.username = username;
         this.password = password;
         this.id = id;
+        
+        this.start = rs.getInt("start");
+        this.close = rs.getInt("close");
+        
+        this.days = decodeDaysString(rs.getString("days"));
 
     }
 
@@ -555,6 +563,17 @@ public class Business {
                 + "'" + email + "')");
 
         return success;
+    }
+    
+    public static boolean[] decodeDaysString(String daysString) {
+        boolean[] days = new boolean[7];
+        String[] spl = daysString.split(",");
+        
+        for (int i = 0; i < 7; i++) {
+            days[i] = spl[i].equals("1");
+        }
+        
+        return days;
     }
 
 }
