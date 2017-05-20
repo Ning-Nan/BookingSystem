@@ -579,5 +579,9 @@ public class Business {
         
         return days;
     }
+    
+    public boolean[] getDays() {
+        return days;
+    }
 
 }

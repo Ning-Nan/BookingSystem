@@ -191,6 +191,12 @@ public class AddTimeSlot extends javax.swing.JFrame {
                 return;
             }
         }
+        
+        if (Business.currBusiness.getDays()[jXDatePicker1.getDate().getDay()] == false) {
+            JOptionPane.showMessageDialog(this, "The business is closed on the selected day!",
+                    "Business Closed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
             
             // Set timeStart to midnight of the selected date
             LocalDateTime timeStart = LocalDateTime.ofInstant(
