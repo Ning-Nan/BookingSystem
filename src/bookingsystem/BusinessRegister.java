@@ -48,16 +48,16 @@ public class BusinessRegister extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         phoneNumberField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        startCB = new javax.swing.JComboBox<>();
+        endCB = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        mondayCheckBox = new javax.swing.JCheckBox();
+        tuesdayCheckBox = new javax.swing.JCheckBox();
+        wednesdayCheckBox = new javax.swing.JCheckBox();
+        thursdayCheckBox = new javax.swing.JCheckBox();
+        fridayCheckBox = new javax.swing.JCheckBox();
+        saturdayCheckBox = new javax.swing.JCheckBox();
+        sundayCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,32 +176,32 @@ public class BusinessRegister extends javax.swing.JFrame {
 
         jLabel2.setText("Business Hour:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m." }));
+        startCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time", "12:00am", "1:00am", "2:00am", "3:00am", "4:00am", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m.", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm", "12:00 pm" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Close Time", "4.00 p.m.", "5.00 p.m.", "6.00 p.m.", "7.00 p.m.", "8.00 p.m.", "9.00 p.m.", "10.00 p.m.", "11.00 p.m.", "12.00 a.m. " }));
+        endCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose End Time", "12:00am", "1:00am", "2:00am", "3:00am", "4:00am", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m.", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm", "12:00 am" }));
 
         jLabel3.setText("Business Date:");
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Monday");
+        mondayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        mondayCheckBox.setText("Monday");
 
-        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Tuesday");
+        tuesdayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        tuesdayCheckBox.setText("Tuesday");
 
-        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setText("Wednesday");
+        wednesdayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        wednesdayCheckBox.setText("Wednesday");
 
-        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setText("Thursday");
+        thursdayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        thursdayCheckBox.setText("Thursday");
 
-        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox5.setText("Friday");
+        fridayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        fridayCheckBox.setText("Friday");
 
-        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox6.setText("Saturday");
+        saturdayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        saturdayCheckBox.setText("Saturday");
 
-        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox7.setText("Sunday");
+        sundayCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        sundayCheckBox.setText("Sunday");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,7 +225,7 @@ public class BusinessRegister extends javax.swing.JFrame {
                                 .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lastNameField))
-                            .addComponent(businessNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                            .addComponent(businessNameField)
                             .addComponent(usernameField)
                             .addComponent(addressField)
                             .addComponent(emailField)
@@ -237,21 +237,21 @@ public class BusinessRegister extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(endCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(startCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox3)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox7))
+                                    .addComponent(wednesdayCheckBox)
+                                    .addComponent(mondayCheckBox)
+                                    .addComponent(fridayCheckBox)
+                                    .addComponent(sundayCheckBox))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox2)
-                                    .addComponent(jCheckBox4)
-                                    .addComponent(jCheckBox6))))
+                                    .addComponent(tuesdayCheckBox)
+                                    .addComponent(thursdayCheckBox)
+                                    .addComponent(saturdayCheckBox))))
                         .addGap(25, 25, 25))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -284,24 +284,24 @@ public class BusinessRegister extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(endCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
+                    .addComponent(mondayCheckBox)
                     .addComponent(jLabel3)
-                    .addComponent(jCheckBox2))
+                    .addComponent(tuesdayCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4))
+                    .addComponent(wednesdayCheckBox)
+                    .addComponent(thursdayCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
+                    .addComponent(fridayCheckBox)
+                    .addComponent(saturdayCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox7)
+                .addComponent(sundayCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -335,10 +335,31 @@ public class BusinessRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        if (endCB.getSelectedIndex() < startCB.getSelectedIndex()) {
+            JOptionPane.showMessageDialog(this,
+                    "End time must be after start time", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;            
+        }
+        
+        int start = startCB.getSelectedIndex() - 1;
+        int close = endCB.getSelectedIndex() - 1;
+        
+        String daysArr[] = new String[7];
+        daysArr[0] = sundayCheckBox.isSelected() ? "1" : "0";
+        daysArr[1] = mondayCheckBox.isSelected() ? "1" : "0";
+        daysArr[2] = tuesdayCheckBox.isSelected() ? "1" : "0";
+        daysArr[3] = wednesdayCheckBox.isSelected() ? "1" : "0";
+        daysArr[4] = thursdayCheckBox.isSelected() ? "1" : "0";
+        daysArr[5] = fridayCheckBox.isSelected() ? "1" : "0";
+        daysArr[6] = saturdayCheckBox.isSelected() ? "1" : "0";
+        
+        String days = String.join(",", daysArr);
+        
         try {
             Business.register(businessNameField.getText(), usernameField.getText(),
                     String.valueOf(passwordField.getPassword()), String.valueOf(confirmPasswordField.getPassword()), addressField.getText(),
-                    phoneNumberField.getText(), emailField.getText());
+                    phoneNumberField.getText(), emailField.getText(), start, close, days);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
@@ -506,26 +527,26 @@ public class BusinessRegister extends javax.swing.JFrame {
     private javax.swing.JTextField businessNameField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JComboBox<String> endCB;
     private javax.swing.JTextField firstNameField;
+    private javax.swing.JCheckBox fridayCheckBox;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField lastNameField;
+    private javax.swing.JCheckBox mondayCheckBox;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField phoneNumberField;
     private javax.swing.JButton registerButton;
+    private javax.swing.JCheckBox saturdayCheckBox;
+    private javax.swing.JComboBox<String> startCB;
+    private javax.swing.JCheckBox sundayCheckBox;
+    private javax.swing.JCheckBox thursdayCheckBox;
+    private javax.swing.JCheckBox tuesdayCheckBox;
     private javax.swing.JTextField usernameField;
+    private javax.swing.JCheckBox wednesdayCheckBox;
     // End of variables declaration//GEN-END:variables
 }

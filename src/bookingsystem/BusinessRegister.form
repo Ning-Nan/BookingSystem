@@ -73,7 +73,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lastNameField" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="businessNameField" pref="271" max="32767" attributes="0"/>
+                              <Component id="businessNameField" max="32767" attributes="0"/>
                               <Component id="usernameField" max="32767" attributes="0"/>
                               <Component id="addressField" alignment="0" max="32767" attributes="0"/>
                               <Component id="emailField" alignment="0" max="32767" attributes="0"/>
@@ -85,24 +85,24 @@
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jComboBox2" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" max="32767" attributes="0"/>
+                                      <Component id="endCB" max="32767" attributes="0"/>
+                                      <Component id="startCB" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="wednesdayCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="mondayCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="fridayCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sundayCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tuesdayCheckBox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="thursdayCheckBox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="saturdayCheckBox" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -144,28 +144,28 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="startCB" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                  <Component id="endCB" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mondayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tuesdayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="wednesdayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="thursdayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="fridayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="saturdayCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jCheckBox7" min="-2" max="-2" attributes="0"/>
+                  <Component id="sundayCheckBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Component id="registerButton" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -289,19 +289,36 @@
             <Property name="text" type="java.lang.String" value="Business Hour:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="startCB">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="9">
+              <StringArray count="26">
                 <StringItem index="0" value="Choose Start Time"/>
-                <StringItem index="1" value="5.00 a.m."/>
-                <StringItem index="2" value="6.00 a.m."/>
-                <StringItem index="3" value="7.00 a.m."/>
-                <StringItem index="4" value="8.00 a.m."/>
-                <StringItem index="5" value="9.00 a.m."/>
-                <StringItem index="6" value="10.00 a.m."/>
-                <StringItem index="7" value="11.00 a.m."/>
-                <StringItem index="8" value="12.00 p.m."/>
+                <StringItem index="1" value="12:00am"/>
+                <StringItem index="2" value="1:00am"/>
+                <StringItem index="3" value="2:00am"/>
+                <StringItem index="4" value="3:00am"/>
+                <StringItem index="5" value="4:00am"/>
+                <StringItem index="6" value="5.00 a.m."/>
+                <StringItem index="7" value="6.00 a.m."/>
+                <StringItem index="8" value="7.00 a.m."/>
+                <StringItem index="9" value="8.00 a.m."/>
+                <StringItem index="10" value="9.00 a.m."/>
+                <StringItem index="11" value="10.00 a.m."/>
+                <StringItem index="12" value="11.00 a.m."/>
+                <StringItem index="13" value="12.00 p.m."/>
+                <StringItem index="14" value="1:00 pm"/>
+                <StringItem index="15" value="2:00 pm"/>
+                <StringItem index="16" value="3:00 pm"/>
+                <StringItem index="17" value="4:00 pm"/>
+                <StringItem index="18" value="5:00 pm"/>
+                <StringItem index="19" value="6:00 pm"/>
+                <StringItem index="20" value="7:00 pm"/>
+                <StringItem index="21" value="8:00 pm"/>
+                <StringItem index="22" value="9:00 pm"/>
+                <StringItem index="23" value="10:00 pm"/>
+                <StringItem index="24" value="11:00 pm"/>
+                <StringItem index="25" value="12:00 pm"/>
               </StringArray>
             </Property>
           </Properties>
@@ -309,20 +326,36 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="endCB">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="10">
-                <StringItem index="0" value="Choose Close Time"/>
-                <StringItem index="1" value="4.00 p.m."/>
-                <StringItem index="2" value="5.00 p.m."/>
-                <StringItem index="3" value="6.00 p.m."/>
-                <StringItem index="4" value="7.00 p.m."/>
-                <StringItem index="5" value="8.00 p.m."/>
-                <StringItem index="6" value="9.00 p.m."/>
-                <StringItem index="7" value="10.00 p.m."/>
-                <StringItem index="8" value="11.00 p.m."/>
-                <StringItem index="9" value="12.00 a.m. "/>
+              <StringArray count="26">
+                <StringItem index="0" value="Choose End Time"/>
+                <StringItem index="1" value="12:00am"/>
+                <StringItem index="2" value="1:00am"/>
+                <StringItem index="3" value="2:00am"/>
+                <StringItem index="4" value="3:00am"/>
+                <StringItem index="5" value="4:00am"/>
+                <StringItem index="6" value="5.00 a.m."/>
+                <StringItem index="7" value="6.00 a.m."/>
+                <StringItem index="8" value="7.00 a.m."/>
+                <StringItem index="9" value="8.00 a.m."/>
+                <StringItem index="10" value="9.00 a.m."/>
+                <StringItem index="11" value="10.00 a.m."/>
+                <StringItem index="12" value="11.00 a.m."/>
+                <StringItem index="13" value="12.00 p.m."/>
+                <StringItem index="14" value="1:00 pm"/>
+                <StringItem index="15" value="2:00 pm"/>
+                <StringItem index="16" value="3:00 pm"/>
+                <StringItem index="17" value="4:00 pm"/>
+                <StringItem index="18" value="5:00 pm"/>
+                <StringItem index="19" value="6:00 pm"/>
+                <StringItem index="20" value="7:00 pm"/>
+                <StringItem index="21" value="8:00 pm"/>
+                <StringItem index="22" value="9:00 pm"/>
+                <StringItem index="23" value="10:00 pm"/>
+                <StringItem index="24" value="11:00 pm"/>
+                <StringItem index="25" value="12:00 am"/>
               </StringArray>
             </Property>
           </Properties>
@@ -335,7 +368,7 @@
             <Property name="text" type="java.lang.String" value="Business Date:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="mondayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -343,7 +376,7 @@
             <Property name="text" type="java.lang.String" value="Monday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+        <Component class="javax.swing.JCheckBox" name="tuesdayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -351,7 +384,7 @@
             <Property name="text" type="java.lang.String" value="Tuesday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+        <Component class="javax.swing.JCheckBox" name="wednesdayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -359,7 +392,7 @@
             <Property name="text" type="java.lang.String" value="Wednesday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+        <Component class="javax.swing.JCheckBox" name="thursdayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -367,7 +400,7 @@
             <Property name="text" type="java.lang.String" value="Thursday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+        <Component class="javax.swing.JCheckBox" name="fridayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -375,7 +408,7 @@
             <Property name="text" type="java.lang.String" value="Friday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox6">
+        <Component class="javax.swing.JCheckBox" name="saturdayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -383,7 +416,7 @@
             <Property name="text" type="java.lang.String" value="Saturday"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+        <Component class="javax.swing.JCheckBox" name="sundayCheckBox">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>

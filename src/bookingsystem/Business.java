@@ -521,7 +521,8 @@ public class Business {
      */
     public static boolean register(String name, String username,
             String password, String confirmPassword, String address,
-            String phoneNumber, String email) throws SQLException, Exception {
+            String phoneNumber, String email,
+            int start, int close, String days) throws SQLException, Exception {
 
         //check if the user fill all the blanks.
         if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
@@ -554,13 +555,16 @@ public class Business {
         }
 
         success = Bdb.iuQuery("INSERT INTO businesses (name, username,"
-                + " password, address, phonenumber, email) VALUES ("
+                + " password, address, phonenumber, email, start, close, days) VALUES ("
                 + "'" + name + "', "
                 + "'" + username + "', "
                 + "'" + password + "', "
                 + "'" + address + "', "
                 + "'" + phoneNumber + "', "
-                + "'" + email + "')");
+                + "'" + email + "', "
+                + start + ", "
+                + close + ", "
+                + "'" + days + "')");
 
         return success;
     }
