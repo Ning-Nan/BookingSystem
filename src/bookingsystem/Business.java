@@ -583,5 +583,13 @@ public class Business {
     public boolean[] getDays() {
         return days;
     }
+    
+    public int getStart() {
+        return start;
+    }
+    
+    public int getClose() {
+        return close;
+    }
 
 }

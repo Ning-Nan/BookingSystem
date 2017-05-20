@@ -197,6 +197,18 @@ public class AddTimeSlot extends javax.swing.JFrame {
                     "Business Closed", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        if (timeSlotCB.getSelectedIndex() < Business.currBusiness.getStart()) {
+            JOptionPane.showMessageDialog(this, "The business is closed at the selected start time!",
+                    "Business Closed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (endCB.getSelectedIndex() > Business.currBusiness.getClose()) {
+            JOptionPane.showMessageDialog(this, "The business is closed before the selected end time!",
+                    "Business Closed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
             
             // Set timeStart to midnight of the selected date
             LocalDateTime timeStart = LocalDateTime.ofInstant(
