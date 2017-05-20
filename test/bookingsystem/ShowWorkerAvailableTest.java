@@ -56,11 +56,9 @@ public class ShowWorkerAvailableTest {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         ArrayList<Booking> bookings1 = new ArrayList<Booking>();
         bookings = Business.currBusiness.getEmployee(1).getEmployeeAvailability();
-        bookings1 = Business.currBusiness.getEmployee(2).getEmployeeAvailability();
+      bookings1 = Business.currBusiness.getEmployee(2).getEmployeeAvailability();
         assert(bookings.size()==0);
-        assert(bookings1.get(0).getEmployeeID() == 2);
-        assert(bookings1.get(0).getBusinessID()==1);
-        assert(bookings1.get(0).getName()==null);
-
+        assert(bookings1.size()==0);
+    
     }
 }
