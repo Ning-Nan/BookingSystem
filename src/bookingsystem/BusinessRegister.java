@@ -176,7 +176,7 @@ public class BusinessRegister extends javax.swing.JFrame {
 
         jLabel2.setText("Business Hour:");
 
-        startCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time", "12:00am", "1:00am", "2:00am", "3:00am", "4:00am", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m.", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm", "12:00 pm" }));
+        startCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Start Time", "12:00am", "1:00am", "2:00am", "3:00am", "4:00am", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m.", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm" }));
 
         endCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose End Time", "12:00am", "1:00am", "2:00am", "3:00am", "4:00am", "5.00 a.m.", "6.00 a.m.", "7.00 a.m.", "8.00 a.m.", "9.00 a.m.", "10.00 a.m.", "11.00 a.m.", "12.00 p.m.", "1:00 pm", "2:00 pm", "3:00 pm", "4:00 pm", "5:00 pm", "6:00 pm", "7:00 pm", "8:00 pm", "9:00 pm", "10:00 pm", "11:00 pm", "12:00 am" }));
 

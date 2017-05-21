@@ -292,7 +292,7 @@
         <Component class="javax.swing.JComboBox" name="startCB">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="26">
+              <StringArray count="25">
                 <StringItem index="0" value="Choose Start Time"/>
                 <StringItem index="1" value="12:00am"/>
                 <StringItem index="2" value="1:00am"/>
@@ -318,7 +318,6 @@
                 <StringItem index="22" value="9:00 pm"/>
                 <StringItem index="23" value="10:00 pm"/>
                 <StringItem index="24" value="11:00 pm"/>
-                <StringItem index="25" value="12:00 pm"/>
               </StringArray>
             </Property>
           </Properties>
