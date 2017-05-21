@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.io.*;
 import java.util.StringTokenizer;
 import java.sql.SQLException;
@@ -40,6 +41,7 @@ public class User {
     public User(String username, String password, int businessID) throws SQLException,
             Exception {
 
+       log.info("logging in...");
         // Check the customers table to find the user.
         ResultSet rs = Bdb.selectQuery(
                 "SELECT * from customers WHERE username='" + username

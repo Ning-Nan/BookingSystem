@@ -12,16 +12,21 @@ import java.util.logging.Logger;
 
 public class LoginForm extends javax.swing.JFrame {
 
+    public static final Logger log = Logger.getLogger("LogTest");
+    
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
         initComponents();
+        log.setLevel(Level.ALL);
+        log.info("initializing page...");
         InputCheck.check = new InputCheck();
         try {
 
             // Setup the database
             Bdb.setup();
+            log.info("loading database..");
 
             // tmp business for get the whole business list
             Business.currBusiness = new Business(1, "rbusiness", "rbpass");
@@ -34,6 +39,7 @@ public class LoginForm extends javax.swing.JFrame {
                 jComboBox1.addItem(tmp.getName());
             }
         } catch (SQLException e) {
+            log.warning("database error!");
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -178,6 +184,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         try {
             if (jComboBox1.getSelectedIndex() == 0) {
+                log.warning("business not selected.");
                 JOptionPane.showMessageDialog(this, "Please select a business",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -190,6 +197,7 @@ public class LoginForm extends javax.swing.JFrame {
 
             User.currUser = new User(username, password, Business.currBusiness.getID());
         } catch (SQLException e) {
+            log.warning("database error");
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -205,9 +213,11 @@ public class LoginForm extends javax.swing.JFrame {
         // Show a different screen based on whether the owner or a customer
         // logged in.
         if (User.currUser.getRole() == owner) {
+            log.info("owner detected, turning to owner page");
             new EmployeeArrangement().setVisible(true);
             this.dispose();
         } else if (User.currUser.getRole() == customer) {
+            log.info("user detected, turning to user page");
             new UserSelectPage().setVisible(true);
             this.dispose();
         }
