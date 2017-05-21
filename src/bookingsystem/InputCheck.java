@@ -47,7 +47,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkPassword(String password) throws Exception {
-        String check1 = "^[a-zA-Z]\\w{6,12}$";
+        String check1 = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 
         Pattern regex = Pattern.compile(check1);
 
