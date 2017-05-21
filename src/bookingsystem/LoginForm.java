@@ -188,7 +188,7 @@ public class LoginForm extends javax.swing.JFrame {
             
             
 
-            User.currUser = new User(username, password);
+            User.currUser = new User(username, password, Business.currBusiness.getID());
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",

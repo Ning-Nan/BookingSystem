@@ -33,10 +33,11 @@ public class User {
      *
      * @param username User's username
      * @param password User's password
+     * @param businessID businessID for owner instancing
      * @throws SQLException
      * @throws Exception
      */
-    public User(String username, String password) throws SQLException,
+    public User(String username, String password, int businessID) throws SQLException,
             Exception {
 
         // Check the customers table to find the user.
@@ -50,7 +51,7 @@ public class User {
             // User wasn't a customer, check if they are a business owner.
             rs = Bdb.selectQuery(
                     "SELECT * from businesses WHERE username='" + username
-                    + "'");
+                    + "' AND id=" + businessID);
 
             this.role = roleType.owner;
 
