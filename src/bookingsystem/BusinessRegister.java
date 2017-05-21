@@ -335,7 +335,7 @@ public class BusinessRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        if (endCB.getSelectedIndex() < startCB.getSelectedIndex()) {
+        if (endCB.getSelectedIndex() <= startCB.getSelectedIndex()) {
             JOptionPane.showMessageDialog(this,
                     "End time must be after start time", "Error",
                     JOptionPane.ERROR_MESSAGE);
