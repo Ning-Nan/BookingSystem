@@ -335,6 +335,13 @@ public class BusinessRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        if (endCB.getSelectedIndex() == 0 || startCB.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Business start and end times must be specified", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;    
+        }
+        
         if (endCB.getSelectedIndex() <= startCB.getSelectedIndex()) {
             JOptionPane.showMessageDialog(this,
                     "End time must be after start time", "Error",
@@ -355,6 +362,13 @@ public class BusinessRegister extends javax.swing.JFrame {
         daysArr[6] = saturdayCheckBox.isSelected() ? "1" : "0";
         
         String days = String.join(",", daysArr);
+        
+        if (days.equals("0,0,0,0,0,0,0")) {
+            JOptionPane.showMessageDialog(this,
+                    "Open days must be specified", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;                        
+        }
         
         try {
             Business.register(businessNameField.getText(), usernameField.getText(),
