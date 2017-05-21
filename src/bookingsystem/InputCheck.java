@@ -5,6 +5,7 @@
  */
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.util.regex.*;
 
 /**
@@ -24,6 +25,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkUserName(String username) throws Exception {
+        log.info("checking username");
         String check1 = "^[a-zA-Z]\\w{6,12}$";
 
         Pattern regex = Pattern.compile(check1);
@@ -33,6 +35,7 @@ public class InputCheck {
         boolean isMatched = matcher.matches();
 
         if (!isMatched) {
+            log.warning("username is in wrong format");
             throw new Exception("Username is in wrong format");
         }
         return true;
@@ -47,6 +50,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkPassword(String password) throws Exception {
+        log.info("checking password");
         String check1 = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!+=])(?=\\S+$).{8,}";
 
         Pattern regex = Pattern.compile(check1);
@@ -74,6 +78,7 @@ public class InputCheck {
      */
     public boolean checkShortName(String name) throws Exception {
 
+        log.info("checking short name ");
         String check1 = "^([A-Z][A-Za-z ,.'`-]{3,30})$";
 
         Pattern regex = Pattern.compile(check1);
@@ -122,6 +127,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkEmail(String email) throws Exception {
+        log.info("checking email");
         String check1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
         Pattern regex = Pattern.compile(check1);
@@ -147,6 +153,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkPhone(String phone) throws Exception {
+        log.info("checking phone number");
 
         String check1 = "^\\d{10}$";
 

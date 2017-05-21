@@ -546,6 +546,8 @@ public class Business {
         if (name.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") || address.equals("") || phoneNumber.equals("") || email.equals("")) {
             throw new Exception("Please fill all the blanks. ");
         }
+        System.out.print(start);
+        System.out.print(days);
         InputCheck.check.checkEmail(email);
         InputCheck.check.checkPassword(password);
         InputCheck.check.checkPassword(confirmPassword);

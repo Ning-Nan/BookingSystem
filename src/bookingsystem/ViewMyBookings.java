@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.ListModel;
@@ -23,6 +24,7 @@ public class ViewMyBookings extends javax.swing.JFrame {
      */
     public void listBookings() {
 
+        log.info("loading bookings");
         ArrayList<Booking> bookings
                 = User.currUser.getSortedBookings(Business.currBusiness);
         System.out.println(bookings.size());

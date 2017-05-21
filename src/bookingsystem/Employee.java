@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -48,7 +49,7 @@ public class Employee {
      * @throws SQLException 
      */
     public ArrayList<Booking> getEmployeeAvailability() throws SQLException{
-        
+        log.info("getting employee availiablity");
         Date now = new Date();
         LocalDateTime ldt = LocalDateTime.ofInstant(now.toInstant(),
                 ZoneId.systemDefault());
@@ -63,6 +64,7 @@ public class Employee {
         
         if(rs.isClosed()){
           
+            log.info("no bookings");
             return bookings;
         }
         
