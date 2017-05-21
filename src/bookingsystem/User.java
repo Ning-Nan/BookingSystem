@@ -152,6 +152,7 @@ public class User {
      * @return ArrayList of Bookings
      */
     public ArrayList<Booking> getSortedBookings(Business b) {
+        log.info("get bookings ");
         ArrayList<Booking> bookings = new ArrayList<Booking>();
 
         try {

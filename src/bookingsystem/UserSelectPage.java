@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -143,6 +144,7 @@ public class UserSelectPage extends javax.swing.JFrame {
     
         if(PromptResult==0)
         {
+            log.info("log out successful");
             new LoginForm().setVisible(true);
             this.dispose();         
         }

@@ -373,7 +373,7 @@ public class Business {
      * @return List of activities
      */
     public ArrayList<Activity> getActivity() {
-        log.info("getting activities");
+        
 
         ArrayList<Activity> intList = new ArrayList<Activity>();
 

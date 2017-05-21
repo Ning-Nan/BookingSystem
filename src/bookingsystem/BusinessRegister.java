@@ -5,6 +5,7 @@
  */
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,7 @@ public class BusinessRegister extends javax.swing.JFrame {
      * Creates new form BusinessRegister
      */
     public BusinessRegister() {
+        log.info("initializing page");
         initComponents();
         jLabel1.requestFocusInWindow();
         passwordField.setEchoChar((char)0);
@@ -348,7 +350,7 @@ public class BusinessRegister extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return;            
         }
-        
+        log.info("converting option to day and time");
         int start = startCB.getSelectedIndex() - 1;
         int close = endCB.getSelectedIndex() - 1;
         
@@ -375,6 +377,7 @@ public class BusinessRegister extends javax.swing.JFrame {
                     String.valueOf(passwordField.getPassword()), String.valueOf(confirmPasswordField.getPassword()), addressField.getText(),
                     phoneNumberField.getText(), emailField.getText(), start, close, days);
         } catch (SQLException e) {
+            log.warning("databse error");
             JOptionPane.showMessageDialog(this, e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -385,9 +388,11 @@ public class BusinessRegister extends javax.swing.JFrame {
             return;
         }
 
+        log.info("registration successful");
         JOptionPane.showMessageDialog(this, "Registration successful!", "",
                 JOptionPane.PLAIN_MESSAGE);
 
+        log.info("turning to login page");
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed

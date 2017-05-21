@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.io.*;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -192,6 +193,7 @@ public class RegisterPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
+        log.info("trying to register");
         String name = firstNameField.getText()+" " + lastNameField.getText();
          String password = String.valueOf(passwordField.getPassword());
         String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
