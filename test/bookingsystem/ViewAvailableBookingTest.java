@@ -34,7 +34,7 @@ public class ViewAvailableBookingTest {
     public static void setUpClass() {
          try {
             Bdb.setup();
-            User.currUser = new User("dwaine", "abc123");
+            User.currUser = new User("dwaine", "abc123", 1);
             Business.currBusiness = new Business(1, "rbusiness", "rbpass");
 
         } catch (SQLException e) {

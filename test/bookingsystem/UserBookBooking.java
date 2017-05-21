@@ -35,7 +35,7 @@ public class UserBookBooking {
         try {
             Bdb.setup();
             Business.currBusiness = new Business(1, "rbusiness", "rbpass");
-            User.currUser = new User("dwaine", "abc123");
+            User.currUser = new User("dwaine", "abc123", 1);
 
         } catch (SQLException e) {
             fail(e.getMessage());
