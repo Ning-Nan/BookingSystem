@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.SQLException;
@@ -7,8 +8,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BookingPage extends javax.swing.JFrame {
 
@@ -18,6 +17,7 @@ public class BookingPage extends javax.swing.JFrame {
      * Creates new form BookingPage
      */
     public BookingPage() {
+        log.info("initializing page");
         initComponents();
         jTextField1.setText(User.currUser.getName());
         jTextField5.setText(User.currUser.getEmail());
@@ -33,6 +33,7 @@ public class BookingPage extends javax.swing.JFrame {
      * @param duration duration of the activity
      */
     public void refreshBookingListWithDate(int duration) {
+        log.info("refreshing booking list");
         /*bookings =
                 Business.currBusiness.getABookingsFromDate(jXDatePicker1.getDate());*/
 
@@ -69,6 +70,7 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public void loadActivity() {
 
+        log.info("loading activities");
         //get activity for this business
         ArrayList<Activity> Activity = Business.currBusiness.getActivity();
 
@@ -305,6 +307,7 @@ public class BookingPage extends javax.swing.JFrame {
 
         //time slot is needed to be choosen
         if (jComboBox2.getSelectedIndex() == 0 || jComboBox1.getSelectedIndex() == 0) {
+            log.warning("time not selected");
             JOptionPane.showMessageDialog(this, "Select a booking time", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -320,6 +323,7 @@ public class BookingPage extends javax.swing.JFrame {
         boolean success = false;
         System.out.println(id);
 
+        log.info("start to convert date time");
         //Convert date object to a LocalDateTime object
         LocalDateTime timeStart = LocalDateTime.ofInstant(jXDatePicker1.getDate().toInstant(),
                 ZoneId.systemDefault());
@@ -355,11 +359,13 @@ public class BookingPage extends javax.swing.JFrame {
         }
 
         if (!success) {
+            log.warning("book failed");
             JOptionPane.showMessageDialog(this, "Unable to book slot", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        log.info("book success");
         JOptionPane.showMessageDialog(this,
                 "Booking has been successfully booked!", "Success",
                 JOptionPane.PLAIN_MESSAGE);

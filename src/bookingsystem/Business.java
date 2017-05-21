@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -43,6 +44,7 @@ public class Business {
                 + id);
 
         if (rs.isClosed()) {
+            log.warning("ID not found in database");
             throw new Exception("Business login ID error");
         }
 
@@ -84,13 +86,16 @@ public class Business {
      */
     public boolean addEmployee(String name) {
         try {
+            log.info("adding employee");
             Bdb.iuQuery("INSERT INTO employees (businessID, name) "
                     + "VALUES ("
                     + this.id + ", "
                     + "'" + name + "')");
         } catch (SQLException e) {
+            log.warning("add failed");
             return false;
         }
+        log.info("add success");
         return true;
     }
 
@@ -102,15 +107,18 @@ public class Business {
      */
     public Employee getEmployee(int employeeID) {
         try {
+            log.info("searching from database");
             ResultSet rs = Bdb.selectQuery("SELECT * from employees WHERE "
                     + "businessID=" + this.id + " AND id=" + employeeID);
             if (rs.isClosed()) {
+                log.warning("not found");
                 return null;
             }
             Employee em = new Employee(rs.getInt("id"),
                     rs.getInt("businessID"), rs.getString("name"));
             return em;
         } catch (SQLException e) {
+            log.warning("database error");
             return null;
         }
     }
@@ -121,6 +129,7 @@ public class Business {
      * @return An ArrayList containing Employee objects of all the employees.
      */
     public ArrayList<Employee> getEmployees() {
+        log.info("getting employee list");
         ArrayList<Employee> employees = new ArrayList();
 
         ResultSet rs;
@@ -130,6 +139,7 @@ public class Business {
                     + this.id + " ORDER BY id");
 
             if (rs.isClosed()) {
+                log.info("no employees found");
                 return employees;
             }
 
@@ -140,6 +150,7 @@ public class Business {
             }
 
         } catch (SQLException e) {
+            log.warning("database error");
             return employees;
         }
 
@@ -331,6 +342,7 @@ public class Business {
                     + "businessID=" + this.id + " AND employeeID" + " AND timeStart" + " AND timeFinish" + " ORDER BY timeStart ASC");
 
             if (rs.isClosed()) {
+                log.info("no bookings found");
                 // No bookings
                 return bookings;
             }
@@ -350,6 +362,7 @@ public class Business {
 
             return bookings;
         } catch (SQLException e) {
+            log.warning("database error");
             return bookings;
         }
     }
@@ -360,6 +373,7 @@ public class Business {
      * @return List of activities
      */
     public ArrayList<Activity> getActivity() {
+        log.info("getting activities");
 
         ArrayList<Activity> intList = new ArrayList<Activity>();
 
@@ -384,6 +398,7 @@ public class Business {
 
             return intList;
         } catch (SQLException e) {
+            log.warning("database error");
             return intList;
         }
 
@@ -407,7 +422,7 @@ public class Business {
             int userID, String name,
             String address, String phoneNumber, int activityId) throws SQLException {
 
-        System.out.println("START");
+        log.info("start booking");
 
         /* If the user's booking duration is not fully used the booking duration,
          * will add one new available booking which use the left duration,
@@ -454,6 +469,7 @@ public class Business {
 
     public ArrayList<Business> getBusiness() throws Exception {
 
+        log.info("loading business list");
         ArrayList<Business> tepBusiness = new ArrayList<Business>();
 
         try {
@@ -491,6 +507,7 @@ public class Business {
     public boolean addActivity(String name, int duration) throws SQLException {
         Bdb.iuQuery("INSERT INTO activity (name, duration, businessID) VALUES('"
                 + name + "', " + duration + ", " + this.id + ")");
+        log.info("add success");
         return true;
     }
 
@@ -503,6 +520,7 @@ public class Business {
      */
     public boolean deleteBooking(Booking b) throws SQLException {
         boolean success = Bdb.iuQuery("DELETE from bookings WHERE id= " + b.getId());
+        log.info("delete success");
         return success;
     }
 

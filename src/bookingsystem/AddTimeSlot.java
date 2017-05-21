@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -24,6 +25,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
      * for their IDs.
      */
     public void loadEmployees() {
+        log.info("loading employees");
         employees = Business.currBusiness.getEmployees();
         
         for (int i = 0; i < employees.size(); i++) {
@@ -178,6 +180,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
         
         // Make sure an employee has been picked
         if (employeeNameCB.getSelectedIndex() == 0) {
+            log.warning("employee is not selected");
             JOptionPane.showMessageDialog(this, "Pick an employee!",
                     "Employee not selected", JOptionPane.ERROR_MESSAGE);
             return;
@@ -193,18 +196,21 @@ public class AddTimeSlot extends javax.swing.JFrame {
         }
         
         if (Business.currBusiness.getDays()[jXDatePicker1.getDate().getDay()] == false) {
+            log.warning("not a business day");
             JOptionPane.showMessageDialog(this, "The business is closed on the selected day!",
                     "Business Closed", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (timeSlotCB.getSelectedIndex() < Business.currBusiness.getStart()) {
+            log.warning("not a business hour");
             JOptionPane.showMessageDialog(this, "The business is closed at the selected start time!",
                     "Business Closed", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (endCB.getSelectedIndex() > Business.currBusiness.getClose()) {
+            log.warning("not a business hour");
             JOptionPane.showMessageDialog(this, "The business is closed before the selected end time!",
                     "Business Closed", JOptionPane.ERROR_MESSAGE);
             return;
@@ -235,6 +241,7 @@ public class AddTimeSlot extends javax.swing.JFrame {
                                 "at the selected time.", "Booking Conflict",
                     JOptionPane.ERROR_MESSAGE);
             } else {
+                log.info("booking has created");
                 JOptionPane.showMessageDialog(this, "Booking created!",
                         "Success", JOptionPane.PLAIN_MESSAGE);
             }

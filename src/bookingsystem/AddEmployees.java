@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -165,6 +166,7 @@ public class AddEmployees extends javax.swing.JFrame {
      * @return Success of the refresh
      */
     private boolean refreshEmployeeList() {
+        log.info("refreshing list");
         DefaultListModel model = new DefaultListModel();
         ArrayList<Employee> employees = Business.currBusiness.getEmployees();
 

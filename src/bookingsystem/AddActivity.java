@@ -5,6 +5,7 @@
  */
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -166,11 +167,13 @@ public class AddActivity extends javax.swing.JFrame {
         if (jComboBox1.getSelectedIndex() == 0) {
             return;
         }
+        
         try {
             InputCheck.check.checkShortName(jTextField1.getText());
             Business.currBusiness.addActivity(jTextField1.getText(),
                     (Integer.valueOf(jComboBox1.getSelectedItem().toString())) * 60);
         } catch (SQLException e) {
+            log.warning("database error");
             return;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
@@ -189,6 +192,7 @@ public class AddActivity extends javax.swing.JFrame {
      * @return Success of the refresh
      */
     private boolean refreshActicityList() {
+        log.info("refreshing activity list");
         DefaultListModel model = new DefaultListModel();
         ArrayList<Activity> activity = Business.currBusiness.getActivity();
 

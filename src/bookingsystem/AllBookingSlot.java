@@ -1,5 +1,6 @@
 package bookingsystem;
 
+import static bookingsystem.LoginForm.log;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
      *
      */
     public void refreshBookingList() {
+        log.info("refreshing the list");
         DefaultListModel model = new DefaultListModel();
 
         // Get all bookings and display them
@@ -179,6 +181,7 @@ public class AllBookingSlot extends javax.swing.JFrame {
         try {
             Business.currBusiness.deleteBooking(b);
         } catch (SQLException e) {
+            log.warning("delete failed.");
             JOptionPane.showMessageDialog(this, "Error deleting booking", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
