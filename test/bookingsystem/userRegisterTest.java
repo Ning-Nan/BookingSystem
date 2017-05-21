@@ -25,7 +25,7 @@ public class userRegisterTest {
         try {
             Bdb.setup();
             InputCheck.check = new InputCheck();
-            User user = new User("NingNan", "pater9925", "a9925678910", "a9925678910", "Boxhillabcd",
+            User user = new User("NingNan", "pater9925", "aA992567!", "aA992567!", "Boxhillabcd",
                     "0405727777", "nanning@gmail.com");
             
 
@@ -56,7 +56,7 @@ public class userRegisterTest {
                 "SELECT * from customers WHERE username='pater9925'");
         assert(rs.getString("name").equals("NingNan"));
         assert(rs.getString("phonenumber").equals("0405727777"));
-        assert(rs.getString("password").equals("a9925678910"));
+        assert(rs.getString("password").equals("aA992567!"));
         assert(rs.getString("address").equals("Boxhillabcd"));
         assert(rs.getString("email").equals("nanning@gmail.com"));
 

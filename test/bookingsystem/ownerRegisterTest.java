@@ -28,7 +28,7 @@ public class ownerRegisterTest {
         try {
             Bdb.setup();
             InputCheck.check = new InputCheck();
-            Business.register("Pater Nan", "pater99252", "a99256789", "a99256789",
+            Business.register("Pater Nan", "pater99252", "aA992567!", "aA992567!",
                     "Boxhillsssss", "0405727777", "nanning9925@gmail.com", 9, 17, "0,1,1,1,1,1,0");
             
 
@@ -60,7 +60,7 @@ public class ownerRegisterTest {
                 "SELECT * from businesses WHERE username='pater99252'");
         assert(rs.getString("name").equals("Pater Nan"));
         assert(rs.getString("phonenumber").equals("0405727777"));
-        assert(rs.getString("password").equals("a99256789"));
+        assert(rs.getString("password").equals("aA992567!"));
         assert(rs.getString("address").equals("Boxhillsssss"));
         assert(rs.getString("email").equals("nanning9925@gmail.com"));
     
