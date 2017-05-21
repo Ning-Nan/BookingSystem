@@ -29,7 +29,7 @@ public class ownerRegisterTest {
             Bdb.setup();
             InputCheck.check = new InputCheck();
             Business.register("Pater Nan", "pater99252", "a99256789", "a99256789",
-                    "Boxhillsssss", "0405727777", "nanning9925@gmail.com");
+                    "Boxhillsssss", "0405727777", "nanning9925@gmail.com", 9, 17, "0,1,1,1,1,1,0");
             
 
         } catch (SQLException e) {
