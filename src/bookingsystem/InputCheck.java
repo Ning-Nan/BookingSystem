@@ -56,7 +56,10 @@ public class InputCheck {
         boolean isMatched = matcher.matches();
 
         if (!isMatched) {
-            throw new Exception("Password is in wrong format");
+            throw new Exception("Password is in wrong format. " +
+                    "Passwords must have at least one uppercase letter, " +
+                    "one lowercase letter, one symbol, one numeric character "+
+                    "and 1) be 8 characters long 2) have no whitespace");
         }
         return true;
 
