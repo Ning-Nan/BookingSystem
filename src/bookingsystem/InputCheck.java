@@ -94,7 +94,7 @@ public class InputCheck {
      * @return success or not for checking input
      */
     public boolean checkLong(String address) throws Exception {
-        String check1 = "^[A-Za-z0-9]\\w{2,40}$";
+        /*String check1 = "^[A-Za-z0-9]\\w{2,40}$";
 
         Pattern regex = Pattern.compile(check1);
 
@@ -106,7 +106,7 @@ public class InputCheck {
 
         if (isMatched == false) {
             throw new Exception("Address is in wrong format");
-        }
+        }*/
 
         return true;
     }
